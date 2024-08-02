@@ -1,0 +1,33 @@
+<mat-dialog-content>
+    <h1 style="line-height: 30px; min-width: 285px;">DELIVERY TYPE</h1>
+
+    <br>
+
+    <div>
+        <div class="popContentButtons">
+            <div class="popUpButton" mat-raised-button (click)="onToggleDeliveryType('PICKUP')"
+                [style]="{color: deliveryType === 'PICKUP' ? 'white' : 'black', backgroundColor: deliveryType === 'PICKUP' ? 'black' : '#f0efef' }">
+                <div class="popUpButtonItems">PICKUP</div>
+            </div>
+            <div class="popUpButton" mat-raised-button (click)="onToggleDeliveryType('DELIVERY')"
+                [style]="{color: deliveryType === 'DELIVERY' ? 'white' : 'black', backgroundColor: deliveryType === 'DELIVERY' ? 'black' : '#f0efef' }">
+                <div class="popUpButtonItems">DELIVERY</div>
+            </div>
+            <div class="addressfield" *ngIf="deliveryType === 'DELIVERY'">
+                <mat-form-field appearance="outline">
+                    <mat-label>Please Enter Complete Address</mat-label>
+                    <textarea matInput [(ngModel)]="message"></textarea>
+                </mat-form-field>
+            </div>
+            <div class="addressError" *ngIf="isError">
+                Please enter your address.
+            </div>
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <div class="actionWrapper">
+        <button class="actionButtons" style="color: black;" (click)="onNoClick()">CLOSE</button>
+        <button class="actionButtons" style="color: black;" (click)="onSubmit()" cdkFocusInitial>CONFIRM</button>
+    </div>
+</mat-dialog-actions>

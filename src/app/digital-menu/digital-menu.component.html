@@ -1,0 +1,123 @@
+<div class="container">
+  <div class="cart-icon" (click)="navigateToCart()">
+    <img src="../../assets/images/cart.png" alt="Cart" />
+    <span class="cart-count">{{ getTotalCartItems() }}</span>
+  </div>
+
+  <br>
+  <br>
+
+  <!-- Search Bar -->
+  <!-- <div class="search-bar">
+    <button class="back-button">&#x2190;</button>
+    <input type="text" placeholder="Search in Omfo Momo" />
+  </div> -->
+
+  <!-- Category Tabs -->
+  <div>
+    <div>
+      <div class="category-tab" (click)="toggleCategory('Pizza')">
+        <div class="category-name">Pizza</div>
+        <div class="category-icon" *ngIf="activeCategory !== 'Pizza'">
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000">
+            <path d="m280-400 200-200 200 200H280Z" />
+          </svg>
+        </div>
+        <div class="category-icon"  *ngIf="activeCategory === 'Pizza'">
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000">
+            <path d="M480-360 280-560h400L480-360Z" />
+          </svg>
+        </div>
+      </div>
+      <div class="product-list" *ngIf="activeCategory === 'Pizza'">
+        <div class="product" *ngFor="let item of storeItems?.pizzaItems">
+          <div class="product-info">
+            <div class="product-title">{{ item.name }}</div>
+            <div class="product-price">₹{{ item.price.small }}</div>
+            <div class="product-description">{{ item.description }}</div>
+          </div>
+          <div class="product-image">
+            <img src="https://b.zmtcdn.com/data/reviews_photos/719/e94af42d0ecde0f94fa4560c1eb22719_1620998588.jpg"
+              alt="{{ item.name }}" />
+            <div class="quantity-controls">
+              <button class="actionButtons" (click)="openDialog(item)">ADD</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="category-tab" (click)="toggleCategory('Momos')">
+        <div class="category-name">Momos</div>
+        <div class="category-icon" *ngIf="activeCategory !== 'Momos'">
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000">
+            <path d="m280-400 200-200 200 200H280Z" />
+          </svg>
+        </div>
+        <div class="category-icon" *ngIf="activeCategory === 'Momos'">
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000">
+            <path d="M480-360 280-560h400L480-360Z" />
+          </svg>
+        </div>
+      </div>
+      <div class="product-list" *ngIf="activeCategory === 'Momos'">
+        <div class="product" *ngFor="let item of storeItems?.momosItems">
+          <div class="product-info">
+            <div class="product-title">{{ item.name }}</div>
+            <div class="product-price">₹{{ item.price.half }}</div>
+            <div class="product-description">{{ item.description }}</div>
+          </div>
+          <div class="product-image">
+            <img src="https://b.zmtcdn.com/data/reviews_photos/719/e94af42d0ecde0f94fa4560c1eb22719_1620998588.jpg"
+              alt="{{ item.name }}" />
+            <div class="quantity-controls">
+              <!-- <button (click)="decreaseQuantity(item)">-</button>
+              <span>{{ item.quantity || 0 }}</span>
+              <button (click)="openDialogForMOMO(item)">+</button> -->
+              <button class="actionButtons" (click)="openDialogForMOMO(item)">ADD</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="category-tab" (click)="toggleCategory('Chinese')">
+        <div class="category-name">Chinese</div>
+        <div class="category-icon" *ngIf="activeCategory !== 'Chinese'">
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000">
+            <path d="m280-400 200-200 200 200H280Z" />
+          </svg>
+        </div>
+        <div class="category-icon" *ngIf="activeCategory === 'Chinese'">
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000">
+            <path d="M480-360 280-560h400L480-360Z" />
+          </svg>
+        </div>
+      </div>
+      <div class="product-list" *ngIf="activeCategory === 'Chinese'">
+        <div class="product" *ngFor="let item of storeItems?.chineseItems">
+          <div class="product-info">
+            <div class="product-title">{{ item.name }}</div>
+            <div class="product-price">₹{{ item.price.half }}</div>
+            <div class="product-description">{{ item.description }}</div>
+          </div>
+          <div class="product-image">
+            <img src="https://b.zmtcdn.com/data/reviews_photos/719/e94af42d0ecde0f94fa4560c1eb22719_1620998588.jpg"
+              alt="{{ item.name }}" />
+            <div class="quantity-controls">
+              <!-- <button (click)="decreaseQuantity(item)">-</button>
+              <span>{{ item.quantity || 0 }}</span>
+              <button (click)="openDialogForCHINESE(item)">+</button> -->
+              <button class="actionButtons" (click)="openDialogForCHINESE(item)">ADD</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notify Button -->
+  <button class="notify-button" (click)="navigateToCart()">GO TO CART</button>
+</div>
