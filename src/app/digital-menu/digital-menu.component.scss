@@ -1,6 +1,14 @@
 .container {
   font-family: Arial, sans-serif;
   padding: 20px;
+
+  .heading {
+    color: #ff4c4c;
+    text-align: center;
+    border-bottom: 1px solid #e0e0e0;
+    margin-top: 25px;
+    margin-bottom: 10px;
+  }
 }
 
 .search-bar {

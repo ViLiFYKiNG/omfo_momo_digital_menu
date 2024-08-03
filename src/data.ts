@@ -19,7 +19,7 @@ export const PIZZA_ITEMS: PizzaItem[] = [
     },
     description:
       'Enjoy the vibrant flavoA simple yet classic delight with fresh tomatoes perfect for a light and flavorful bite..',
-    imagePath: 'path-to-image-1.jpg',
+    imagePath: '../../assets/images/PIZZA.jpeg',
     quantity: 0,
     itemType: ITEMTYPES.PIZZA,
   },
@@ -33,7 +33,7 @@ export const PIZZA_ITEMS: PizzaItem[] = [
     },
     description:
       'Enjoy the vibrant flavor of Onion & Amul Mozzarella creating a balanced and delicious pizza experience...',
-    imagePath: 'path-to-image-2.jpg',
+    imagePath: '../../assets/images/PIZZA.jpeg',
     quantity: 0,
     itemType: ITEMTYPES.PIZZA,
   },
@@ -47,7 +47,7 @@ export const PIZZA_ITEMS: PizzaItem[] = [
     },
     description:
       'Enjoy the vibrant flavor of capsicum, creating a balanced and delicious pizza experience with Amul Mozzarella.Amul Mozzarella cheese...',
-    imagePath: 'path-to-image-3.jpg',
+    imagePath: '../../assets/images/PIZZA.jpeg',
     quantity: 0,
     itemType: ITEMTYPES.PIZZA,
   },
@@ -61,7 +61,7 @@ export const PIZZA_ITEMS: PizzaItem[] = [
     },
     description:
       'Perfect for cheese Enjoy the sweet crunch of corn paired with Amul Mozzarella cheese creating a balanced and delicious pizza experience....',
-    imagePath: 'path-to-image-3.jpg',
+    imagePath: '../../assets/images/PIZZA.jpeg',
     quantity: 0,
     itemType: ITEMTYPES.PIZZA,
   },
@@ -75,7 +75,7 @@ export const PIZZA_ITEMS: PizzaItem[] = [
     },
     description:
       'Indulge in the rich taste of marinated paneer cubes, bringing a burst of Indian flavor to every slice.',
-    imagePath: 'path-to-image-3.jpg',
+    imagePath: '../../assets/images/PIZZA.jpeg',
     quantity: 0,
     itemType: ITEMTYPES.PIZZA,
   },
@@ -89,7 +89,7 @@ export const PIZZA_ITEMS: PizzaItem[] = [
     },
     description:
       'A timeless favorite, topped with generous amounts of gooey Mozzarella cheese for a classic Italian experience with an Indian twist.',
-    imagePath: 'path-to-image-3.jpg',
+    imagePath: '../../assets/images/PIZZA.jpeg',
     quantity: 0,
     itemType: ITEMTYPES.PIZZA,
   },
@@ -103,7 +103,7 @@ export const PIZZA_ITEMS: PizzaItem[] = [
     },
     description:
       'Loaded with a variety of fresh vegetables, this pizza is a colorful and nutritious option for veggie lovers.',
-    imagePath: 'path-to-image-3.jpg',
+    imagePath: '../../assets/images/PIZZA.jpeg',
     quantity: 0,
     itemType: ITEMTYPES.PIZZA,
   },
@@ -117,7 +117,7 @@ export const PIZZA_ITEMS: PizzaItem[] = [
     },
     description:
       'Sweet corn kernels combined with a medley of vegetables make this pizza a delightful and satisfying choice.',
-    imagePath: 'path-to-image-3.jpg',
+    imagePath: '../../assets/images/PIZZA.jpeg',
     quantity: 0,
     itemType: ITEMTYPES.PIZZA,
   },
@@ -131,7 +131,7 @@ export const PIZZA_ITEMS: PizzaItem[] = [
     },
     description:
       'A perfect blend of veggies and marinated paneer, this pizza offers a rich and hearty flavor in every bite.',
-    imagePath: 'path-to-image-3.jpg',
+    imagePath: '../../assets/images/PIZZA.jpeg',
     quantity: 0,
     itemType: ITEMTYPES.PIZZA,
   },
@@ -145,7 +145,7 @@ export const PIZZA_ITEMS: PizzaItem[] = [
     },
     description:
       'Spice up your meal with peppy paneer, featuring zesty seasonings, capsicum, red paprika and tangy paneer that excite your taste buds.',
-    imagePath: 'path-to-image-3.jpg',
+    imagePath: '../../assets/images/PIZZA.jpeg',
     quantity: 0,
     itemType: ITEMTYPES.PIZZA,
   },
@@ -159,7 +159,7 @@ export const PIZZA_ITEMS: PizzaItem[] = [
     },
     description:
       'Experience the goodness of the farm with this pizza, loaded with fresh onions, tomatoes, capsicum, paneer and mushrooms.',
-    imagePath: 'path-to-image-3.jpg',
+    imagePath: '../../assets/images/PIZZA.jpeg',
     quantity: 0,
     itemType: ITEMTYPES.PIZZA,
   },
@@ -173,7 +173,7 @@ export const PIZZA_ITEMS: PizzaItem[] = [
     },
     description:
       'Relish the creamy and tangy flavors of makhani sauce topped with onions, capsicum, paneer and red pepper bringing the taste of India to your plate.',
-    imagePath: 'path-to-image-3.jpg',
+    imagePath: '../../assets/images/PIZZA.jpeg',
     quantity: 0,
     itemType: ITEMTYPES.PIZZA,
   },
@@ -187,7 +187,7 @@ export const PIZZA_ITEMS: PizzaItem[] = [
     },
     description:
       'A bold and flavorful choice, featuring tandoori spiced toppings like onions, tomatoes, capsicum, paneer and red paprika that give a smoky and aromatic touch to your pizza.',
-    imagePath: 'path-to-image-3.jpg',
+    imagePath: '../../assets/images/PIZZA.jpeg',
     quantity: 0,
     itemType: ITEMTYPES.PIZZA,
   },
@@ -201,7 +201,7 @@ export const PIZZA_ITEMS: PizzaItem[] = [
     },
     description:
       'A supreme combination of all the finest toppings, offering a rich and indulgent pizza experience with a variety of flavors in every bite.',
-    imagePath: 'path-to-image-3.jpg',
+    imagePath: '../../assets/images/PIZZA.jpeg',
     quantity: 0,
     itemType: ITEMTYPES.PIZZA,
   },
@@ -215,7 +215,7 @@ export const PIZZA_ITEMS: PizzaItem[] = [
     },
     description:
       'An extravagant mixed of vegetables, including onions, tomatoes, capsicum, corn, mushrooms, black olives, green olives and jalapenos, this pizza is a feast for the senses, packed with fresh and vibrant flavors...',
-    imagePath: 'path-to-image-3.jpg',
+    imagePath: '../../assets/images/PIZZA.jpeg',
     quantity: 0,
     itemType: ITEMTYPES.PIZZA,
   },
@@ -229,7 +229,7 @@ export const PIZZA_ITEMS: PizzaItem[] = [
     },
     description:
       'For the ultimate cheese enthusiast, this pizza is loaded with multiple layers of gooey and melty cheese making it a true indulgence...',
-    imagePath: 'path-to-image-3.jpg',
+    imagePath: '../../assets/images/PIZZA.jpeg',
     quantity: 0,
     itemType: ITEMTYPES.PIZZA,
   },
@@ -245,7 +245,7 @@ export const MOMO_ITEMS: MomoItem[] = [
     },
     description:
       'Delicious steamed momos serve with 4 dips (Chilli,Mayo,Mint & Tandoori dip) filled with fresh vegetables...',
-    imagePath: 'path-to-imagePath-4.jpg',
+    imagePath: '../../assets/images/MOMO.jpeg',
     quantity: 0,
     itemType: ITEMTYPES.MOMO,
   },
@@ -258,7 +258,7 @@ export const MOMO_ITEMS: MomoItem[] = [
     },
     description:
       'Served with 4 dips chilli, mint, mayo, tandoori masala,Our best selling kurkure momos are most crunchy momo with corn flakes wrapping on it makes its test amazing you never jonna forget and stuffing of momos made with carrot, onion, cabbage and capsicum.',
-    imagePath: 'path-to-imagePath-5.jpg',
+    imagePath: '../../assets/images/KURKURE_MOMO.jpeg',
     quantity: 0,
     itemType: ITEMTYPES.MOMO,
   },
@@ -271,7 +271,7 @@ export const MOMO_ITEMS: MomoItem[] = [
     },
     description:
       'Momos Made with pizza pasta suace ,cheese blend & mozzerella and olives & red paper baked at 297 with coal flavour',
-    imagePath: 'path-to-imagePath-5.jpg',
+    imagePath: '../../assets/images/CHEESE_GRAVY_MOMO.jpeg',
     quantity: 0,
     itemType: ITEMTYPES.MOMO,
   },
@@ -284,7 +284,7 @@ export const MOMO_ITEMS: MomoItem[] = [
     },
     description:
       'Momos Made with cheese blend , mozzerella and pizza toppings baked at 297 with coal flavour',
-    imagePath: 'path-to-imagePath-5.jpg',
+    imagePath: '../../assets/images/CHEESE_BAKED_MOMO.jpeg',
     quantity: 0,
     itemType: ITEMTYPES.MOMO,
   },
@@ -324,7 +324,7 @@ export const BURGER_ITEMS: BurgerItem[] = [
     price: 49,
     description:
       'delightful combination of onion, capsicum, aloo tikki and a creamy blend of Mayonnaise and burger sauce, all nestled in a soft burger bun with Amul cheese....',
-    imagePath: 'path-to-imagePath-4.jpg',
+    imagePath: '../../assets/images/CLASSIC_BURGER.jpeg',
     quantity: 0,
     itemType: ITEMTYPES.BURGER,
   },
@@ -334,7 +334,7 @@ export const BURGER_ITEMS: BurgerItem[] = [
     price: 59,
     description:
       'Delight in our omfo momo veg burger, filled with onion, capsicum, tomato, aloo tikki and a luscious mixed of Mayonnaise and burger sauce, all embraced by a soft burger bun with Amul cheese..',
-    imagePath: 'path-to-imagePath-5.jpg',
+    imagePath: '../../assets/images/VEG_BURGER.jpeg',
     quantity: 0,
     itemType: ITEMTYPES.BURGER,
   },
@@ -344,7 +344,7 @@ export const BURGER_ITEMS: BurgerItem[] = [
     price: 79,
     description:
       'Indulge in our omfo momo cheese burger, boasting a medley of onion, capsicum, tomato, paneer, aloo tikki, Mozzarella cheese and a rich combination of mayonnaise and burger sauce, hugged by a soft burger bun with Amul cheese.',
-    imagePath: 'path-to-imagePath-5.jpg',
+    imagePath: '../../assets/images/CHEESE_BURGER.jpeg',
     quantity: 0,
     itemType: ITEMTYPES.BURGER,
   },
@@ -354,7 +354,7 @@ export const BURGER_ITEMS: BurgerItem[] = [
     price: 99,
     description:
       'omfo momo cheese slice burger, packed with onion, capsicum, tomato, paneer, aloo tikki, Mozzarella cheese, a slice of cheese and a creamy blend of mayonnaise and burger sauce, all wrapped in a soft burger bun with Amul cheese.',
-    imagePath: 'path-to-imagePath-5.jpg',
+    imagePath: '../../assets/images/CHEESE_SLICE_BURGER.jpeg',
     quantity: 0,
     itemType: ITEMTYPES.BURGER,
   },
@@ -366,7 +366,7 @@ export const SHAKES_ITEMS: ShakeItem[] = [
     name: 'Oreo Shake',
     price: 49,
     description: '',
-    imagePath: 'path-to-imagePath-4.jpg',
+    imagePath: '../../assets/images/OREO_SHAKE.jpeg',
     quantity: 0,
     itemType: ITEMTYPES.SHAKE,
   },
@@ -375,7 +375,7 @@ export const SHAKES_ITEMS: ShakeItem[] = [
     name: 'Kitkat Shake',
     price: 59,
     description: '',
-    imagePath: 'path-to-imagePath-5.jpg',
+    imagePath: '../../assets/images/KITKAT_SHAKE.jpeg',
     quantity: 0,
     itemType: ITEMTYPES.SHAKE,
   },
@@ -384,7 +384,7 @@ export const SHAKES_ITEMS: ShakeItem[] = [
     name: 'Strawberry Shake',
     price: 79,
     description: '',
-    imagePath: 'path-to-imagePath-5.jpg',
+    imagePath: '../../assets/images/SHRAWBERRY_SHAKE.jpeg',
     quantity: 0,
     itemType: ITEMTYPES.SHAKE,
   },
@@ -393,7 +393,7 @@ export const SHAKES_ITEMS: ShakeItem[] = [
     name: 'Butterscoth',
     price: 99,
     description: '',
-    imagePath: 'path-to-imagePath-5.jpg',
+    imagePath: '../../assets/images/BUTTERSCOTH_SHAKE.jpeg',
     quantity: 0,
     itemType: ITEMTYPES.SHAKE,
   },

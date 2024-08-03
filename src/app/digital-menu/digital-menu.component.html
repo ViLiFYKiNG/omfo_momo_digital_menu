@@ -1,11 +1,11 @@
 <div class="container">
+
+  <h1 class="heading">OMFO MOMO</h1>
+
   <div class="cart-icon" (click)="navigateToCart()">
     <img src="../../assets/images/cart.png" alt="Cart" />
     <span class="cart-count">{{ getTotalCartItems() }}</span>
   </div>
-
-  <br>
-  <br>
 
   <!-- Search Bar -->
   <!-- <div class="search-bar">
@@ -37,7 +37,7 @@
             <div class="product-description">{{ item.description }}</div>
           </div>
           <div class="product-image">
-            <img src="https://b.zmtcdn.com/data/reviews_photos/719/e94af42d0ecde0f94fa4560c1eb22719_1620998588.jpg"
+            <img [src]="item.imagePath"
               alt="{{ item.name }}" />
             <div class="quantity-controls">
               <button class="actionButtons" (click)="openDialog(item)">ADD</button>
@@ -69,7 +69,7 @@
             <div class="product-description">{{ item.description }}</div>
           </div>
           <div class="product-image">
-            <img src="https://b.zmtcdn.com/data/reviews_photos/719/e94af42d0ecde0f94fa4560c1eb22719_1620998588.jpg"
+            <img [src]="item.imagePath"
               alt="{{ item.name }}" />
             <div class="quantity-controls">
               <!-- <button (click)="decreaseQuantity(item)">-</button>
@@ -104,7 +104,7 @@
             <div class="product-description">{{ item.description }}</div>
           </div>
           <div class="product-image">
-            <img src="https://b.zmtcdn.com/data/reviews_photos/719/e94af42d0ecde0f94fa4560c1eb22719_1620998588.jpg"
+            <img [src]="item.imagePath"
               alt="{{ item.name }}" />
             <div class="quantity-controls">
               <button class="actionButtons" (click)="openDialogForCHINESE(item)">ADD</button>
@@ -136,7 +136,7 @@
             <div class="product-description">{{ item.description }}</div>
           </div>
           <div class="product-image">
-            <img src="https://b.zmtcdn.com/data/reviews_photos/719/e94af42d0ecde0f94fa4560c1eb22719_1620998588.jpg"
+            <img [src]="item.imagePath"
               alt="{{ item.name }}" />
             <div class="quantity-controls">
               <button class="actionButtons" (click)="openDialogForBURGER(item)">ADD</button>
@@ -168,7 +168,7 @@
             <div class="product-description">{{ item.description }}</div>
           </div>
           <div class="product-image">
-            <img src="https://b.zmtcdn.com/data/reviews_photos/719/e94af42d0ecde0f94fa4560c1eb22719_1620998588.jpg"
+            <img [src]="item.imagePath"
               alt="{{ item.name }}" />
             <div class="quantity-controls">
               <button class="actionButtons" (click)="openDialogForSHAKE(item)">ADD</button>
