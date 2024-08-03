@@ -2,6 +2,8 @@ export const ITEMTYPES = {
   PIZZA: 'PIZZA',
   MOMO: 'MOMO',
   CHINESE: 'CHINESE',
+  BURGER: 'BURGER',
+  SHAKE: 'SHAKE', 
 } as const;
 
 

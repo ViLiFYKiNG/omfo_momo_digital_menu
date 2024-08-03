@@ -82,7 +82,7 @@
       </div>
     </div>
 
-    <div>
+    <!-- <div>
       <div class="category-tab" (click)="toggleCategory('Chinese')">
         <div class="category-name">Chinese</div>
         <div class="category-icon" *ngIf="activeCategory !== 'Chinese'">
@@ -107,10 +107,71 @@
             <img src="https://b.zmtcdn.com/data/reviews_photos/719/e94af42d0ecde0f94fa4560c1eb22719_1620998588.jpg"
               alt="{{ item.name }}" />
             <div class="quantity-controls">
-              <!-- <button (click)="decreaseQuantity(item)">-</button>
-              <span>{{ item.quantity || 0 }}</span>
-              <button (click)="openDialogForCHINESE(item)">+</button> -->
               <button class="actionButtons" (click)="openDialogForCHINESE(item)">ADD</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+    <div>
+      <div class="category-tab" (click)="toggleCategory('Burgers')">
+        <div class="category-name">Burgers</div>
+        <div class="category-icon" *ngIf="activeCategory !== 'Burgers'">
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000">
+            <path d="m280-400 200-200 200 200H280Z" />
+          </svg>
+        </div>
+        <div class="category-icon" *ngIf="activeCategory === 'Burgers'">
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000">
+            <path d="M480-360 280-560h400L480-360Z" />
+          </svg>
+        </div>
+      </div>
+      <div class="product-list" *ngIf="activeCategory === 'Burgers'">
+        <div class="product" *ngFor="let item of storeItems?.burgerItems">
+          <div class="product-info">
+            <div class="product-title">{{ item.name }}</div>
+            <div class="product-price">₹{{ item.price }}</div>
+            <div class="product-description">{{ item.description }}</div>
+          </div>
+          <div class="product-image">
+            <img src="https://b.zmtcdn.com/data/reviews_photos/719/e94af42d0ecde0f94fa4560c1eb22719_1620998588.jpg"
+              alt="{{ item.name }}" />
+            <div class="quantity-controls">
+              <button class="actionButtons" (click)="openDialogForBURGER(item)">ADD</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="category-tab" (click)="toggleCategory('Shakes')">
+        <div class="category-name">Shakes</div>
+        <div class="category-icon" *ngIf="activeCategory !== 'Shakes'">
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000">
+            <path d="m280-400 200-200 200 200H280Z" />
+          </svg>
+        </div>
+        <div class="category-icon" *ngIf="activeCategory === 'Shakes'">
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000">
+            <path d="M480-360 280-560h400L480-360Z" />
+          </svg>
+        </div>
+      </div>
+      <div class="product-list" *ngIf="activeCategory === 'Shakes'">
+        <div class="product" *ngFor="let item of storeItems?.shakesItems">
+          <div class="product-info">
+            <div class="product-title">{{ item.name }}</div>
+            <div class="product-price">₹{{ item.price }}</div>
+            <div class="product-description">{{ item.description }}</div>
+          </div>
+          <div class="product-image">
+            <img src="https://b.zmtcdn.com/data/reviews_photos/719/e94af42d0ecde0f94fa4560c1eb22719_1620998588.jpg"
+              alt="{{ item.name }}" />
+            <div class="quantity-controls">
+              <button class="actionButtons" (click)="openDialogForSHAKE(item)">ADD</button>
             </div>
           </div>
         </div>

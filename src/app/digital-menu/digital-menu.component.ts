@@ -8,7 +8,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { PizzaPopupComponent } from './pizza-popup/pizza-popup.component';
 import { MomoPopupComponent } from './momo-popup/momo-popup.component';
 import { ChinesePopupComponent } from './chinese-popup/chinese-popup.component';
-import { CartItem, ChineseItem, MomoItem, OmfoMomoItems, PizzaItem } from '../shared/modals';
+import { BurgerItem, CartItem, ChineseItem, MomoItem, OmfoMomoItems, PizzaItem, ShakeItem } from '../shared/modals';
+import { BurgerPopupComponent } from './burger-popup/burger-popup.component';
+import { ShakePopupComponent } from './shake-popup/shake-popup.component';
 
 @Component({
   selector: 'app-digital-menu',
@@ -76,6 +78,30 @@ export class DigitalMenuComponent {
 
   openDialogForCHINESE(item: ChineseItem) {
     const dialogRef = this.dialog.open(ChinesePopupComponent, {
+      data: item,
+    });
+
+    dialogRef.afterClosed().subscribe((result: CartItem) => {
+      if (result) {
+        this.increaseQuantity(result);
+      }
+    });
+  }
+
+  openDialogForBURGER(item: BurgerItem) {
+    const dialogRef = this.dialog.open(BurgerPopupComponent, {
+      data: item,
+    });
+
+    dialogRef.afterClosed().subscribe((result: CartItem) => {
+      if (result) {
+        this.increaseQuantity(result);
+      }
+    });
+  }
+
+  openDialogForSHAKE(item: ShakeItem) {
+    const dialogRef = this.dialog.open(ShakePopupComponent, {
       data: item,
     });
 

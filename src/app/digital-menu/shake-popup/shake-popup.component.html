@@ -1,0 +1,28 @@
+<mat-dialog-content>
+    <h1 style="line-height: 30px; min-width: 285px;">{{ shakeItem.name }}</h1>
+
+    <br>
+
+    <div>
+        <h2>Choose size</h2>
+        <div class="popContentButtons">
+            <div class="popUpButton" mat-raised-button
+                [style]="{color: size === 'regular' ? 'white' : 'black', backgroundColor: size === 'regular' ? 'black' : '#f0efef' }">
+                <div class="popUpButtonItems">REGULAR</div>
+                <div class="popUpButtonItems">₹{{ shakeItem.price }}</div>
+            </div>
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <div class="actionWrapper">
+        <div class="quantity-controls">
+            <button (click)="decreaseQuantity()">-</button>
+            <span style="color: white;">{{ getCartItemQuantity() }}</span>
+            <button (click)="increaseQuantity()">+</button>
+        </div>
+        <button class="actionButtons" style="color: black;" (click)="onNoClick()">CLOSE</button>
+        <button class="actionButtons" style="color: black;" [mat-dialog-close]="cartItem" cdkFocusInitial>ADD - ₹{{
+            getTotalPrice() }}</button>
+    </div>
+</mat-dialog-actions>
