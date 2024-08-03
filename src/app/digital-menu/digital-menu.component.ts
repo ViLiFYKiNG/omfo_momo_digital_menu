@@ -8,9 +8,18 @@ import { MatDialog } from '@angular/material/dialog';
 import { PizzaPopupComponent } from './pizza-popup/pizza-popup.component';
 import { MomoPopupComponent } from './momo-popup/momo-popup.component';
 import { ChinesePopupComponent } from './chinese-popup/chinese-popup.component';
-import { BurgerItem, CartItem, ChineseItem, MomoItem, OmfoMomoItems, PizzaItem, ShakeItem } from '../shared/modals';
+import {
+  BurgerItem,
+  CartItem,
+  ChineseItem,
+  MomoItem,
+  OmfoMomoItems,
+  PizzaItem,
+  ShakeItem,
+} from '../shared/modals';
 import { BurgerPopupComponent } from './burger-popup/burger-popup.component';
 import { ShakePopupComponent } from './shake-popup/shake-popup.component';
+import { OutletSelectionPopupComponent } from './outlet-selection-popup/outlet-selection-popup.component';
 
 @Component({
   selector: 'app-digital-menu',
@@ -20,15 +29,22 @@ import { ShakePopupComponent } from './shake-popup/shake-popup.component';
   imports: [CommonModule, MatSlideToggleModule],
 })
 export class DigitalMenuComponent {
+  static selectOutlet: string;
   constructor(private router: Router, private foodService: FoodService) {}
 
   activeCategory: string | null = 'Pizza';
+
+  selectedOutlet: string = 'SITAPUR';
 
   storeItems: OmfoMomoItems | null = null;
 
   ngOnInit(): void {
     this.activeCategory = this.foodService.activeCategory;
     this.storeItems = this.foodService.getAll();
+
+    this.foodService.selectedValue$.subscribe((value) => {
+      this.selectedOutlet = value;
+    });
   }
 
   toggleCategory(category: string) {
@@ -116,5 +132,18 @@ export class DigitalMenuComponent {
     return this.foodService
       .getAllCartItems()
       .reduce((total, item) => total + item.quantity, 0);
+  }
+
+  openOutletSelectionPopup() {
+    console.log('....');
+    const dialogRef = this.dialog.open(OutletSelectionPopupComponent);
+
+    dialogRef.afterClosed().subscribe((result: any) => {
+      if (result) {
+        console.log('HELLO');
+        console.log(result);
+        this.selectedOutlet = result;
+      }
+    });
   }
 }

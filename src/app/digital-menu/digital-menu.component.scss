@@ -5,9 +5,29 @@
   .heading {
     color: #ff4c4c;
     text-align: center;
-    border-bottom: 1px solid #e0e0e0;
     margin-top: 25px;
     margin-bottom: 10px;
+  }
+
+  .outlet {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+    padding: 5px;
+    margin-top: -8px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid #e0e0e0;
+
+    .outletText {
+      font-weight: 600;
+      font-size: 22px;
+      color: rgb(90, 89, 89);
+    }
+
+    .outletIcon {
+      padding-top: 2px;
+    }
   }
 }
 
@@ -184,7 +204,7 @@
 }
 
 .category-name {
+  color: red;
   font-size: 24px;
   font-weight: 700;
-  color: black;
 }

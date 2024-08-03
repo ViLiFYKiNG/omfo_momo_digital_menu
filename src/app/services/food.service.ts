@@ -6,6 +6,7 @@ import {
   CHINESE_ITEM,
 } from '../../data';
 import { CartItem, ChineseItem, MomoItem, OmfoMomoItems, PizzaItem } from '../shared/modals';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +16,15 @@ export class FoodService {
 
   activeCategory: string | null = 'Pizza';
 
+  selectedValueSource = new BehaviorSubject<string>('SITAPUR');
+
+  selectedValue$ = this.selectedValueSource.asObservable();
+
   constructor() {}
+
+  setSelectedValue(value: string) {
+    this.selectedValueSource.next(value);
+  }
 
   getAll(): OmfoMomoItems {
     return OMFO_MOMO_ITEMS;
