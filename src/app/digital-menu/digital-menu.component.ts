@@ -135,13 +135,10 @@ export class DigitalMenuComponent {
   }
 
   openOutletSelectionPopup() {
-    console.log('....');
     const dialogRef = this.dialog.open(OutletSelectionPopupComponent);
 
     dialogRef.afterClosed().subscribe((result: any) => {
       if (result) {
-        console.log('HELLO');
-        console.log(result);
         this.selectedOutlet = result;
       }
     });

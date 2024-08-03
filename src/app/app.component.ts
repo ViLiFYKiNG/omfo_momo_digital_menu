@@ -19,8 +19,6 @@ export class AppComponent {
 
     dialogRef.afterClosed().subscribe((result: string) => {
       if (result) {
-        console.log('HELLO');
-        console.log(result);
         this.foodService.setSelectedValue(result);
       }
     });
