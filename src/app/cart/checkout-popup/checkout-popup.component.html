@@ -12,14 +12,27 @@
             <div class="popUpButton" mat-raised-button (click)="onToggleDeliveryType('DELIVERY')"
                 [style]="{color: deliveryType === 'DELIVERY' ? 'white' : 'black', backgroundColor: deliveryType === 'DELIVERY' ? 'black' : '#f0efef' }">
                 <div class="popUpButtonItems">DELIVERY</div>
+                <div class="popUpButtonItems" *ngIf="(orderAmount < 300 && deliveryType === 'DELIVERY')">₹30</div>
             </div>
-            <div class="addressfield" *ngIf="deliveryType === 'DELIVERY'">
+            <div class="deliveryChargeInfo" *ngIf="(orderAmount < 300 && deliveryType === 'DELIVERY')">
+                ₹30 Delivery charge under order 300.
+            </div>
+            <div class="inputField">
                 <mat-form-field appearance="outline">
-                    <mat-label>Please Enter Complete Address</mat-label>
-                    <textarea matInput [(ngModel)]="message"></textarea>
+                    <mat-label>Please enter your name</mat-label>
+                    <input matInput [(ngModel)]="name" (ngModelChange)="onNameChange()">
                 </mat-form-field>
             </div>
-            <div class="addressError" *ngIf="isError">
+            <div class="fieldError" *ngIf="isNameError">
+                Please enter your name.
+            </div>
+            <div class="inputField" *ngIf="deliveryType === 'DELIVERY'">
+                <mat-form-field appearance="outline">
+                    <mat-label>Please Enter Complete Address</mat-label>
+                    <textarea matInput [(ngModel)]="message" (ngModelChange)="onADDChange()"></textarea>
+                </mat-form-field>
+            </div>
+            <div class="fieldError" *ngIf="isError">
                 Please enter your address.
             </div>
         </div>
@@ -28,6 +41,6 @@
 <mat-dialog-actions>
     <div class="actionWrapper">
         <button class="actionButtons" style="color: black;" (click)="onNoClick()">CLOSE</button>
-        <button class="actionButtons" style="color: black;" (click)="onSubmit()" cdkFocusInitial>CONFIRM</button>
+        <button class="actionButtons" style="color: black;" (click)="onSubmit()" [disabled]="isNameError" cdkFocusInitial>CONFIRM</button>
     </div>
 </mat-dialog-actions>

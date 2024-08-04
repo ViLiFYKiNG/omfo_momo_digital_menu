@@ -7,6 +7,7 @@ export type DeliveryType = 'PICKUP' | 'DELIVERY';
 
 export interface OrderType {
   deliveryType: DeliveryType;
+  name: string;
   message?: string;
 }
 export interface PizzaPrice {

@@ -51,6 +51,10 @@ export class CartComponent {
 
   phoneNumber: string = '7518999096';
 
+  shouldTakeDeliveryCharge(orderType: OrderType) {
+    return orderType.deliveryType === 'DELIVERY' && this.getTotalAmount() < 300;
+  }
+
   formatOrderDetails(orderType: OrderType) {
     const orderItems = this.cartItems
       .map((item: CartItem) => {
@@ -61,15 +65,21 @@ export class CartComponent {
         }]`;
       })
       .join(encodeURI('\n'));
-    return `ORDER DETAILS - ${encodeURI('\n')}${orderItems}${encodeURI(
+    return `ORDER ID - ${new Date().getTime()}${encodeURI('\n')}NAME - ${
+      orderType.name
+    }${encodeURI('\n')}**************************${encodeURI(
       '\n'
-    )}********************************${encodeURI(
+    )}ITEMS DETAILS - ${encodeURI('\n')}${orderItems}${encodeURI(
       '\n'
-    )}TOTAL ITEMS - ${this.getTotalItems()}${encodeURI(
+    )}**************************${encodeURI(
       '\n'
-    )}TOTAL - ${this.getTotalAmount()}${encodeURI(
+    )}TOTAL ITEMS - ${this.getTotalItems()}${encodeURI('\n')}${
+      this.shouldTakeDeliveryCharge(orderType)
+        ? 'DELIVERY CHARGE - 30' + encodeURI('\n')
+        : ''
+    }TOTAL - ${this.getTotalAmount() + (this.shouldTakeDeliveryCharge(orderType) ? 30 : 0)}${encodeURI(
       '\n'
-    )}********************************${encodeURI('\n')}OUTLET - ${
+    )}**************************${encodeURI('\n')}OUTLET - ${
       this.selectedOutlet
     }${encodeURI('\n')}MODE - ${orderType.deliveryType}${encodeURI('\n')}${
       orderType.deliveryType === 'DELIVERY' ? 'ADD - ' + orderType.message : ''
@@ -87,7 +97,9 @@ export class CartComponent {
   }
 
   orderNow() {
-    const dialogRef = this.dialog.open(CheckoutPopupComponent);
+    const dialogRef = this.dialog.open(CheckoutPopupComponent, {
+      data: this.getTotalAmount(),
+    });
 
     dialogRef.afterClosed().subscribe((result: OrderType) => {
       if (result) {

@@ -364,7 +364,7 @@ export const SHAKES_ITEMS: ShakeItem[] = [
   {
     itemId: Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000,
     name: 'Oreo Shake',
-    price: 49,
+    price: 99,
     description: '',
     imagePath: '../../assets/images/OREO_SHAKE.jpeg',
     quantity: 0,
@@ -373,7 +373,7 @@ export const SHAKES_ITEMS: ShakeItem[] = [
   {
     itemId: Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000,
     name: 'Kitkat Shake',
-    price: 59,
+    price: 109,
     description: '',
     imagePath: '../../assets/images/KITKAT_SHAKE.jpeg',
     quantity: 0,
@@ -382,7 +382,7 @@ export const SHAKES_ITEMS: ShakeItem[] = [
   {
     itemId: Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000,
     name: 'Strawberry Shake',
-    price: 79,
+    price: 119,
     description: '',
     imagePath: '../../assets/images/SHRAWBERRY_SHAKE.jpeg',
     quantity: 0,
@@ -391,7 +391,7 @@ export const SHAKES_ITEMS: ShakeItem[] = [
   {
     itemId: Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000,
     name: 'Butterscoth',
-    price: 99,
+    price: 129,
     description: '',
     imagePath: '../../assets/images/BUTTERSCOTH_SHAKE.jpeg',
     quantity: 0,

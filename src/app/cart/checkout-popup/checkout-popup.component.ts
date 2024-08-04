@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import {
+  MAT_DIALOG_DATA,
   MatDialogActions,
   MatDialogClose,
   MatDialogContent,
@@ -32,26 +33,57 @@ import { FormsModule } from '@angular/forms';
 export class CheckoutPopupComponent {
   readonly dialogRef = inject(MatDialogRef<CheckoutPopupComponent>);
 
+  readonly orderAmount = inject<number>(MAT_DIALOG_DATA);
+
   deliveryType: DeliveryType = 'DELIVERY';
 
-  message!: string;
+  message: string = '';
+
+  name: string = '';
 
   isError: boolean = false;
+
+  isNameError: boolean = false;
 
   onNoClick(): void {
     this.dialogRef.close();
   }
 
+  onNameChange() {
+    this.isNameError = this.name.trim() === '';
+  }
+
+  onADDChange() {
+    this.isError = this.message.trim() === '';
+  }
+
   onSubmit() {
+    if (this.name.trim() === '') {
+      this.isNameError = true;
+      this.isError =
+        this.deliveryType === 'DELIVERY' && this.message.trim() === '';
+      return;
+    }
     if (this.deliveryType === 'DELIVERY') {
-      if (this.message !== '' && this.message !== undefined && this.message !== null) {
-        this.dialogRef.close({ deliveryType: this.deliveryType, message: this.message });
+      if (
+        this.message !== '' &&
+        this.message !== undefined &&
+        this.message !== null
+      ) {
+        this.dialogRef.close({
+          deliveryType: this.deliveryType,
+          message: this.message,
+          name: this.name,
+        });
       } else {
         this.isError = true;
         return;
       }
     } else {
-      this.dialogRef.close({ deliveryType: this.deliveryType });
+      this.dialogRef.close({
+        deliveryType: this.deliveryType,
+        name: this.name,
+      });
     }
   }
 
