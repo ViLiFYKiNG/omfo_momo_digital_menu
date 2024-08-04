@@ -20,8 +20,14 @@ export class CartComponent {
 
   readonly dialog = inject(MatDialog);
 
+  selectedOutlet: string = 'SITAPUR';
+
   ngOnInit(): void {
     this.cartItems = this.foodService.getAllCartItems();
+
+    this.foodService.selectedValue$.subscribe((value) => {
+      this.selectedOutlet = value;
+    });
   }
 
   getTotalAmount() {
@@ -50,7 +56,9 @@ export class CartComponent {
       .map((item: CartItem) => {
         return `    ${item.name.toUpperCase()} - ${item.size?.toUpperCase()}${
           item.withExtraCheese ? ' WITH EXTRA CHEESE' : ''
-        }${item.withCheeseBurst ? ' WITH CHEESE BURST' : ''} [${item.quantity}]`;
+        }${item.withCheeseBurst ? ' WITH CHEESE BURST' : ''} [${
+          item.quantity
+        }]`;
       })
       .join(encodeURI('\n'));
     return `ORDER DETAILS - ${encodeURI('\n')}${orderItems}${encodeURI(
@@ -61,9 +69,9 @@ export class CartComponent {
       '\n'
     )}TOTAL - ${this.getTotalAmount()}${encodeURI(
       '\n'
-    )}********************************${encodeURI('\n')}MODE - ${
-      orderType.deliveryType
-    }${encodeURI('\n')}${
+    )}********************************${encodeURI('\n')}OUTLET - ${
+      this.selectedOutlet
+    }${encodeURI('\n')}MODE - ${orderType.deliveryType}${encodeURI('\n')}${
       orderType.deliveryType === 'DELIVERY' ? 'ADD - ' + orderType.message : ''
     }`;
   }
