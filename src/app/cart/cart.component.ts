@@ -60,9 +60,9 @@ export class CartComponent {
       .map((item: CartItem) => {
         return `    ${item.name.toUpperCase()} - ${item.size?.toUpperCase()}${
           item.withExtraCheese ? ' WITH EXTRA CHEESE' : ''
-        }${item.withCheeseBurst ? ' WITH CHEESE BURST' : ''} [${
+        }${item.withCheeseBurst ? ' WITH CHEESE BURST' : ''} [QUANTITY - ${
           item.quantity
-        }]`;
+        }] [PRICE - ₹${item.price}]`;
       })
       .join(encodeURI('\n'));
     return `ORDER ID - ${new Date().getTime()}${encodeURI('\n')}NAME - ${
@@ -75,11 +75,16 @@ export class CartComponent {
       '\n'
     )}TOTAL ITEMS - ${this.getTotalItems()}${encodeURI('\n')}${
       this.shouldTakeDeliveryCharge(orderType)
+        ? 'ITEMS TOTAL - ' + this.getTotalAmount() + encodeURI('\n')
+        : ''
+    }${
+      this.shouldTakeDeliveryCharge(orderType)
         ? 'DELIVERY CHARGE - 30' + encodeURI('\n')
         : ''
-    }TOTAL - ${this.getTotalAmount() + (this.shouldTakeDeliveryCharge(orderType) ? 30 : 0)}${encodeURI(
-      '\n'
-    )}**************************${encodeURI('\n')}OUTLET - ${
+    }TOTAL - ${
+      this.getTotalAmount() +
+      (this.shouldTakeDeliveryCharge(orderType) ? 30 : 0)
+    }${encodeURI('\n')}**************************${encodeURI('\n')}OUTLET - ${
       this.selectedOutlet
     }${encodeURI('\n')}MODE - ${orderType.deliveryType}${encodeURI('\n')}${
       orderType.deliveryType === 'DELIVERY' ? 'ADD - ' + orderType.message : ''
@@ -104,8 +109,9 @@ export class CartComponent {
     dialogRef.afterClosed().subscribe((result: OrderType) => {
       if (result) {
         const link = this.generateWhatsAppLink(result);
-        this.clearCart();
         window.open(link, '_blank');
+        this.clearCart();
+        this.navigateToHome();
       }
     });
   }
