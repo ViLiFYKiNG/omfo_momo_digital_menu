@@ -79,11 +79,11 @@ export class CartComponent {
         : ''
     }${
       this.shouldTakeDeliveryCharge(orderType)
-        ? 'DELIVERY CHARGE - 30' + encodeURI('\n')
+        ? 'DELIVERY CHARGE - 20' + encodeURI('\n')
         : ''
     }TOTAL - ${
       this.getTotalAmount() +
-      (this.shouldTakeDeliveryCharge(orderType) ? 30 : 0)
+      (this.shouldTakeDeliveryCharge(orderType) ? 20 : 0)
     }${encodeURI('\n')}**************************${encodeURI('\n')}OUTLET - ${
       this.selectedOutlet
     }${encodeURI('\n')}MODE - ${orderType.deliveryType}${encodeURI('\n')}${

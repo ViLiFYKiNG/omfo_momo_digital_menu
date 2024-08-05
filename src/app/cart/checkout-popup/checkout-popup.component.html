@@ -12,10 +12,10 @@
             <div class="popUpButton" mat-raised-button (click)="onToggleDeliveryType('DELIVERY')"
                 [style]="{color: deliveryType === 'DELIVERY' ? 'white' : 'black', backgroundColor: deliveryType === 'DELIVERY' ? 'black' : '#f0efef' }">
                 <div class="popUpButtonItems">DELIVERY</div>
-                <div class="popUpButtonItems" *ngIf="(orderAmount < 300 && deliveryType === 'DELIVERY')">₹30</div>
+                <div class="popUpButtonItems" *ngIf="(orderAmount < 300 && deliveryType === 'DELIVERY')">₹20</div>
             </div>
             <div class="deliveryChargeInfo" *ngIf="(orderAmount < 300 && deliveryType === 'DELIVERY')">
-                ₹30 Delivery charge under order 300.
+                ₹20 Delivery charge under order 300.
             </div>
             <div class="inputField">
                 <mat-form-field appearance="outline">
