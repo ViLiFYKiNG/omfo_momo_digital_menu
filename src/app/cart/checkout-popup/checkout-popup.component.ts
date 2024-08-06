@@ -91,4 +91,8 @@ export class CheckoutPopupComponent {
     this.deliveryType = deliveryType;
     this.isError = false;
   }
+
+  getRemainingAmount() {
+    return 300 - (this.orderAmount ?? 0);
+  }
 }

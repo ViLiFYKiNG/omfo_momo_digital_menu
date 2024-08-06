@@ -15,7 +15,7 @@
                 <div class="popUpButtonItems" *ngIf="(orderAmount < 300 && deliveryType === 'DELIVERY')">₹20</div>
             </div>
             <div class="deliveryChargeInfo" *ngIf="(orderAmount < 300 && deliveryType === 'DELIVERY')">
-                ₹20 Delivery charge under order 300.
+                Add ₹{{ getRemainingAmount() }} more to save delivery charge.
             </div>
             <div class="inputField">
                 <mat-form-field appearance="outline">
