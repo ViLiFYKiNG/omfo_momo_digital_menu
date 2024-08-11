@@ -128,10 +128,35 @@ export class DigitalMenuComponent {
     });
   }
 
+  getTotalAmount() {
+    return this.foodService.cartItems.reduce(
+      (total, item) => total + item.perItemPrice * item.quantity,
+      0
+    );
+  }
+
+  isTotalOver200(): boolean {
+    const totalAmount = this.getTotalAmount();
+    return (
+      totalAmount < 300 &&
+      totalAmount >= 200 &&
+      this.selectedOutlet === 'SITAPUR'
+    );
+  }
+
+  isTotalOver300(): boolean {
+    const totalAmount = this.getTotalAmount();
+    return totalAmount >= 300 && this.selectedOutlet === 'SITAPUR';
+  }
+
   getTotalCartItems() {
-    return this.foodService
+    let totalItems = this.foodService
       .getAllCartItems()
       .reduce((total, item) => total + item.quantity, 0);
+    if (this.isTotalOver200() || this.isTotalOver300()) {
+      totalItems++;
+    }
+    return totalItems;
   }
 
   openOutletSelectionPopup() {
@@ -139,7 +164,7 @@ export class DigitalMenuComponent {
 
     dialogRef.afterClosed().subscribe((result: any) => {
       if (result) {
-        this.selectedOutlet = result;
+        this.foodService.setSelectedValue(result);
       }
     });
   }

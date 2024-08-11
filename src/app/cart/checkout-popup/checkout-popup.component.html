@@ -19,7 +19,7 @@
             </div>
             <div class="inputField">
                 <mat-form-field appearance="outline">
-                    <mat-label>Please Enter Your Name</mat-label>
+                    <mat-label>NAME</mat-label>
                     <input matInput [(ngModel)]="name" (ngModelChange)="onNameChange()">
                 </mat-form-field>
             </div>
@@ -28,7 +28,7 @@
             </div>
             <div class="inputField" *ngIf="deliveryType === 'DELIVERY'">
                 <mat-form-field appearance="outline">
-                    <mat-label>Please Enter Complete Address</mat-label>
+                    <mat-label>ADDRESS</mat-label>
                     <textarea matInput [(ngModel)]="message" (ngModelChange)="onADDChange()"></textarea>
                 </mat-form-field>
             </div>

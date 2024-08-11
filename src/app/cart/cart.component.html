@@ -7,6 +7,64 @@
     </div>
 
     <div class="product-list">
+        <div class="product" *ngIf="isTotalOver300()">
+            <div class="product-info">
+                <div class="product-title">{{ freeItemOver300.name }}</div>
+                <div class="product-description">
+                    <span>
+                        <button class="mat-button" mat-stroked-button disabled> ₹{{ freeItemOver300.perItemPrice
+                            }}</button>
+                    </span>
+                </div>
+                <div class="product-tag">
+                    <button class="mat-button" *ngIf="freeItemOver300.size" mat-stroked-button disabled> {{ getItemSize(freeItemOver300)
+                        }}</button>
+                    <button class="mat-button" *ngIf="freeItemOver300.withExtraCheese" mat-stroked-button disabled>EXTRA_CHEESSE</button>
+                    <button class="mat-button" *ngIf="freeItemOver300.withCheeseBurst" mat-stroked-button disabled>CHEESE_BURST</button>
+                </div>
+            </div>
+            <div class="product-image">
+                <div class="quantity-controls">
+                    <button (click)="decreaseQuantity(freeItemOver300)" [disabled]="true">-</button>
+                    <span style="color: white;">{{ freeItemOver300.quantity }}</span>
+                    <button (click)="increaseQuantity(freeItemOver300)" [disabled]="true">+</button>
+                </div>
+                <div>
+                    <button class="mat-button" mat-stroked-button disabled> ₹{{ freeItemOver300.perItemPrice * freeItemOver300.quantity
+                        }}</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="product" *ngIf="isTotalOver200()">
+            <div class="product-info">
+                <div class="product-title">{{ freeItemOver200.name }}</div>
+                <div class="product-description">
+                    <span>
+                        <button class="mat-button" mat-stroked-button disabled> ₹{{ freeItemOver200.perItemPrice
+                            }}</button>
+                    </span>
+                </div>
+                <div class="product-tag">
+                    <button class="mat-button" *ngIf="freeItemOver200.size" mat-stroked-button disabled> {{ getItemSize(freeItemOver200)
+                        }}</button>
+                    <button class="mat-button" *ngIf="freeItemOver200.withExtraCheese" mat-stroked-button disabled>EXTRA_CHEESSE</button>
+                    <button class="mat-button" *ngIf="freeItemOver200.withCheeseBurst" mat-stroked-button disabled>CHEESE_BURST</button>
+                </div>
+            </div>
+            <div class="product-image">
+                <div class="quantity-controls">
+                    <button (click)="decreaseQuantity(freeItemOver200)" [disabled]="true">-</button>
+                    <span style="color: white;">{{ freeItemOver200.quantity }}</span>
+                    <button (click)="increaseQuantity(freeItemOver200)" [disabled]="true">+</button>
+                </div>
+                <div>
+                    <button class="mat-button" mat-stroked-button disabled> ₹{{ freeItemOver200.perItemPrice * freeItemOver200.quantity
+                        }}</button>
+                </div>
+            </div>
+        </div>
+
         <div class="product" *ngFor="let item of cartItems">
             <div class="product-info">
                 <div class="product-title">{{ item.name }}</div>
