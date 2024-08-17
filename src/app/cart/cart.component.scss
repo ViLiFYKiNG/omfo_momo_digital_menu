@@ -128,6 +128,18 @@
   justify-content: space-between;
 }
 
+.showFreeMsgWrappper {
+  border: 2px solid lightgray;
+  padding: 5px;
+  margin-bottom: 5px;
+
+  .freeMsg {
+    color: #ff4c4c;
+    font-weight: bolder;
+  }
+}
+
+
 .pri-btn {
   background-color: #ff4c4c;
   color: white;

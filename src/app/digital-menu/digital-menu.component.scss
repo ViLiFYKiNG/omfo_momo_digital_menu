@@ -120,14 +120,25 @@
 
 .notify-button {
   display: block;
+  position: fixed;
+  bottom: 0;
+  left: 0;
   width: 100%;
-  padding: 15px;
+  font-size: 18px;
+  padding: 12px;
   background-color: #ff4c4c;
   color: white;
   border: none;
   text-align: center;
   cursor: pointer;
+  transition: all 0.5s ease;
 }
+
+.item-added {
+  background-color: #fc8585;
+  transform: scale(1.1);
+}
+
 .product-image {
   position: relative;
 

@@ -6,6 +6,15 @@
         <button class="back-button" (click)="navigateToHome()">&#x2190; GO TO HOME</button>
     </div>
 
+    <div class="showFreeMsgWrappper"  *ngIf="isShowFreeMsg200() || isShowFreeMsg300()">
+        <span class="freeMsg" *ngIf="isShowFreeMsg200()">
+            Add items worth ₹{{ 200 - getTotalAmount() }} to get FREE KURKURE MOMO.
+        </span>
+        <span class="freeMsg" *ngIf="isShowFreeMsg300()">
+            Add items worth ₹{{ 300 - getTotalAmount() }} to get FREE VEG CORN PIZZA.
+        </span>
+    </div>
+
     <div class="product-list">
         <div class="product" *ngIf="isTotalOver300()">
             <div class="product-info">
@@ -17,20 +26,18 @@
                     </span>
                 </div>
                 <div class="product-tag">
-                    <button class="mat-button" *ngIf="freeItemOver300.size" mat-stroked-button disabled> {{ getItemSize(freeItemOver300)
-                        }}</button>
-                    <button class="mat-button" *ngIf="freeItemOver300.withExtraCheese" mat-stroked-button disabled>EXTRA_CHEESSE</button>
-                    <button class="mat-button" *ngIf="freeItemOver300.withCheeseBurst" mat-stroked-button disabled>CHEESE_BURST</button>
+                    <button class="mat-button" *ngIf="freeItemOver300.size" mat-stroked-button disabled> FREE </button>
                 </div>
             </div>
             <div class="product-image">
                 <div class="quantity-controls">
-                    <button (click)="decreaseQuantity(freeItemOver300)" [disabled]="true">-</button>
+                    <button style="visibility: hidden;">-</button>
                     <span style="color: white;">{{ freeItemOver300.quantity }}</span>
-                    <button (click)="increaseQuantity(freeItemOver300)" [disabled]="true">+</button>
+                    <button style="visibility: hidden;">+</button>
                 </div>
                 <div>
-                    <button class="mat-button" mat-stroked-button disabled> ₹{{ freeItemOver300.perItemPrice * freeItemOver300.quantity
+                    <button class="mat-button" mat-stroked-button disabled> ₹{{ freeItemOver300.perItemPrice *
+                        freeItemOver300.quantity
                         }}</button>
                 </div>
             </div>
@@ -46,20 +53,18 @@
                     </span>
                 </div>
                 <div class="product-tag">
-                    <button class="mat-button" *ngIf="freeItemOver200.size" mat-stroked-button disabled> {{ getItemSize(freeItemOver200)
-                        }}</button>
-                    <button class="mat-button" *ngIf="freeItemOver200.withExtraCheese" mat-stroked-button disabled>EXTRA_CHEESSE</button>
-                    <button class="mat-button" *ngIf="freeItemOver200.withCheeseBurst" mat-stroked-button disabled>CHEESE_BURST</button>
+                    <button class="mat-button" *ngIf="freeItemOver200.size" mat-stroked-button disabled> FREE </button>
                 </div>
             </div>
             <div class="product-image">
                 <div class="quantity-controls">
-                    <button (click)="decreaseQuantity(freeItemOver200)" [disabled]="true">-</button>
+                    <button style="visibility: hidden;">-</button>
                     <span style="color: white;">{{ freeItemOver200.quantity }}</span>
-                    <button (click)="increaseQuantity(freeItemOver200)" [disabled]="true">+</button>
+                    <button style="visibility: hidden;">+</button>
                 </div>
                 <div>
-                    <button class="mat-button" mat-stroked-button disabled> ₹{{ freeItemOver200.perItemPrice * freeItemOver200.quantity
+                    <button class="mat-button" mat-stroked-button disabled> ₹{{ freeItemOver200.perItemPrice *
+                        freeItemOver200.quantity
                         }}</button>
                 </div>
             </div>

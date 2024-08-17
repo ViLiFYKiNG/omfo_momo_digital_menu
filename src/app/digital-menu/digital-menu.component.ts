@@ -38,6 +38,8 @@ export class DigitalMenuComponent {
 
   storeItems: OmfoMomoItems | null = null;
 
+  itemAdded: boolean = false;
+
   ngOnInit(): void {
     this.activeCategory = this.foodService.activeCategory;
     this.storeItems = this.foodService.getAll();
@@ -68,6 +70,13 @@ export class DigitalMenuComponent {
 
   readonly dialog = inject(MatDialog);
 
+  showTransition() {
+    this.itemAdded = true;
+    setTimeout(() => {
+      this.itemAdded = false;
+    }, 1000);
+  }
+
   openDialog(item: PizzaItem) {
     const dialogRef = this.dialog.open(PizzaPopupComponent, {
       data: item,
@@ -76,6 +85,7 @@ export class DigitalMenuComponent {
     dialogRef.afterClosed().subscribe((result: CartItem) => {
       if (result) {
         this.increaseQuantity(result);
+        this.showTransition();
       }
     });
   }
@@ -88,6 +98,7 @@ export class DigitalMenuComponent {
     dialogRef.afterClosed().subscribe((result: CartItem) => {
       if (result) {
         this.increaseQuantity(result);
+        this.showTransition();
       }
     });
   }
@@ -100,6 +111,7 @@ export class DigitalMenuComponent {
     dialogRef.afterClosed().subscribe((result: CartItem) => {
       if (result) {
         this.increaseQuantity(result);
+        this.showTransition();
       }
     });
   }
@@ -112,6 +124,7 @@ export class DigitalMenuComponent {
     dialogRef.afterClosed().subscribe((result: CartItem) => {
       if (result) {
         this.increaseQuantity(result);
+        this.showTransition();
       }
     });
   }
@@ -124,6 +137,7 @@ export class DigitalMenuComponent {
     dialogRef.afterClosed().subscribe((result: CartItem) => {
       if (result) {
         this.increaseQuantity(result);
+        this.showTransition();
       }
     });
   }

@@ -69,6 +69,16 @@ export class CartComponent {
     return totalAmount >= 300 && this.selectedOutlet === 'SITAPUR';
   }
 
+  isShowFreeMsg200(): boolean {
+    const totalAmount = this.getTotalAmount();
+    return totalAmount < 200 && this.selectedOutlet === 'SITAPUR';
+  }
+
+  isShowFreeMsg300(): boolean {
+    const totalAmount = this.getTotalAmount();
+    return totalAmount >= 200 && totalAmount < 300 && this.selectedOutlet === 'SITAPUR';
+  }
+
   getTotalAmount() {
     return this.cartItems.reduce(
       (total, item) => total + item.perItemPrice * item.quantity,
@@ -114,7 +124,7 @@ export class CartComponent {
           item.withExtraCheese ? ' WITH EXTRA CHEESE' : ''
         }${item.withCheeseBurst ? ' WITH CHEESE BURST' : ''} ${
           item.price
-            ? '[QUANTITY - '+ item.quantity +'] [PRICE - ₹'+ item.price +']'
+            ? '[QUANTITY - ' + item.quantity + '] [PRICE - ₹' + item.price + ']'
             : '[FREE]'
         }`;
       })

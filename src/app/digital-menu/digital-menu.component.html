@@ -192,6 +192,18 @@
     </div>
   </div>
 
-  <!-- Notify Button -->
-  <button class="notify-button" (click)="navigateToCart()">GO TO CART</button>
+  <div>
+    <br />
+    <br />
+  </div>
+
+  <!-- Notify DIV -->
+  <div class="notify-button" [class.item-added]="itemAdded" (click)="navigateToCart()">
+
+    <span *ngIf="getTotalCartItems()">
+      {{ getTotalCartItems() }} items added &#x2192; </span>
+    <span>GO TO CART</span>
+
+
+  </div>
 </div>
