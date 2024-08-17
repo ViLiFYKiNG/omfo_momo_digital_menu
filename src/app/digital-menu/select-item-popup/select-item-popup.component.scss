@@ -1,0 +1,78 @@
+.popContentButtons {
+  display: flex;
+  flex-direction: column;
+
+  ::ng-deep .popUpButton {
+    display: flex !important;
+    flex-direction: row;
+    color: black;
+    margin-right: 7px;
+    margin-top: 10px;
+    justify-content: space-between !important;
+    height: 24px;
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+
+    &.active-class {
+      color: white;
+      background-color: black;
+      margin-top: 10px;
+    }
+
+    .popUpButtonItems {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+}
+
+mat-dialog-content {
+  padding: 0px;
+
+  h1 {
+    text-align: center;
+  }
+}
+
+.actionWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .quantity-controls {
+    display: flex;
+    align-items: center;
+    background: #ff4c4c;
+    border-radius: 25px;
+
+    button {
+      background: none;
+      border: none;
+      font-size: 18px;
+      padding: 8px;
+      opacity: 0.8;
+      cursor: pointer;
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    span {
+      margin: 0 5px;
+      font-size: 16px;
+      font-weight: bold;
+    }
+  }
+
+  .actionButtons {
+    background: #ff4c4c;
+    border-radius: 25px;
+    border: none;
+    color: white !important;
+    padding: 10px;
+    font-size: 15px;
+    font-weight: 600;
+  }
+}

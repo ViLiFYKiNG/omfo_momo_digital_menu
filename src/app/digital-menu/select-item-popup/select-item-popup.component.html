@@ -1,0 +1,78 @@
+<mat-dialog-content>
+    <h1 style="line-height: 30px; min-width: 285px;">{{ selectedItem.name }}</h1>
+
+    <br>
+
+    <div>
+        <h2>Choose size</h2>
+        <div class="popContentButtons" *ngIf="selectedItem.itemType === 'PIZZA'">
+            <div class="popUpButton" (click)="onToggleSize('small')"
+                [style]="{color: size === 'small' ? 'white' : 'black', backgroundColor: size === 'small' ? 'black' : '#f0efef' }">
+                <div class="popUpButtonItems">SMALL</div>
+                <div class="popUpButtonItems">₹{{ getPriceForSize('small') }}</div>
+            </div>
+            <div class="popUpButton" (click)="onToggleSize('medium')"
+                [style]="{color: size === 'medium' ? 'white' : 'black', backgroundColor: size === 'medium' ? 'black' : '#f0efef' }">
+                <div class="popUpButtonItems">MEDIUM</div>
+                <div class="popUpButtonItems">₹{{ getPriceForSize('medium') }}</div>
+            </div>
+            <div class="popUpButton" (click)="onToggleSize('large')"
+                [style]="{color: size === 'large' ? 'white' : 'black', backgroundColor: size === 'large' ? 'black' : '#f0efef' }">
+                <div class="popUpButtonItems">LARGE</div>
+                <div class="popUpButtonItems">₹{{ getPriceForSize('large') }}</div>
+            </div>
+        </div>
+        <div class="popContentButtons" *ngIf="selectedItem.itemType === 'MOMO'">
+            <div class="popUpButton" mat-raised-button (click)="onToggleSize('half')"
+                [style]="{color: size === 'half' ? 'white' : 'black', backgroundColor: size === 'half' ? 'black' : '#f0efef' }">
+                <div class="popUpButtonItems">HALF</div>
+                <div class="popUpButtonItems">₹{{ getPriceForSize('half') }}</div>
+            </div>
+            <div class="popUpButton" mat-raised-button (click)="onToggleSize('full')"
+                [style]="{color: size === 'full' ? 'white' : 'black', backgroundColor: size === 'full' ? 'black' : '#f0efef' }">
+                <div class="popUpButtonItems">FULL</div>
+                <div class="popUpButtonItems">₹{{ getPriceForSize('full') }}</div>
+            </div>
+        </div>
+        <div class="popContentButtons" *ngIf="selectedItem.itemType === 'BURGER' || selectedItem.itemType === 'SHAKE'">
+            <div class="popUpButton" mat-raised-button
+                [style]="{color: size === 'regular' ? 'white' : 'black', backgroundColor: size === 'regular' ? 'black' : '#f0efef' }">
+                <div class="popUpButtonItems">REGULAR</div>
+                <div class="popUpButtonItems">₹{{ selectedItem.price }}</div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="selectedItem.itemType === 'PIZZA'">
+        <br>
+
+        <div>
+            <h2>TOPPLINGS</h2>
+            <div class="popContentButtons">
+                <div class="popUpButton" (click)="onToggleExtraCheese()"
+                    [style]="{color: isExtraCheese ? 'white' : 'black', backgroundColor: isExtraCheese ? 'black' : '#f0efef' }">
+                    <div class="popUpButtonItems">EXTRA CHEESE</div>
+                    <div class="popUpButtonItems">+₹{{ getExtraCheesePrice() }}</div>
+                </div>
+
+                <div class="popUpButton" (click)="onToggleCheeseBurst()"
+                    [style]="{color: isCheeseBurst ? 'white' : 'black', backgroundColor: isCheeseBurst ? 'black' : '#f0efef' }">
+                    <div class="popUpButtonItems">CHEESE BURST </div>
+                    <div class="popUpButtonItems">+₹{{ getCheeseBurstPrice() }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <div class="actionWrapper">
+        <div class="quantity-controls">
+            <button (click)="decreaseQuantity()">-</button>
+            <span style="color: white;">{{ getCartItemQuantity() }}</span>
+            <button (click)="increaseQuantity()">+</button>
+        </div>
+        <button class="actionButtons" style="color: black;" (click)="onClose()">CLOSE</button>
+        <button class="actionButtons" style="color: black;" [mat-dialog-close]="cartItem" cdkFocusInitial>ADD - ₹{{
+            getTotalPrice() }}</button>
+    </div>
+</mat-dialog-actions>

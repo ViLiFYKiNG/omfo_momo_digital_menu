@@ -20,13 +20,22 @@ import {
 import { BurgerPopupComponent } from './burger-popup/burger-popup.component';
 import { ShakePopupComponent } from './shake-popup/shake-popup.component';
 import { OutletSelectionPopupComponent } from './outlet-selection-popup/outlet-selection-popup.component';
+import { ItemCardComponent } from '../shared/components/item-card/item-card.component';
+import { SelectOutletComponent } from './select-outlet/select-outlet.component';
+import { CategoryTabComponent } from './category-tab/category-tab.component';
 
 @Component({
   selector: 'app-digital-menu',
   standalone: true,
   templateUrl: './digital-menu.component.html',
   styleUrls: ['./digital-menu.component.scss'],
-  imports: [CommonModule, MatSlideToggleModule],
+  imports: [
+    CommonModule,
+    MatSlideToggleModule,
+    ItemCardComponent,
+    SelectOutletComponent,
+    CategoryTabComponent,
+  ],
 })
 export class DigitalMenuComponent {
   static selectOutlet: string;
