@@ -38,8 +38,6 @@ export class CategoryTabComponent {
     item: PizzaItem | MomoItem | BurgerItem | ShakeItem;
     event: Event;
   }): void {
-    console.log('---***---');
-    console.log(item);
     event.stopPropagation();
     const dialogRef = this.dialog.open(SelectItemPopupComponent, {
       data: item,

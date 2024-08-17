@@ -36,9 +36,6 @@ import { EXTRA_PRICE, ITEMTYPES } from '../../shared/constants';
 })
 export class SelectItemPopupComponent implements OnInit {
   ngOnInit(): void {
-    console.log('onInit');
-    console.log(this.selectedItem);
-
     if (this.selectedItem.itemType === ITEMTYPES.PIZZA) {
       this.priceForOneSelectedItem = (
         this.selectedItem as PizzaItem

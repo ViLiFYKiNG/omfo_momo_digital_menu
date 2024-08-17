@@ -18,8 +18,6 @@ export class ItemCardComponent {
   }>();
 
   public onSelectItem(event: Event): void {
-    console.log('***');
-    console.log(this.item());
     this.selectedItem.emit({ item: this.item(), event });
   }
 

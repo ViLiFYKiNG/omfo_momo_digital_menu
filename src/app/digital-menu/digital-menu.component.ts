@@ -3,22 +3,8 @@ import { Component, inject, viewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { FoodService } from '../services/food.service';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { MatMenuTrigger } from '@angular/material/menu';
 import { MatDialog } from '@angular/material/dialog';
-import { PizzaPopupComponent } from './pizza-popup/pizza-popup.component';
-import { MomoPopupComponent } from './momo-popup/momo-popup.component';
-import { ChinesePopupComponent } from './chinese-popup/chinese-popup.component';
-import {
-  BurgerItem,
-  CartItem,
-  ChineseItem,
-  MomoItem,
-  OmfoMomoItems,
-  PizzaItem,
-  ShakeItem,
-} from '../shared/modals';
-import { BurgerPopupComponent } from './burger-popup/burger-popup.component';
-import { ShakePopupComponent } from './shake-popup/shake-popup.component';
+import { OmfoMomoItems } from '../shared/modals';
 import { OutletSelectionPopupComponent } from './outlet-selection-popup/outlet-selection-popup.component';
 import { ItemCardComponent } from '../shared/components/item-card/item-card.component';
 import { SelectOutletComponent } from './select-outlet/select-outlet.component';
@@ -38,7 +24,6 @@ import { CategoryTabComponent } from './category-tab/category-tab.component';
   ],
 })
 export class DigitalMenuComponent {
-  static selectOutlet: string;
   constructor(private router: Router, private foodService: FoodService) {}
 
   activeCategory: string | null = 'Pizza';
@@ -67,15 +52,9 @@ export class DigitalMenuComponent {
     this.foodService.activeCategory = this.activeCategory;
   }
 
-  increaseQuantity(item: CartItem) {
-    this.foodService.increaseQuantity(item);
-  }
-
   navigateToCart() {
     this.router.navigate(['/cart']);
   }
-
-  readonly menuTrigger = viewChild.required(MatMenuTrigger);
 
   readonly dialog = inject(MatDialog);
 
@@ -84,71 +63,6 @@ export class DigitalMenuComponent {
     setTimeout(() => {
       this.itemAdded = false;
     }, 1000);
-  }
-
-  openDialog(item: PizzaItem) {
-    const dialogRef = this.dialog.open(PizzaPopupComponent, {
-      data: item,
-    });
-
-    dialogRef.afterClosed().subscribe((result: CartItem) => {
-      if (result) {
-        this.increaseQuantity(result);
-        this.showTransition();
-      }
-    });
-  }
-
-  openDialogForMOMO(item: MomoItem) {
-    const dialogRef = this.dialog.open(MomoPopupComponent, {
-      data: item,
-    });
-
-    dialogRef.afterClosed().subscribe((result: CartItem) => {
-      if (result) {
-        this.increaseQuantity(result);
-        this.showTransition();
-      }
-    });
-  }
-
-  openDialogForCHINESE(item: ChineseItem) {
-    const dialogRef = this.dialog.open(ChinesePopupComponent, {
-      data: item,
-    });
-
-    dialogRef.afterClosed().subscribe((result: CartItem) => {
-      if (result) {
-        this.increaseQuantity(result);
-        this.showTransition();
-      }
-    });
-  }
-
-  openDialogForBURGER(item: BurgerItem) {
-    const dialogRef = this.dialog.open(BurgerPopupComponent, {
-      data: item,
-    });
-
-    dialogRef.afterClosed().subscribe((result: CartItem) => {
-      if (result) {
-        this.increaseQuantity(result);
-        this.showTransition();
-      }
-    });
-  }
-
-  openDialogForSHAKE(item: ShakeItem) {
-    const dialogRef = this.dialog.open(ShakePopupComponent, {
-      data: item,
-    });
-
-    dialogRef.afterClosed().subscribe((result: CartItem) => {
-      if (result) {
-        this.increaseQuantity(result);
-        this.showTransition();
-      }
-    });
   }
 
   getTotalAmount() {
