@@ -74,7 +74,6 @@ export interface ShakeItem {
 export interface OmfoMomoItems {
   pizzaItems: PizzaItem[];
   momosItems: MomoItem[];
-  chineseItems: ChineseItem[];
   burgerItems: BurgerItem[];
   shakesItems: ShakeItem[];
 }

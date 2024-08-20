@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, viewChild } from '@angular/core';
+import { Component, inject, viewChild, computed } from '@angular/core';
 import { Router } from '@angular/router';
 import { FoodService } from '../services/food.service';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
@@ -28,19 +28,16 @@ export class DigitalMenuComponent {
 
   activeCategory: string | null = 'Pizza';
 
-  selectedOutlet: string = 'SITAPUR';
-
   storeItems: OmfoMomoItems | null = null;
 
   itemAdded: boolean = false;
 
-  ngOnInit(): void {
-    this.activeCategory = this.foodService.activeCategory;
-    this.storeItems = this.foodService.getAll();
+  selectedOutlet = computed(() => {
+    return this.foodService.outlet();
+  });
 
-    this.foodService.selectedValue$.subscribe((value) => {
-      this.selectedOutlet = value;
-    });
+  ngOnInit(): void {
+    this.storeItems = this.foodService.getAll();
   }
 
   toggleCategory(category: string) {
@@ -49,7 +46,6 @@ export class DigitalMenuComponent {
     } else {
       this.activeCategory = category;
     }
-    this.foodService.activeCategory = this.activeCategory;
   }
 
   navigateToCart() {
@@ -77,13 +73,13 @@ export class DigitalMenuComponent {
     return (
       totalAmount < 300 &&
       totalAmount >= 200 &&
-      this.selectedOutlet === 'SITAPUR'
+      this.selectedOutlet() === 'SITAPUR'
     );
   }
 
   isTotalOver300(): boolean {
     const totalAmount = this.getTotalAmount();
-    return totalAmount >= 300 && this.selectedOutlet === 'SITAPUR';
+    return totalAmount >= 300 && this.selectedOutlet() === 'SITAPUR';
   }
 
   getTotalCartItems() {
@@ -101,7 +97,7 @@ export class DigitalMenuComponent {
 
     dialogRef.afterClosed().subscribe((result: any) => {
       if (result) {
-        this.foodService.setSelectedValue(result);
+        this.foodService.setOutlet(result);
       }
     });
   }

@@ -2,7 +2,7 @@
 
   <h1 class="heading">OMFO MOMO</h1>
 
-  <app-select-outlet class="outlet" (click)="openOutletSelectionPopup()" [outlet]="selectedOutlet"></app-select-outlet>
+  <app-select-outlet class="outlet" (click)="openOutletSelectionPopup()" [outlet]="selectedOutlet()"></app-select-outlet>
 
   <div class="cart-icon" (click)="navigateToCart()">
     <img src="../../assets/images/cart.png" alt="Cart" />
@@ -11,7 +11,6 @@
 
   <!-- Category Tabs -->
   <div>
-
     <!-- MOMOS -->
     <app-category-tab category="Momos" [activeCategory]="activeCategory" [items]="storeItems?.momosItems!"
       (click)="toggleCategory('Momos')"></app-category-tab>
@@ -27,6 +26,11 @@
     <!-- SHAKES -->
     <app-category-tab category="Shakes" [activeCategory]="activeCategory" [items]="storeItems?.shakesItems!"
       (click)="toggleCategory('Shakes')"></app-category-tab>
+
+      <!-- @for (item of storeItems | keyvalue; track item.key) {
+        <app-category-tab [category]="item.key" [activeCategory]="activeCategory" [items]="item.value"
+          (click)="toggleCategory(item.key)"></app-category-tab>
+      } -->
   </div>
 
   <div>

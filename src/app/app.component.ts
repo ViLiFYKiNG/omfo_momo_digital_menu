@@ -19,7 +19,7 @@ export class AppComponent {
 
     dialogRef.afterClosed().subscribe((result: string) => {
       if (result) {
-        this.foodService.setSelectedValue(result);
+        this.foodService.setOutlet(result);
       }
     });
   }

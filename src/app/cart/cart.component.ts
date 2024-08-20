@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { FoodService } from '../services/food.service';
 import { CartItem, OrderType } from '../shared/modals';
@@ -45,14 +45,12 @@ export class CartComponent {
 
   readonly dialog = inject(MatDialog);
 
-  selectedOutlet: string = 'SITAPUR';
+  selectedOutlet = computed(() => {
+    return this.foodService.outlet();
+  });
 
   ngOnInit(): void {
     this.cartItems = this.foodService.getAllCartItems();
-
-    this.foodService.selectedValue$.subscribe((value) => {
-      this.selectedOutlet = value;
-    });
   }
 
   isTotalOver200(): boolean {
@@ -60,23 +58,27 @@ export class CartComponent {
     return (
       totalAmount < 300 &&
       totalAmount >= 200 &&
-      this.selectedOutlet === 'SITAPUR'
+      this.selectedOutlet() === 'SITAPUR'
     );
   }
 
   isTotalOver300(): boolean {
     const totalAmount = this.getTotalAmount();
-    return totalAmount >= 300 && this.selectedOutlet === 'SITAPUR';
+    return totalAmount >= 300 && this.selectedOutlet() === 'SITAPUR';
   }
 
   isShowFreeMsg200(): boolean {
     const totalAmount = this.getTotalAmount();
-    return totalAmount < 200 && this.selectedOutlet === 'SITAPUR';
+    return totalAmount < 200 && this.selectedOutlet() === 'SITAPUR';
   }
 
   isShowFreeMsg300(): boolean {
     const totalAmount = this.getTotalAmount();
-    return totalAmount >= 200 && totalAmount < 300 && this.selectedOutlet === 'SITAPUR';
+    return (
+      totalAmount >= 200 &&
+      totalAmount < 300 &&
+      this.selectedOutlet() === 'SITAPUR'
+    );
   }
 
   getTotalAmount() {

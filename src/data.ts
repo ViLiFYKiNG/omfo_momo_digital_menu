@@ -400,9 +400,8 @@ export const SHAKES_ITEMS: ShakeItem[] = [
 ];
 
 export const OMFO_MOMO_ITEMS: OmfoMomoItems = {
-  pizzaItems: PIZZA_ITEMS,
   momosItems: MOMO_ITEMS,
-  chineseItems: CHINESE_ITEM,
+  pizzaItems: PIZZA_ITEMS,
   burgerItems: BURGER_ITEMS,
   shakesItems: SHAKES_ITEMS,
 };

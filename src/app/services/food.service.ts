@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import {
   OMFO_MOMO_ITEMS,
   PIZZA_ITEMS,
@@ -6,7 +6,6 @@ import {
   CHINESE_ITEM,
 } from '../../data';
 import { CartItem, ChineseItem, MomoItem, OmfoMomoItems, PizzaItem } from '../shared/modals';
-import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -14,16 +13,12 @@ import { BehaviorSubject } from 'rxjs';
 export class FoodService {
   cartItems: CartItem[] = [];
 
-  activeCategory: string | null = 'Pizza';
-
-  selectedValueSource = new BehaviorSubject<string>('SITAPUR');
-
-  selectedValue$ = this.selectedValueSource.asObservable();
+  outlet = signal<string>('SITAPUR');
 
   constructor() {}
 
-  setSelectedValue(value: string) {
-    this.selectedValueSource.next(value);
+  setOutlet(value: string) {
+    this.outlet.set(value);
   }
 
   getAll(): OmfoMomoItems {
