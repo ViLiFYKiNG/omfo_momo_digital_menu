@@ -2,8 +2,8 @@ name: CI_ON_PUSH
 
 on:
   push:
-    branches:
-      - main
+    branches: 
+      - '**'  # This will match all branches
   workflow_dispatch:
 
 jobs:
@@ -12,7 +12,7 @@ jobs:
     if: github.event_name == 'push'
     steps:
       - uses: actions/checkout@v4
-      - run: npm ci && npm run build
+      - run: npm ci && npm run build:TEST
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
@@ -22,14 +22,13 @@ jobs:
 
   DEPLOY_ON_PROD:
     runs-on: ubuntu-latest
-    if: github.event_name == 'workflow_dispatch'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     steps:
       - uses: actions/checkout@v4
-      - run: npm ci && npm run build
+      - run: npm ci && npm run build:PROD
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_PROD }}
           channelId: live
           projectId: omfomomo-prod
-

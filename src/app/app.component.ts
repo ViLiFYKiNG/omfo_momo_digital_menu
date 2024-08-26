@@ -3,6 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { OutletSelectionPopupComponent } from './digital-menu/outlet-selection-popup/outlet-selection-popup.component';
 import { MatDialog } from '@angular/material/dialog';
 import { FoodService } from './services/food.service';
+import { ENV } from '../env/env';
 
 @Component({
   selector: 'app-root',
@@ -22,5 +23,8 @@ export class AppComponent {
         this.foodService.setOutlet(result);
       }
     });
+
+    console.log('000');
+    console.log(ENV);
   }
 }
