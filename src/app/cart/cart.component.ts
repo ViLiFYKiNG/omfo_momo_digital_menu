@@ -156,7 +156,7 @@ export class CartComponent {
       this.getTotalAmount() +
       (this.shouldTakeDeliveryCharge(orderType) ? 20 : 0)
     }${encodeURI('\n')}**************************${encodeURI('\n')}OUTLET - ${
-      this.selectedOutlet
+      this.selectedOutlet()
     }${encodeURI('\n')}MODE - ${orderType.deliveryType}${encodeURI('\n')}${
       orderType.deliveryType === 'DELIVERY' ? 'ADD - ' + orderType.message : ''
     }`;
