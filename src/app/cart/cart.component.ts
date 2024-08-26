@@ -6,6 +6,7 @@ import { CartItem, OrderType } from '../shared/modals';
 import { CheckoutPopupComponent } from './checkout-popup/checkout-popup.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ITEMTYPES } from '../shared/constants';
+import { ENV } from '../../env/env';
 
 @Component({
   selector: 'app-cart',
@@ -51,6 +52,10 @@ export class CartComponent {
 
   ngOnInit(): void {
     this.cartItems = this.foodService.getAllCartItems();
+
+    if(!ENV.isProd) {
+      this.phoneNumber = '8869860624';
+    }
   }
 
   isTotalOver200(): boolean {
