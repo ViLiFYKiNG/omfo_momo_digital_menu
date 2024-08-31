@@ -24,13 +24,7 @@ import { CategoryTabComponent } from './category-tab/category-tab.component';
   ],
 })
 export class DigitalMenuComponent {
-  constructor(private router: Router, private foodService: FoodService) {
-    effect(() => {
-      if (this.foodService.itemAddedSuccessFully()) {
-        this.showTransition();
-      }
-    });
-  }
+  constructor(private router: Router, private foodService: FoodService) {}
 
   activeCategory: string | null = 'Pizza';
 
@@ -44,6 +38,10 @@ export class DigitalMenuComponent {
 
   ngOnInit(): void {
     this.storeItems = this.foodService.getAll();
+
+    this.foodService.itemAddedSuccessFully.subscribe(() => {
+      this.showTransition();
+    });
   }
 
   toggleCategory(category: string) {

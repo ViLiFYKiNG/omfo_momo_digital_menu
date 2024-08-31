@@ -12,12 +12,13 @@ import {
   OmfoMomoItems,
   PizzaItem,
 } from '../shared/modals';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FoodService {
-  readonly itemAddedSuccessFully = signal<boolean>(false);
+  public itemAddedSuccessFully = new Subject<null>();
 
   cartItems: CartItem[] = [];
 
@@ -84,11 +85,7 @@ export class FoodService {
       this.cartItems.push({ ...item });
     }
 
-    this.itemAddedSuccessFully.set(true);
-
-    setTimeout(() => {
-      this.itemAddedSuccessFully.set(false);
-    }, 1000);
+    this.itemAddedSuccessFully.next(null);
   }
 
   increaseItemQuantityInCart(item: CartItem) {
