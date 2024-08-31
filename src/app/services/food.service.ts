@@ -5,12 +5,20 @@ import {
   MOMO_ITEMS,
   CHINESE_ITEM,
 } from '../../data';
-import { CartItem, ChineseItem, MomoItem, OmfoMomoItems, PizzaItem } from '../shared/modals';
+import {
+  CartItem,
+  ChineseItem,
+  MomoItem,
+  OmfoMomoItems,
+  PizzaItem,
+} from '../shared/modals';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FoodService {
+  readonly itemAddedSuccessFully = signal<boolean>(false);
+
   cartItems: CartItem[] = [];
 
   outlet = signal<string>('SITAPUR');
@@ -75,6 +83,12 @@ export class FoodService {
     } else {
       this.cartItems.push({ ...item });
     }
+
+    this.itemAddedSuccessFully.set(true);
+
+    setTimeout(() => {
+      this.itemAddedSuccessFully.set(false);
+    }, 1000);
   }
 
   increaseItemQuantityInCart(item: CartItem) {

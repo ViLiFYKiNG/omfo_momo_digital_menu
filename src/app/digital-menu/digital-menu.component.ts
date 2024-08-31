@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, viewChild, computed } from '@angular/core';
+import { Component, inject, viewChild, computed, effect } from '@angular/core';
 import { Router } from '@angular/router';
 import { FoodService } from '../services/food.service';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
@@ -24,7 +24,13 @@ import { CategoryTabComponent } from './category-tab/category-tab.component';
   ],
 })
 export class DigitalMenuComponent {
-  constructor(private router: Router, private foodService: FoodService) {}
+  constructor(private router: Router, private foodService: FoodService) {
+    effect(() => {
+      if (this.foodService.itemAddedSuccessFully()) {
+        this.showTransition();
+      }
+    });
+  }
 
   activeCategory: string | null = 'Pizza';
 
@@ -95,7 +101,7 @@ export class DigitalMenuComponent {
   openOutletSelectionPopup() {
     const dialogRef = this.dialog.open(OutletSelectionPopupComponent);
 
-    dialogRef.afterClosed().subscribe((result: any) => {
+    dialogRef.afterClosed().subscribe((result: string) => {
       if (result) {
         this.foodService.setOutlet(result);
       }
