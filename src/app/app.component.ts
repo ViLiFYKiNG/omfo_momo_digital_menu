@@ -16,13 +16,13 @@ export class AppComponent {
   readonly dialog = inject(MatDialog);
   constructor(private foodService: FoodService) {}
   ngOnInit(): void {
-    const dialogRef = this.dialog.open(OutletSelectionPopupComponent);
+    // const dialogRef = this.dialog.open(OutletSelectionPopupComponent);
 
-    dialogRef.afterClosed().subscribe((result: string) => {
-      if (result) {
-        this.foodService.setOutlet(result);
-      }
-    });
+    // dialogRef.afterClosed().subscribe((result: string) => {
+    //   if (result) {
+    //     this.foodService.setOutlet(result);
+    //   }
+    // });
 
     console.log('000');
     console.log(ENV);
