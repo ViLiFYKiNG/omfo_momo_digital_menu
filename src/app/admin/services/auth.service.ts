@@ -103,6 +103,7 @@ export class AuthService {
         new Date(userData._tokenExpirationDate).getTime() -
         new Date().getTime();
       console.log(expirationDuration);
+      this.router.navigate(['/dashboard']);
       this.autoLogout(expirationDuration);
     }
   }

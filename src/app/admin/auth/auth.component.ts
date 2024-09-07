@@ -52,7 +52,7 @@ export class AuthComponent {
         console.log(1);
         console.log(resData);
         this.isLoading = false;
-        // this.router.navigate(['/recipes']);
+        this.router.navigate(['/dashboard']);
       },
       error: (errorMessage) => {
         console.log(2);
