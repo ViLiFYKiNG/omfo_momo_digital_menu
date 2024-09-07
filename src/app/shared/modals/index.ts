@@ -90,3 +90,8 @@ export interface CartItem {
   withExtraCheese?: boolean;
   withCheeseBurst?: boolean;
 }
+
+export interface Topping {
+  name: string;
+  price: number;
+}

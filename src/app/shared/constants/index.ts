@@ -3,9 +3,16 @@ export const ITEMTYPES = {
   MOMO: 'MOMO',
   CHINESE: 'CHINESE',
   BURGER: 'BURGER',
-  SHAKE: 'SHAKE', 
+  SHAKE: 'SHAKE',
 } as const;
 
+export const CATEGORYTYPES: { cNAME: string; cVALUE: string }[] = [
+  { cNAME: 'PIZZA', cVALUE: 'PIZZA' },
+  { cNAME: 'MOMO', cVALUE: 'MOMO' },
+  { cNAME: 'CHINESE', cVALUE: 'CHINESE' },
+  { cNAME: 'BURGER', cVALUE: 'BURGER' },
+  { cNAME: 'SHAKE', cVALUE: 'SHAKE' },
+] as const;
 
 export const EXTRA_PRICE = {
   small: {

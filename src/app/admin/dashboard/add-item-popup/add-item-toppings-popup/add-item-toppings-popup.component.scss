@@ -2,32 +2,19 @@
   display: flex;
   flex-direction: column;
 
-  .inputField {
-    margin-top: 10px;
-    text-align: center;
-
-    mat-form-field {
-      width: 100%;
-    }
-  }
-
-  .checkbox {
-    text-align: start;
-  }
-
-  .size {
+  .toppingsWrapper {
     border: 2px solid;
     padding: 5px;
     margin-top: 10px;
 
-    .sizes {
+    .toppings {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-top: 10px;
 
-      .sizeField {
-        width: 40%;
+      .toppingField {
+        width: 44%;
 
         mat-form-field {
           width: 100%;
@@ -43,7 +30,7 @@
 
 mat-dialog-content {
   padding: 0px;
-  min-width: 560px;
+  min-width: 535px;
 
   h1 {
     text-align: center;
