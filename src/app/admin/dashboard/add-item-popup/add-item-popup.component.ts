@@ -55,6 +55,12 @@ export class AddItemPopupComponent implements OnInit {
   ngOnInit(): void {
     console.log('***');
     this.sizeForm = this.fb.group({
+      name: [''],
+      description: [''],
+      restaurantId: [''],
+      imageUrl: [''],
+      category: ['PIZZA'],
+      isPublished: [false],
       sizes: this.fb.array([this.createSizeField()]),
     });
   }
@@ -83,6 +89,7 @@ export class AddItemPopupComponent implements OnInit {
 
   addToppings(index: number, toppings: Topping[]) {
     const toppingsArray = this.getToppings(index);
+    toppingsArray.clear();
 
     toppings.forEach((topping: Topping) => {
       toppingsArray.push(
@@ -117,7 +124,9 @@ export class AddItemPopupComponent implements OnInit {
 
   public addToppingPopUp(index: number): void {
     this.selectedIndex = index;
-    const dialogRef = this.dialog.open(AddItemToppingsPopupComponent);
+    const dialogRef = this.dialog.open(AddItemToppingsPopupComponent, {
+      data: this.getToppings(index),
+    });
     dialogRef.afterClosed().subscribe((toppings: Topping[]) => {
       if (toppings) {
         console.log('...***---');

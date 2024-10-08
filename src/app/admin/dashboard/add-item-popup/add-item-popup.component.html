@@ -8,31 +8,31 @@
             <div class="inputField">
                 <mat-form-field appearance="outline">
                     <mat-label>NAME</mat-label>
-                    <input matInput>
+                    <input matInput formControlName="name">
                 </mat-form-field>
             </div>
             <div class="inputField">
                 <mat-form-field appearance="outline">
                     <mat-label>DESCRIPTION</mat-label>
-                    <textarea matInput></textarea>
+                    <textarea matInput formControlName="description"></textarea>
                 </mat-form-field>
             </div>
             <div class="inputField">
                 <mat-form-field appearance="outline">
                     <mat-label>RESTAURANT ID</mat-label>
-                    <input matInput>
+                    <input matInput formControlName="restaurantId">
                 </mat-form-field>
             </div>
             <div class="inputField">
                 <mat-form-field appearance="outline">
                     <mat-label>IMAGE URL</mat-label>
-                    <input matInput>
+                    <input matInput formControlName="imageUrl">
                 </mat-form-field>
             </div>
             <div class="inputField">
                 <mat-form-field appearance="outline">
                     <mat-label>CATEGORY</mat-label>
-                    <mat-select>
+                    <mat-select formControlName="category">
                         @for (item of CATEGORYTYPES; track item.cVALUE) {
                         <mat-option [value]="item.cVALUE">{{item.cNAME}}</mat-option>
                         }
@@ -55,7 +55,7 @@
                                 <input type="number" matInput formControlName="price" />
                             </mat-form-field>
                         </div>
-                        <button mat-mini-fab matTooltip="ADD TOPPINGS" matTooltipPosition="above"
+                        <button mat-mini-fab matTooltip="ADD/EDIT TOPPINGS" matTooltipPosition="above"
                             (click)="addToppingPopUp(i)" [disabled]="!isSizeValid(i)">
                             <mat-icon class="icon" aria-hidden="false" fontIcon="add"></mat-icon>
                         </button>
@@ -71,7 +71,7 @@
             </div>
 
             <div class="inputField checkbox">
-                <mat-checkbox>PUBLISH</mat-checkbox>
+                <mat-checkbox formControlName="isPublished">PUBLISH</mat-checkbox>
             </div>
 
 

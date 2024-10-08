@@ -14,6 +14,7 @@ import {
   MatDialogActions,
   MatDialogClose,
   MatDialogRef,
+  MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -45,12 +46,28 @@ export class AddItemToppingsPopupComponent {
 
   ngOnInit(): void {
     console.log('***');
+    console.log(this.inputTopplings);
+    console.log(this.inputTopplings.value);
     this.toppingsForm = this.fb.group({
-      toppings: this.fb.array([this.createSizeField()]),
+      toppings: this.fb.array([]),
     });
+    if (this.inputTopplings.value.length) {
+      this.inputTopplings.value.forEach((topping: any) => {
+        this.toppings.push(
+          this.fb.group({
+            name: [topping.name, Validators.required],
+            price: [topping.price, Validators.required],
+          })
+        );
+      });
+    } else {
+      this.addToppingField();
+    }
   }
 
   readonly dialogRef = inject(MatDialogRef<AddItemPopupComponent>);
+
+  readonly inputTopplings = inject<FormArray>(MAT_DIALOG_DATA);
 
   constructor(private fb: FormBuilder) {}
 
