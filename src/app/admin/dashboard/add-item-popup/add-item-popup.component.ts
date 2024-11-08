@@ -71,14 +71,6 @@ export class AddItemPopupComponent implements OnInit {
 
   constructor(private fb: FormBuilder) {}
 
-  createSizeField(): FormGroup {
-    return this.fb.group({
-      size: ['', Validators.required],
-      price: ['', Validators.required],
-      toppings: this.fb.array([]),
-    });
-  }
-
   getToppings(index: number): FormArray {
     return this.sizes.at(index).get('toppings') as FormArray;
   }
@@ -111,6 +103,14 @@ export class AddItemPopupComponent implements OnInit {
 
   addSizeField() {
     this.sizes.push(this.createSizeField());
+  }
+
+  createSizeField(): FormGroup {
+    return this.fb.group({
+      size: ['', Validators.required],
+      price: ['', Validators.required],
+      toppings: this.fb.array([]),
+    });
   }
 
   removeSizeField(index: number) {
