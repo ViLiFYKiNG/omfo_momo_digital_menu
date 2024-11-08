@@ -154,13 +154,13 @@ export class DigitalMenuComponent {
     return (
       totalAmount < 300 &&
       totalAmount >= 200 &&
-      this.selectedOutlet === 'SITAPUR'
+      this.selectedOutlet === 'SITAPUR--'
     );
   }
 
   isTotalOver300(): boolean {
     const totalAmount = this.getTotalAmount();
-    return totalAmount >= 300 && this.selectedOutlet === 'SITAPUR';
+    return totalAmount >= 300 && this.selectedOutlet === 'SITAPUR--';
   }
 
   getTotalCartItems() {

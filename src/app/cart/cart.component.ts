@@ -60,23 +60,23 @@ export class CartComponent {
     return (
       totalAmount < 300 &&
       totalAmount >= 200 &&
-      this.selectedOutlet === 'SITAPUR'
+      this.selectedOutlet === 'SITAPUR--'
     );
   }
 
   isTotalOver300(): boolean {
     const totalAmount = this.getTotalAmount();
-    return totalAmount >= 300 && this.selectedOutlet === 'SITAPUR';
+    return totalAmount >= 300 && this.selectedOutlet === 'SITAPUR--';
   }
 
   isShowFreeMsg200(): boolean {
     const totalAmount = this.getTotalAmount();
-    return totalAmount < 200 && this.selectedOutlet === 'SITAPUR';
+    return totalAmount < 200 && this.selectedOutlet === 'SITAPUR--';
   }
 
   isShowFreeMsg300(): boolean {
     const totalAmount = this.getTotalAmount();
-    return totalAmount >= 200 && totalAmount < 300 && this.selectedOutlet === 'SITAPUR';
+    return totalAmount >= 200 && totalAmount < 300 && this.selectedOutlet === 'SITAPUR--';
   }
 
   getTotalAmount() {
