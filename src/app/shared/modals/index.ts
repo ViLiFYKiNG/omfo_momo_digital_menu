@@ -95,3 +95,20 @@ export interface Topping {
   name: string;
   price: number;
 }
+
+export interface OmfoItemSize {
+  size: string;
+  price: number;
+  toppings?: Topping[];
+}
+
+export interface OmfoItem {
+  itemId?: number | string;
+  restaurantId?: number | string;
+  name: string;
+  description: string;
+  category: 'PIZZA' | 'MOMO' | 'CHINESE' | 'BURGER' | 'SHAKE';
+  isAvailable: boolean;
+  imageURL: string;
+  sizes: OmfoItemSize[];
+}

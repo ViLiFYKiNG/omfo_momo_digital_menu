@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, tap } from 'rxjs/operators';
 import { User } from '../user.model';
-import { Observable, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { ENV } from '../../../env/env';
 
 export interface AuthResponseData {
@@ -20,6 +20,8 @@ export interface AuthResponseData {
   providedIn: 'root',
 })
 export class AuthService {
+  public user = new BehaviorSubject<User | null>(null);
+
   private tokenExpirationTimer: ReturnType<typeof setTimeout> | null = null;
 
   constructor(private http: HttpClient, private router: Router) {}
@@ -53,6 +55,7 @@ export class AuthService {
     const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
     const user = new User(email, userId, token, expirationDate);
     this.autoLogout(expiresIn * 1000);
+    this.user.next(user);
     localStorage.setItem('userData', JSON.stringify(user));
   }
 
@@ -103,6 +106,7 @@ export class AuthService {
         new Date(userData._tokenExpirationDate).getTime() -
         new Date().getTime();
       console.log(expirationDuration);
+      this.user.next(loadedUser);
       this.router.navigate(['/dashboard']);
       this.autoLogout(expirationDuration);
     }
@@ -111,6 +115,7 @@ export class AuthService {
   logout() {
     this.router.navigate(['/auth']);
     localStorage.removeItem('userData');
+    this.user.next(null);
     if (this.tokenExpirationTimer) {
       clearTimeout(this.tokenExpirationTimer);
     }

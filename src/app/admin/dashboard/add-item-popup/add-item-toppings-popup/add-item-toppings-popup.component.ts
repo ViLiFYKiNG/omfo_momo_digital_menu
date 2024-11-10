@@ -28,12 +28,10 @@ import { MatTooltipModule } from '@angular/material/tooltip';
   imports: [
     MatDialogContent,
     MatDialogActions,
-    MatDialogClose,
     MatButtonModule,
     CommonModule,
     MatFormFieldModule,
     MatInputModule,
-    FormsModule,
     ReactiveFormsModule,
     MatIconModule,
     MatTooltipModule,
@@ -88,9 +86,7 @@ export class AddItemToppingsPopupComponent {
 
   removeToppingField(index: number) {
     console.log(index);
-    if (this.toppings.length > 1) {
-      this.toppings.removeAt(index);
-    }
+    this.toppings.removeAt(index);
   }
 
   onSubmit(): void {

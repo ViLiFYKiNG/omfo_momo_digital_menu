@@ -4,15 +4,14 @@ import {
   FormArray,
   FormBuilder,
   FormGroup,
-  FormsModule,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import {
+  MAT_DIALOG_DATA,
   MatDialog,
   MatDialogActions,
-  MatDialogClose,
   MatDialogContent,
   MatDialogRef,
 } from '@angular/material/dialog';
@@ -23,8 +22,9 @@ import { CATEGORYTYPES } from '../../../shared/constants';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import { AddItemToppingsPopupComponent } from './add-item-toppings-popup/add-item-toppings-popup.component';
-import { Topping } from '../../../shared/modals';
+import { OmfoItem, Topping } from '../../../shared/modals';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { DataStorageService } from '../../services/data-storage.service';
 
 @Component({
   selector: 'app-add-item-popup',
@@ -32,12 +32,10 @@ import { MatTooltipModule } from '@angular/material/tooltip';
   imports: [
     MatDialogContent,
     MatDialogActions,
-    MatDialogClose,
     MatButtonModule,
     CommonModule,
     MatFormFieldModule,
     MatInputModule,
-    FormsModule,
     MatSelectModule,
     MatCheckboxModule,
     ReactiveFormsModule,
@@ -52,16 +50,58 @@ export class AddItemPopupComponent implements OnInit {
 
   selectedIndex: number = -1;
 
+  readonly inputItem = inject<OmfoItem | null>(MAT_DIALOG_DATA);
+
   ngOnInit(): void {
     console.log('***');
+    console.log(this.inputItem);
     this.sizeForm = this.fb.group({
       name: [''],
       description: [''],
       restaurantId: [''],
-      imageUrl: [''],
+      imageURL: [''],
       category: ['PIZZA'],
-      isPublished: [false],
+      isAvailable: [false],
       sizes: this.fb.array([this.createSizeField()]),
+    });
+
+    if (this.inputItem) {
+      console.log('HAINGA');
+      this.fillForm(this.inputItem);
+    }
+  }
+
+  fillForm(data: OmfoItem) {
+    this.sizeForm.patchValue({
+      name: data.name,
+      description: data.description,
+      restaurantId: data.restaurantId,
+      imageURL: data.imageURL,
+      category: data.category,
+      isAvailable: data.isAvailable,
+    });
+
+    const sizeArray = this.sizeForm.get('sizes') as FormArray;
+    sizeArray.clear();
+
+    data.sizes.forEach((sizeData: any) => {
+      const sizeGroup = this.createSizeField();
+      sizeGroup.patchValue({
+        size: sizeData.size,
+        price: sizeData.price,
+      });
+
+      const toppingsArray = sizeGroup.get('toppings') as FormArray;
+      sizeData.toppings &&
+        sizeData.toppings.forEach((toppingData: any) => {
+          const toppingGroup = this.fb.group({
+            name: [toppingData.name, Validators.required],
+            price: [toppingData.price, Validators.required],
+          });
+          toppingsArray.push(toppingGroup);
+        });
+
+      sizeArray.push(sizeGroup);
     });
   }
 
@@ -69,7 +109,10 @@ export class AddItemPopupComponent implements OnInit {
 
   readonly CATEGORYTYPES: { cNAME: string; cVALUE: string }[] = CATEGORYTYPES;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private dataStorageService: DataStorageService
+  ) {}
 
   getToppings(index: number): FormArray {
     return this.sizes.at(index).get('toppings') as FormArray;
@@ -143,11 +186,29 @@ export class AddItemPopupComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  onSubmit(): void {
+  async onSubmit(): Promise<void> {
     console.log(this.sizeForm.valid);
     console.log(this.sizeForm.value);
+    console.log(this.sizeForm.value as OmfoItem);
 
-    return;
-    this.dialogRef.close('KING AB');
+    if (this.inputItem) {
+      await this.dataStorageService
+        .updateItem(this.inputItem.itemId?.toString() ?? '', this.sizeForm.value)
+        .subscribe((response) => {
+          console.log(response);
+          console.log('success');
+          this.dialogRef.close('KING AB EDIT');
+        });
+    } else {
+      await this.dataStorageService
+        .storeItem(this.sizeForm.value)
+        .subscribe((response) => {
+          console.log(response);
+          console.log('success');
+          this.dialogRef.close('KING AB ADD');
+        });
+    }
+
+    console.log('DONE');
   }
 }

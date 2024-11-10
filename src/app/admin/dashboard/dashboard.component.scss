@@ -1,0 +1,82 @@
+.navbar {
+  background-color: #000;
+  color: #ffeb3b;
+
+  .navbarItems {
+    color: white;
+    font-size: 20px;
+
+    .icon {
+      cursor: pointer;
+      color: #ffeb3b;
+      font-size: 24px;
+      height: 24px;
+      width: 24px;
+    }
+  }
+
+  .navbarIcon {
+    width: 100px;
+    margin-top: 60px;
+  }
+
+  .active-link {
+    font-weight: bold;
+    border-bottom: 2px solid #ffeb3b; /* Yellow underline for active link */
+  }
+}
+
+.table-container {
+  max-height: 600px;
+  overflow: auto;
+
+  .icon {
+    cursor: pointer;
+    color: rgb(45, 47, 110);
+    font-size: 32px;
+    height: 32px;
+    width: 32px;
+  }
+}
+
+table {
+  width: 100%;
+  padding-left: 5px;
+}
+
+[mat-header-row] {
+  background-color: #000;
+}
+
+[mat-header-cell] {
+  color: yellow;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+th.mat-column-actions,
+td.mat-column-actions {
+  //   min-width: 150px;
+  //   max-width: 200px;
+  width: 150px;
+}
+
+.pri-btn {
+  background-color: #ff4c4c;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin-left: 5px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.navbar-spacer {
+  flex: 1;
+}
+
+.login-spinner {
+  text-align: center;
+  margin-top: 25px;
+}

@@ -1,5 +1,5 @@
 <mat-dialog-content>
-    <h1 style="line-height: 30px; min-width: 285px;">ADD ITEM</h1>
+    <h1 style="line-height: 30px; min-width: 285px;">{{ inputItem ? 'EDIT ITEM' : 'ADD ITEM' }}</h1>
 
     <br>
 
@@ -26,7 +26,7 @@
             <div class="inputField">
                 <mat-form-field appearance="outline">
                     <mat-label>IMAGE URL</mat-label>
-                    <input matInput formControlName="imageUrl">
+                    <input matInput formControlName="imageURL">
                 </mat-form-field>
             </div>
             <div class="inputField">
@@ -71,7 +71,7 @@
             </div>
 
             <div class="inputField checkbox">
-                <mat-checkbox formControlName="isPublished">PUBLISH</mat-checkbox>
+                <mat-checkbox formControlName="isAvailable">PUBLISH</mat-checkbox>
             </div>
 
 
@@ -81,7 +81,8 @@
 <mat-dialog-actions>
     <div class="actionWrapper">
         <button class="actionButtons mr-10" (click)="onClose()" cdkFocusInitial>CANCEL</button>
-        <button class="actionButtons" (click)="onSubmit()" [disabled]="!sizeForm.valid" cdkFocusInitial>ADD
-            ITEM</button>
+        <button class="actionButtons" (click)="onSubmit()" [disabled]="!sizeForm.valid" cdkFocusInitial>{{ inputItem ?
+            'UPDATE' : 'ADD' }}
+        </button>
     </div>
 </mat-dialog-actions>
