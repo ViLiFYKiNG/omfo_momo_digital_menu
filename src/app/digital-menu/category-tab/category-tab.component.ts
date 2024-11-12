@@ -1,9 +1,6 @@
 import { NgIf } from '@angular/common';
 import { Component, inject, input } from '@angular/core';
-import {
-  CartItem,
-  OmfoItem,
-} from '../../shared/modals';
+import { NewCartItem, OmfoItem } from '../../shared/modals';
 import { ItemCardComponent } from '../../shared/components/item-card/item-card.component';
 import { SelectItemPopupComponent } from '../select-item-popup/select-item-popup.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -32,9 +29,9 @@ export class CategoryTabComponent {
       data: item,
     });
 
-    dialogRef.afterClosed().subscribe((result: CartItem) => {
+    dialogRef.afterClosed().subscribe((result: NewCartItem) => {
       if (result) {
-        this.foodService.increaseQuantity(result);
+        this.foodService.updateCartNew(result);
       }
     });
   }

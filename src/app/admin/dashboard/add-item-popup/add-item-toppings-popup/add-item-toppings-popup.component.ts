@@ -4,7 +4,6 @@ import {
   FormArray,
   FormBuilder,
   FormGroup,
-  FormsModule,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
@@ -12,7 +11,6 @@ import { MatButtonModule } from '@angular/material/button';
 import {
   MatDialogContent,
   MatDialogActions,
-  MatDialogClose,
   MatDialogRef,
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';

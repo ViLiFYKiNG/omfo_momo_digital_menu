@@ -24,8 +24,8 @@
         <div class="popContentButtons">
             @for (topping of selectedItemSize?.toppings; track topping.name) {
             <div class="popUpButton" (click)="onToggleTopping(topping)" [ngStyle]="{
-                color: selectedToppings.includes(topping) ? 'white' : 'black',
-                backgroundColor: selectedToppings.includes(topping) ? 'black' : '#f0efef'
+                color: selectedToppings.includes(topping.name) ? 'white' : 'black',
+                backgroundColor: selectedToppings.includes(topping.name) ? 'black' : '#f0efef'
                 }">
                 <div class="popUpButtonItems"> {{topping.name}} </div>
                 <div class="popUpButtonItems">+₹{{ topping.price }}</div>
@@ -43,9 +43,7 @@
             <button (click)="increaseQuantity()">+</button>
         </div>
         <button class="actionButtons" style="color: black;" (click)="onClose()">CLOSE</button>
-        <!-- <button class="actionButtons" style="color: black;" [mat-dialog-close]="cartItem" cdkFocusInitial>ADD - ₹{{
-            getTotalPrice() }}</button> -->
-        <button class="actionButtons" style="color: black;" (click)="onSubmit()" cdkFocusInitial>ADD - ₹{{
-                    getTotalPrice() }}</button>
+        <button class="actionButtons" style="color: black;" [mat-dialog-close]="cartItem" cdkFocusInitial>ADD - ₹{{
+            getTotalPrice() }}</button>
     </div>
 </mat-dialog-actions>

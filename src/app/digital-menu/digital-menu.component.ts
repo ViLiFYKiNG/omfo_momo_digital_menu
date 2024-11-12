@@ -53,8 +53,6 @@ export class DigitalMenuComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.foodService.getAll();
-
     this.foodService.itemAddedSuccessFully.subscribe(() => {
       this.showTransition();
     });
@@ -79,13 +77,6 @@ export class DigitalMenuComponent implements OnInit {
     setTimeout(() => {
       this.itemAdded = false;
     }, 1000);
-  }
-
-  public getTotalAmount() {
-    return this.foodService.cartItems.reduce(
-      (total, item) => total + item.perItemPrice * item.quantity,
-      0
-    );
   }
 
   public getTotalCartItems() {

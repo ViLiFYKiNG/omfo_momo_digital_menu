@@ -4,6 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import {
   MAT_DIALOG_DATA,
   MatDialogActions,
+  MatDialogClose,
   MatDialogContent,
   MatDialogRef,
 } from '@angular/material/dialog';
@@ -17,7 +18,13 @@ import {
 @Component({
   selector: 'app-select-item-popup',
   standalone: true,
-  imports: [MatDialogContent, MatDialogActions, MatButtonModule, CommonModule],
+  imports: [
+    MatDialogContent,
+    MatDialogClose,
+    MatDialogActions,
+    MatButtonModule,
+    CommonModule,
+  ],
   templateUrl: './select-item-popup.component.html',
   styleUrl: './select-item-popup.component.scss',
 })
@@ -30,7 +37,7 @@ export class SelectItemPopupComponent {
 
   public selectedItemSize = this.itemSizes.at(0);
 
-  public selectedToppings: Topping[] = [];
+  public selectedToppings: string[] = [];
 
   public size = this.itemSizes.at(0)?.size;
 
@@ -44,7 +51,7 @@ export class SelectItemPopupComponent {
     price: this.itemSizes.at(0)?.price!,
     quantity: 1,
     category: this.selectedItem.category,
-    size: this.size,
+    size: this.size!,
     toppings: [],
   };
 
@@ -73,9 +80,9 @@ export class SelectItemPopupComponent {
   }
 
   onToggleTopping(topping: Topping): void {
-    const index = this.selectedToppings.indexOf(topping);
+    const index = this.selectedToppings.indexOf(topping.name);
     if (index === -1) {
-      this.selectedToppings.push(topping);
+      this.selectedToppings.push(topping.name);
       this.cartItem.perItemPrice += topping.price;
     } else {
       this.selectedToppings.splice(index, 1);

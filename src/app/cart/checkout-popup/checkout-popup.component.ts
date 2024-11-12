@@ -4,7 +4,6 @@ import { MatButtonModule } from '@angular/material/button';
 import {
   MAT_DIALOG_DATA,
   MatDialogActions,
-  MatDialogClose,
   MatDialogContent,
   MatDialogRef,
 } from '@angular/material/dialog';
@@ -20,7 +19,6 @@ import { FormsModule } from '@angular/forms';
   imports: [
     MatDialogContent,
     MatDialogActions,
-    MatDialogClose,
     MatButtonModule,
     CommonModule,
     MatFormFieldModule,

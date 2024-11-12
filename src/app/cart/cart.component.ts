@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { FoodService } from '../services/food.service';
-import { CartItem, OrderType } from '../shared/modals';
+import { NewCartItem, OrderType } from '../shared/modals';
 import { CheckoutPopupComponent } from './checkout-popup/checkout-popup.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ENV } from '../../env/env';
@@ -17,34 +17,34 @@ import { ENV } from '../../env/env';
 export class CartComponent {
   constructor(private router: Router, private foodService: FoodService) {}
 
-  cartItems: CartItem[] = [];
+  newCartItems: NewCartItem[] = [];
 
   readonly dialog = inject(MatDialog);
 
   ngOnInit(): void {
-    this.cartItems = this.foodService.getAllCartItems();
+    this.newCartItems = this.foodService.getAllCartItems();
 
     if (!ENV.isProd) {
-      this.phoneNumber = '9027130194';
+      this.phoneNumber = '8869860624';
     }
   }
 
   getTotalAmount() {
-    return this.cartItems.reduce(
+    return this.newCartItems.reduce(
       (total, item) => total + item.perItemPrice * item.quantity,
       0
     );
   }
 
   getTotalItems() {
-    let totalItems = this.cartItems.reduce(
+    let totalItems = this.newCartItems.reduce(
       (total, item) => total + item.quantity,
       0
     );
     return totalItems;
   }
 
-  getItemSize(item: CartItem) {
+  getItemSize(item: NewCartItem) {
     return item.size && item.size.toString().toUpperCase();
   }
 
@@ -59,11 +59,13 @@ export class CartComponent {
   }
 
   formatOrderDetails(orderType: OrderType) {
-    const orderItems = this.cartItems
-      .map((item: CartItem) => {
+    const orderItems = this.newCartItems
+      .map((item: NewCartItem) => {
         return `    ${item.name.toUpperCase()} - ${item.size?.toUpperCase()}${
-          item.withExtraCheese ? ' WITH EXTRA CHEESE' : ''
-        }${item.withCheeseBurst ? ' WITH CHEESE BURST' : ''} ${
+          item.toppings.includes('EXTRA_CHEESE') ? ' WITH EXTRA CHEESE' : ''
+        }${
+          item.toppings.includes('CHEESE_BURST') ? ' WITH CHEESE BURST' : ''
+        } ${
           item.price
             ? '[QUANTITY - ' + item.quantity + '] [PRICE - ₹' + item.price + ']'
             : '[FREE]'
@@ -103,10 +105,10 @@ export class CartComponent {
 
   clearCart() {
     this.foodService.clearCart();
-    this.cartItems = this.foodService.getAllCartItems();
+    this.newCartItems = this.foodService.getAllCartItems();
   }
 
-  orderNow() {
+    orderNow() {
     const dialogRef = this.dialog.open(CheckoutPopupComponent, {
       data: this.getTotalAmount(),
     });
@@ -125,11 +127,11 @@ export class CartComponent {
     return this.getTotalItems() === 0;
   }
 
-  increaseQuantity(item: CartItem) {
-    this.foodService.increaseItemQuantityInCart(item);
+  increaseQuantity(item: NewCartItem) {
+    this.foodService.increaseItemQuantityInCartNew(item);
   }
 
-  decreaseQuantity(item: CartItem) {
-    this.foodService.decreaseItemQuantityInCart(item);
+  decreaseQuantity(item: NewCartItem) {
+    this.foodService.decreaseItemQuantityInCartNew(item);
   }
 }

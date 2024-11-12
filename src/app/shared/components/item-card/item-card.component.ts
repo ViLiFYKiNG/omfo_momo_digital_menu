@@ -1,6 +1,5 @@
 import { Component, input, output } from '@angular/core';
-import { BurgerItem, MomoItem, OmfoItem, PizzaItem, ShakeItem } from '../../modals';
-import { ITEMTYPES } from '../../constants';
+import { OmfoItem} from '../../modals';
 
 @Component({
   selector: 'app-item-card',
