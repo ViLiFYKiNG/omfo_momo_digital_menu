@@ -2,8 +2,6 @@
 
   <h1 class="heading">OMFO MOMO</h1>
 
-  <app-select-outlet class="outlet" (click)="openOutletSelectionPopup()" [outlet]="selectedOutlet()"></app-select-outlet>
-
   <div class="cart-icon" (click)="navigateToCart()">
     <img src="../../assets/images/cart.png" alt="Cart" />
     <span class="cart-count">{{ getTotalCartItems() }}</span>
@@ -27,7 +25,7 @@
     <app-category-tab category="Shakes" [activeCategory]="activeCategory" [items]="storeItems?.shakesItems!"
       (click)="toggleCategory('Shakes')"></app-category-tab>
 
-      <!-- @for (item of storeItems | keyvalue; track item.key) {
+    <!-- @for (item of storeItems | keyvalue; track item.key) {
         <app-category-tab [category]="item.key" [activeCategory]="activeCategory" [items]="item.value"
           (click)="toggleCategory(item.key)"></app-category-tab>
       } -->

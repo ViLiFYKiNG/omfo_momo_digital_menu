@@ -22,13 +22,7 @@ export class FoodService {
 
   cartItems: CartItem[] = [];
 
-  outlet = signal<string>('SITAPUR');
-
   constructor() {}
-
-  setOutlet(value: string) {
-    this.outlet.set(value);
-  }
 
   getAll(): OmfoMomoItems {
     return OMFO_MOMO_ITEMS;

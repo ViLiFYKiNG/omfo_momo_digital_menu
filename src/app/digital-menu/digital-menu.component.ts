@@ -5,9 +5,6 @@ import { FoodService } from '../services/food.service';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatDialog } from '@angular/material/dialog';
 import { OmfoMomoItems } from '../shared/modals';
-import { OutletSelectionPopupComponent } from './outlet-selection-popup/outlet-selection-popup.component';
-import { ItemCardComponent } from '../shared/components/item-card/item-card.component';
-import { SelectOutletComponent } from './select-outlet/select-outlet.component';
 import { CategoryTabComponent } from './category-tab/category-tab.component';
 
 @Component({
@@ -15,13 +12,7 @@ import { CategoryTabComponent } from './category-tab/category-tab.component';
   standalone: true,
   templateUrl: './digital-menu.component.html',
   styleUrls: ['./digital-menu.component.scss'],
-  imports: [
-    CommonModule,
-    MatSlideToggleModule,
-    ItemCardComponent,
-    SelectOutletComponent,
-    CategoryTabComponent,
-  ],
+  imports: [CommonModule, MatSlideToggleModule, CategoryTabComponent],
 })
 export class DigitalMenuComponent {
   constructor(private router: Router, private foodService: FoodService) {}
@@ -31,10 +22,6 @@ export class DigitalMenuComponent {
   storeItems: OmfoMomoItems | null = null;
 
   itemAdded: boolean = false;
-
-  selectedOutlet = computed(() => {
-    return this.foodService.outlet();
-  });
 
   ngOnInit(): void {
     this.storeItems = this.foodService.getAll();
@@ -72,37 +59,10 @@ export class DigitalMenuComponent {
     );
   }
 
-  isTotalOver200(): boolean {
-    const totalAmount = this.getTotalAmount();
-    return (
-      totalAmount < 300 &&
-      totalAmount >= 200 &&
-      this.selectedOutlet() === 'SITAPUR'
-    );
-  }
-
-  isTotalOver300(): boolean {
-    const totalAmount = this.getTotalAmount();
-    return totalAmount >= 300 && this.selectedOutlet() === 'SITAPUR';
-  }
-
   getTotalCartItems() {
     let totalItems = this.foodService
       .getAllCartItems()
       .reduce((total, item) => total + item.quantity, 0);
-    if (this.isTotalOver200() || this.isTotalOver300()) {
-      totalItems++;
-    }
     return totalItems;
-  }
-
-  openOutletSelectionPopup() {
-    const dialogRef = this.dialog.open(OutletSelectionPopupComponent);
-
-    dialogRef.afterClosed().subscribe((result: string) => {
-      if (result) {
-        this.foodService.setOutlet(result);
-      }
-    });
   }
 }

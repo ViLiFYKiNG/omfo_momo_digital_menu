@@ -5,7 +5,6 @@ import { FoodService } from '../services/food.service';
 import { CartItem, OrderType } from '../shared/modals';
 import { CheckoutPopupComponent } from './checkout-popup/checkout-popup.component';
 import { MatDialog } from '@angular/material/dialog';
-import { ITEMTYPES } from '../shared/constants';
 import { ENV } from '../../env/env';
 
 @Component({
@@ -20,70 +19,14 @@ export class CartComponent {
 
   cartItems: CartItem[] = [];
 
-  freeItemOver300: CartItem = {
-    cartItemId: 11,
-    itemId: Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000,
-    name: 'Veg Corn Pizza',
-    perItemPrice: 0,
-    price: 0,
-    quantity: 1,
-    itemType: ITEMTYPES.PIZZA,
-    size: 'small',
-    withExtraCheese: false,
-    withCheeseBurst: false,
-  };
-
-  freeItemOver200: CartItem = {
-    cartItemId: 21,
-    itemId: Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000,
-    name: 'Kurkure Momo',
-    perItemPrice: 0,
-    price: 0,
-    quantity: 1,
-    itemType: ITEMTYPES.MOMO,
-    size: 'half',
-  };
-
   readonly dialog = inject(MatDialog);
-
-  selectedOutlet = computed(() => {
-    return this.foodService.outlet();
-  });
 
   ngOnInit(): void {
     this.cartItems = this.foodService.getAllCartItems();
 
-    if(!ENV.isProd) {
-      this.phoneNumber = '8869860624';
+    if (!ENV.isProd) {
+      this.phoneNumber = '9027130194';
     }
-  }
-
-  isTotalOver200(): boolean {
-    const totalAmount = this.getTotalAmount();
-    return (
-      totalAmount < 300 &&
-      totalAmount >= 200 &&
-      this.selectedOutlet() === 'SITAPUR'
-    );
-  }
-
-  isTotalOver300(): boolean {
-    const totalAmount = this.getTotalAmount();
-    return totalAmount >= 300 && this.selectedOutlet() === 'SITAPUR';
-  }
-
-  isShowFreeMsg200(): boolean {
-    const totalAmount = this.getTotalAmount();
-    return totalAmount < 200 && this.selectedOutlet() === 'SITAPUR';
-  }
-
-  isShowFreeMsg300(): boolean {
-    const totalAmount = this.getTotalAmount();
-    return (
-      totalAmount >= 200 &&
-      totalAmount < 300 &&
-      this.selectedOutlet() === 'SITAPUR'
-    );
   }
 
   getTotalAmount() {
@@ -98,9 +41,6 @@ export class CartComponent {
       (total, item) => total + item.quantity,
       0
     );
-    if (this.isTotalOver200() || this.isTotalOver300()) {
-      totalItems++;
-    }
     return totalItems;
   }
 
@@ -119,12 +59,6 @@ export class CartComponent {
   }
 
   formatOrderDetails(orderType: OrderType) {
-    if (this.isTotalOver200()) {
-      this.cartItems.unshift(this.freeItemOver200);
-    }
-    if (this.isTotalOver300()) {
-      this.cartItems.unshift(this.freeItemOver300);
-    }
     const orderItems = this.cartItems
       .map((item: CartItem) => {
         return `    ${item.name.toUpperCase()} - ${item.size?.toUpperCase()}${
@@ -155,9 +89,9 @@ export class CartComponent {
     }TOTAL - ${
       this.getTotalAmount() +
       (this.shouldTakeDeliveryCharge(orderType) ? 20 : 0)
-    }${encodeURI('\n')}**************************${encodeURI('\n')}OUTLET - ${
-      this.selectedOutlet()
-    }${encodeURI('\n')}MODE - ${orderType.deliveryType}${encodeURI('\n')}${
+    }${encodeURI('\n')}**************************${encodeURI('\n')}MODE - ${
+      orderType.deliveryType
+    }${encodeURI('\n')}${
       orderType.deliveryType === 'DELIVERY' ? 'ADD - ' + orderType.message : ''
     }`;
   }
