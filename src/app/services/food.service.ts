@@ -25,7 +25,7 @@ export class FoodService {
   public isFetching = signal<boolean>(false);
 
   public error = signal<string | null>(null);
-  
+
   public itemAddedSuccessFully = new Subject<null>();
 
   cartItems: CartItem[] = [];
@@ -49,20 +49,13 @@ export class FoodService {
       )
       .subscribe({
         next: (response: OmfoItem[] | null) => {
-          console.log('KING');
-          console.log(response);
           if (response) this.items.set(response);
           else this.items.set([]);
         },
         complete: () => {
-          console.log('KING COMPLETE');
           this.isFetching.set(false);
-
-          console.log(this.items());
         },
         error: (error) => {
-          console.log('Error fetching items:', error);
-          console.log(error.message);
           this.error.set(error.message);
           this.isFetching.set(false);
         },

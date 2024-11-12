@@ -1,12 +1,5 @@
 import { CommonModule } from '@angular/common';
-import {
-  Component,
-  inject,
-  viewChild,
-  computed,
-  effect,
-  OnInit,
-} from '@angular/core';
+import { Component, inject, effect, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FoodService } from '../services/food.service';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
@@ -36,9 +29,6 @@ export class DigitalMenuComponent implements OnInit {
   constructor(private router: Router, private foodService: FoodService) {
     effect(() => {
       const items = this.foodService.items();
-      console.log('---');
-      console.log(items);
-
       items.forEach((item) => {
         switch (item.category) {
           case 'PIZZA':
@@ -59,13 +49,10 @@ export class DigitalMenuComponent implements OnInit {
             );
         }
       });
-
-      console.log('****', this.categorizedItems);
     });
   }
 
   public ngOnInit(): void {
-    console.log('ON INIT');
     this.foodService.getAll();
 
     this.foodService.itemAddedSuccessFully.subscribe(() => {

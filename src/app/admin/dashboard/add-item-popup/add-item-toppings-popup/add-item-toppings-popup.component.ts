@@ -43,9 +43,6 @@ export class AddItemToppingsPopupComponent {
   toppingsForm!: FormGroup;
 
   ngOnInit(): void {
-    console.log('***');
-    console.log(this.inputTopplings);
-    console.log(this.inputTopplings.value);
     this.toppingsForm = this.fb.group({
       toppings: this.fb.array([]),
     });
@@ -85,7 +82,6 @@ export class AddItemToppingsPopupComponent {
   }
 
   removeToppingField(index: number) {
-    console.log(index);
     this.toppings.removeAt(index);
   }
 

@@ -43,7 +43,6 @@ export class DashboardComponent implements OnInit {
 
   constructor(private authService: AuthService) {}
   ngOnInit(): void {
-    console.log('ON INIT');
     this.fetchItems();
   }
 
@@ -64,20 +63,13 @@ export class DashboardComponent implements OnInit {
       )
       .subscribe({
         next: (response: OmfoItem[] | null) => {
-          console.log('KING');
-          console.log(response);
           if (response) this.items.set(response);
           else this.items.set([]);
         },
         complete: () => {
-          console.log('KING COMPLETE');
           this.isFetching.set(false);
-
-          console.log(this.items());
         },
         error: (error) => {
-          console.log('Error fetching items:', error);
-          console.log(error.message);
           this.error.set(error.message);
           this.isFetching.set(false);
         },
@@ -87,15 +79,12 @@ export class DashboardComponent implements OnInit {
   readonly dialog = inject(MatDialog);
 
   public addItem(): void {
-    console.log('addItem');
     const dialogRef = this.dialog.open(AddItemPopupComponent, {
       data: null,
     });
 
     dialogRef.afterClosed().subscribe((result: string) => {
       if (result) {
-        console.log(result);
-        console.log('...ADD');
         this.fetchItems();
       }
     });
@@ -106,8 +95,6 @@ export class DashboardComponent implements OnInit {
   }
 
   public toggleItem(item: OmfoItem): void {
-    console.log('toggle');
-    console.log(item);
     this.isFetching.set(true);
     item.itemId &&
       this.dataStorageService
@@ -116,8 +103,7 @@ export class DashboardComponent implements OnInit {
           isAvailable: !item.isAvailable,
         })
         .subscribe({
-          next: (response) => {
-            console.log('Item updated:', response);
+          next: () => {
             this.fetchItems();
           },
           error: (err) => {
@@ -128,28 +114,21 @@ export class DashboardComponent implements OnInit {
   }
 
   public editItem(item: OmfoItem): void {
-    console.log('EDIT ITEM');
-    console.log(item);
     const dialogRef = this.dialog.open(AddItemPopupComponent, {
       data: item,
     });
 
     dialogRef.afterClosed().subscribe((result: string) => {
       if (result) {
-        console.log(result);
-        console.log('...EDIT');
         this.fetchItems();
       }
     });
   }
   public deleteItem(item: OmfoItem): void {
-    console.log('delete');
-    console.log(item);
     this.isFetching.set(true);
     item.itemId &&
       this.dataStorageService.deleteItem(item.itemId.toString()).subscribe({
-        next: (response) => {
-          console.log('Item deleted:', response);
+        next: () => {
           this.fetchItems();
         },
         error: (err) => {

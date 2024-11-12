@@ -53,8 +53,6 @@ export class AddItemPopupComponent implements OnInit {
   readonly inputItem = inject<OmfoItem | null>(MAT_DIALOG_DATA);
 
   ngOnInit(): void {
-    console.log('***');
-    console.log(this.inputItem);
     this.sizeForm = this.fb.group({
       name: [''],
       description: [''],
@@ -66,7 +64,6 @@ export class AddItemPopupComponent implements OnInit {
     });
 
     if (this.inputItem) {
-      console.log('HAINGA');
       this.fillForm(this.inputItem);
     }
   }
@@ -136,8 +133,6 @@ export class AddItemPopupComponent implements OnInit {
     });
 
     this.selectedIndex = -1;
-    console.log(toppingsArray.value);
-    console.log(this.sizeForm.value);
   }
 
   get sizes(): FormArray {
@@ -157,7 +152,6 @@ export class AddItemPopupComponent implements OnInit {
   }
 
   removeSizeField(index: number) {
-    console.log(index);
     if (this.sizes.length > 1) {
       this.sizes.removeAt(index);
     }
@@ -172,9 +166,6 @@ export class AddItemPopupComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((toppings: Topping[]) => {
       if (toppings) {
-        console.log('...***---');
-        console.log(toppings);
-
         if (this.selectedIndex !== -1) {
           this.addToppings(this.selectedIndex, toppings);
         }
@@ -187,28 +178,21 @@ export class AddItemPopupComponent implements OnInit {
   }
 
   async onSubmit(): Promise<void> {
-    console.log(this.sizeForm.valid);
-    console.log(this.sizeForm.value);
-    console.log(this.sizeForm.value as OmfoItem);
-
     if (this.inputItem) {
       await this.dataStorageService
-        .updateItem(this.inputItem.itemId?.toString() ?? '', this.sizeForm.value)
-        .subscribe((response) => {
-          console.log(response);
-          console.log('success');
-          this.dialogRef.close('KING AB EDIT');
+        .updateItem(
+          this.inputItem.itemId?.toString() ?? '',
+          this.sizeForm.value
+        )
+        .subscribe(() => {
+          this.dialogRef.close('ADD');
         });
     } else {
       await this.dataStorageService
         .storeItem(this.sizeForm.value)
-        .subscribe((response) => {
-          console.log(response);
-          console.log('success');
-          this.dialogRef.close('KING AB ADD');
+        .subscribe(() => {
+          this.dialogRef.close('EDIT');
         });
     }
-
-    console.log('DONE');
   }
 }

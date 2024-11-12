@@ -40,29 +40,17 @@ export class AuthComponent {
     const email = form.value.email;
     const password = form.value.password;
 
-    console.log('LOG IN');
-    console.log(email);
-    console.log(password);
-
     this.isLoading = true;
     this.error = null;
 
     this.authService.login(email, password).subscribe({
       next: (resData) => {
-        console.log(1);
-        console.log(resData);
         this.isLoading = false;
         this.router.navigate(['/dashboard']);
       },
       error: (errorMessage) => {
-        console.log(2);
-        console.log(errorMessage);
         this.error = errorMessage;
         this.isLoading = false;
-      },
-      complete: () => {
-        console.log('.');
-        console.log('....');
       },
     });
 

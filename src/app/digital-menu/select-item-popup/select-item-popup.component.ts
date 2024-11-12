@@ -1,156 +1,89 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import {
   MAT_DIALOG_DATA,
   MatDialogActions,
-  MatDialogClose,
   MatDialogContent,
   MatDialogRef,
 } from '@angular/material/dialog';
 import {
-  CartItem,
-  MomoSizeType,
+  NewCartItem,
   OmfoItem,
-  PizzaSizeType,
+  OmfoItemSize,
+  Topping,
 } from '../../shared/modals';
-import { EXTRA_PRICE, ITEMTYPES } from '../../shared/constants';
 
 @Component({
   selector: 'app-select-item-popup',
   standalone: true,
-  imports: [
-    MatDialogContent,
-    MatDialogActions,
-    MatDialogClose,
-    MatButtonModule,
-    CommonModule,
-  ],
+  imports: [MatDialogContent, MatDialogActions, MatButtonModule, CommonModule],
   templateUrl: './select-item-popup.component.html',
   styleUrl: './select-item-popup.component.scss',
 })
-export class SelectItemPopupComponent implements OnInit {
-  ngOnInit(): void {
-    // if (this.selectedItem.itemType === ITEMTYPES.PIZZA) {
-    //   this.priceForOneSelectedItem = (
-    //     this.selectedItem as PizzaItem
-    //   ).price.small;
-    //   this.size = 'small';
-    // } else if (this.selectedItem.itemType === ITEMTYPES.MOMO) {
-    //   this.priceForOneSelectedItem = (this.selectedItem as MomoItem).price.half;
-    //   this.size = 'half';
-    // } else {
-    //   this.priceForOneSelectedItem = (
-    //     this.selectedItem as BurgerItem | ShakeItem
-    //   ).price;
-    //   this.size = 'regular';
-    // }
-
-    // this.cartItem.perItemPrice = this.priceForOneSelectedItem;
-    // this.cartItem.price = this.priceForOneSelectedItem;
-    console.log('0000');
-    console.log(this.selectedItem);
-  }
-
+export class SelectItemPopupComponent {
   readonly dialogRef = inject(MatDialogRef<SelectItemPopupComponent>);
 
   readonly selectedItem = inject<OmfoItem>(MAT_DIALOG_DATA);
 
+  public itemSizes: OmfoItemSize[] = this.selectedItem.sizes;
+
+  public selectedItemSize = this.itemSizes.at(0);
+
+  public selectedToppings: Topping[] = [];
+
+  public size = this.itemSizes.at(0)?.size;
+
   priceForOneSelectedItem: number = 0;
 
-  size = 'small';
-
-  isExtraCheese: boolean = false;
-
-  isCheeseBurst: boolean = false;
-
-  cartItem: CartItem = {
+  cartItem: NewCartItem = {
     cartItemId: new Date().getTime(),
     itemId: this.selectedItem.itemId!,
     name: this.selectedItem.name,
-    perItemPrice: 0,
-    price: 0,
+    perItemPrice: this.itemSizes.at(0)?.price!,
+    price: this.itemSizes.at(0)?.price!,
     quantity: 1,
-    itemType: this.selectedItem.category,
+    category: this.selectedItem.category,
     size: this.size,
-    withExtraCheese: false,
-    withCheeseBurst: false,
+    toppings: [],
   };
 
   onClose(): void {
     this.dialogRef.close();
   }
 
-  onToggleSize(size: string) {
-    this.size = size;
-    this.cartItem.size = size;
-
-    // if (this.selectedItem.category === ITEMTYPES.PIZZA) {
-    //   this.priceForOneSelectedItem = (this.selectedItem as PizzaItem)['price'][
-    //     this.size as PizzaSizeType
-    //   ];
-    //   if (this.isExtraCheese)
-    //     this.priceForOneSelectedItem +=
-    //       EXTRA_PRICE[size as PizzaSizeType].EXTRA_CHEESE;
-    //   if (this.isCheeseBurst)
-    //     this.priceForOneSelectedItem +=
-    //       EXTRA_PRICE[size as PizzaSizeType].CHEESE_BURST;
-    // } else if (this.selectedItem.category === ITEMTYPES.MOMO) {
-    //   this.priceForOneSelectedItem = (this.selectedItem as MomoItem)['price'][
-    //     this.size as MomoSizeType
-    //   ];
-    // } else {
-    //   this.priceForOneSelectedItem = (
-    //     this.selectedItem as BurgerItem | ShakeItem
-    //   ).price;
-    // }
-
-    this.cartItem.perItemPrice = this.priceForOneSelectedItem;
-    this.cartItem.price = this.priceForOneSelectedItem * this.cartItem.quantity;
+  public onSubmit() {
+    console.log('ON SUBMIT');
+    console.log(this.cartItem);
   }
 
-  onToggleExtraCheese() {
-    this.isExtraCheese = !this.isExtraCheese;
-    this.cartItem.withExtraCheese = this.isExtraCheese;
-    if (this.isExtraCheese)
-      this.priceForOneSelectedItem +=
-        EXTRA_PRICE[this.size as PizzaSizeType].EXTRA_CHEESE;
-    else
-      this.priceForOneSelectedItem -=
-        EXTRA_PRICE[this.size as PizzaSizeType].EXTRA_CHEESE;
+  onToggleSize(itemSize: OmfoItemSize) {
+    this.size = itemSize.size;
+    this.cartItem.size = itemSize.size;
 
-    this.cartItem.perItemPrice = this.priceForOneSelectedItem;
-    this.cartItem.price = this.priceForOneSelectedItem * this.cartItem.quantity;
+    this.selectedItemSize = itemSize;
+
+    this.cartItem.size = itemSize.size;
+    this.cartItem.perItemPrice = itemSize.price;
+
+    this.cartItem.price = itemSize.price * this.cartItem.quantity;
+
+    this.selectedToppings = [];
+    this.cartItem.toppings = [];
   }
 
-  onToggleCheeseBurst() {
-    this.isCheeseBurst = !this.isCheeseBurst;
-    this.cartItem.withCheeseBurst = this.isCheeseBurst;
-    if (this.isCheeseBurst)
-      this.priceForOneSelectedItem +=
-        EXTRA_PRICE[this.size as PizzaSizeType].CHEESE_BURST;
-    else
-      this.priceForOneSelectedItem -=
-        EXTRA_PRICE[this.size as PizzaSizeType].CHEESE_BURST;
+  onToggleTopping(topping: Topping): void {
+    const index = this.selectedToppings.indexOf(topping);
+    if (index === -1) {
+      this.selectedToppings.push(topping);
+      this.cartItem.perItemPrice += topping.price;
+    } else {
+      this.selectedToppings.splice(index, 1);
+      this.cartItem.perItemPrice -= topping.price;
+    }
 
-    this.cartItem.perItemPrice = this.priceForOneSelectedItem;
-    this.cartItem.price = this.priceForOneSelectedItem * this.cartItem.quantity;
-  }
-
-  getExtraCheesePrice() {
-    return EXTRA_PRICE[this.size as PizzaSizeType].EXTRA_CHEESE;
-  }
-
-  getCheeseBurstPrice() {
-    return EXTRA_PRICE[this.size as PizzaSizeType].CHEESE_BURST;
-  }
-
-  getPriceForSize(size: PizzaSizeType | MomoSizeType): number {
-    // if (this.selectedItem.itemType === ITEMTYPES.PIZZA) {
-    //   return (this.selectedItem as PizzaItem)['price'][size as PizzaSizeType];
-    // }
-    // return (this.selectedItem as MomoItem)['price'][size as MomoSizeType];
-    return 121;
+    this.refreshPrice();
+    this.cartItem.toppings = this.selectedToppings;
   }
 
   getTotalPrice() {
@@ -161,16 +94,19 @@ export class SelectItemPopupComponent implements OnInit {
     return this.cartItem.quantity;
   }
 
+  refreshPrice() {
+    this.cartItem.price = this.cartItem.perItemPrice * this.cartItem.quantity;
+  }
+
   increaseQuantity() {
     this.cartItem.quantity += 1;
-    this.cartItem.price = this.priceForOneSelectedItem * this.cartItem.quantity;
+    this.refreshPrice();
   }
 
   decreaseQuantity() {
     if (this.cartItem.quantity > 1) {
       this.cartItem.quantity -= 1;
-      this.cartItem.price =
-        this.priceForOneSelectedItem * this.cartItem.quantity;
+      this.refreshPrice();
     }
   }
 }

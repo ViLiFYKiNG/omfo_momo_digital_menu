@@ -61,8 +61,6 @@ export class AuthService {
 
   private handleError(errorRes: HttpErrorResponse) {
     let errorMessage = 'An unknown error occurred!';
-    console.log('***');
-    console.log(errorRes);
     if (!errorRes.error || !errorRes.error.error) {
       return throwError(errorMessage);
     }
@@ -98,14 +96,10 @@ export class AuthService {
       new Date(userData._tokenExpirationDate)
     );
 
-    console.log('KING LOADED');
-    console.log(loadedUser);
-
     if (loadedUser.token) {
       const expirationDuration =
         new Date(userData._tokenExpirationDate).getTime() -
         new Date().getTime();
-      console.log(expirationDuration);
       this.user.next(loadedUser);
       this.router.navigate(['/dashboard']);
       this.autoLogout(expirationDuration);
@@ -123,7 +117,6 @@ export class AuthService {
   }
 
   autoLogout(expirationDuration: number) {
-    console.log('AUTO LOGOUT');
     this.tokenExpirationTimer = setTimeout(() => {
       this.logout();
     }, expirationDuration);

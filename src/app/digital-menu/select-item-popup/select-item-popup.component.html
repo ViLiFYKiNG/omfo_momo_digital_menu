@@ -5,64 +5,35 @@
 
     <div>
         <h2>Choose size</h2>
-        <div class="popContentButtons" *ngIf="selectedItem.category === 'PIZZA'">
-            <div class="popUpButton" (click)="onToggleSize('small')"
-                [style]="{color: size === 'small' ? 'white' : 'black', backgroundColor: size === 'small' ? 'black' : '#f0efef' }">
-                <div class="popUpButtonItems">SMALL</div>
-                <div class="popUpButtonItems">₹{{ getPriceForSize('small') }}</div>
+        <div class="popContentButtons">
+            @for (itemSize of itemSizes; track itemSize.size) {
+            <div class="popUpButton" (click)="onToggleSize(itemSize)"
+                [style]="{color: size === itemSize.size  ? 'white' : 'black', backgroundColor: size === itemSize.size  ? 'black' : '#f0efef' }">
+                <div class="popUpButtonItems"> {{ itemSize.size.toUpperCase() }}</div>
+                <div class="popUpButtonItems">₹{{ itemSize.price }}</div>
             </div>
-            <div class="popUpButton" (click)="onToggleSize('medium')"
-                [style]="{color: size === 'medium' ? 'white' : 'black', backgroundColor: size === 'medium' ? 'black' : '#f0efef' }">
-                <div class="popUpButtonItems">MEDIUM</div>
-                <div class="popUpButtonItems">₹{{ getPriceForSize('medium') }}</div>
-            </div>
-            <div class="popUpButton" (click)="onToggleSize('large')"
-                [style]="{color: size === 'large' ? 'white' : 'black', backgroundColor: size === 'large' ? 'black' : '#f0efef' }">
-                <div class="popUpButtonItems">LARGE</div>
-                <div class="popUpButtonItems">₹{{ getPriceForSize('large') }}</div>
-            </div>
-        </div>
-        <div class="popContentButtons" *ngIf="selectedItem.category === 'MOMO'">
-            <div class="popUpButton" mat-raised-button (click)="onToggleSize('half')"
-                [style]="{color: size === 'half' ? 'white' : 'black', backgroundColor: size === 'half' ? 'black' : '#f0efef' }">
-                <div class="popUpButtonItems">HALF</div>
-                <div class="popUpButtonItems">₹{{ getPriceForSize('half') }}</div>
-            </div>
-            <div class="popUpButton" mat-raised-button (click)="onToggleSize('full')"
-                [style]="{color: size === 'full' ? 'white' : 'black', backgroundColor: size === 'full' ? 'black' : '#f0efef' }">
-                <div class="popUpButtonItems">FULL</div>
-                <div class="popUpButtonItems">₹{{ getPriceForSize('full') }}</div>
-            </div>
-        </div>
-        <div class="popContentButtons" *ngIf="selectedItem.category === 'BURGER' || selectedItem.category === 'SHAKE'">
-            <div class="popUpButton" mat-raised-button
-                [style]="{color: size === 'regular' ? 'white' : 'black', backgroundColor: size === 'regular' ? 'black' : '#f0efef' }">
-                <div class="popUpButtonItems">REGULAR</div>
-                <div class="popUpButtonItems">₹{{ 121 }}</div>
-            </div>
+            }
         </div>
     </div>
 
-    <div *ngIf="selectedItem.category === 'PIZZA'">
-        <br>
+    @if (selectedItem.category === 'PIZZA' && selectedItemSize?.toppings) {
+    <br>
 
-        <div>
-            <h2>TOPPLINGS</h2>
-            <div class="popContentButtons">
-                <div class="popUpButton" (click)="onToggleExtraCheese()"
-                    [style]="{color: isExtraCheese ? 'white' : 'black', backgroundColor: isExtraCheese ? 'black' : '#f0efef' }">
-                    <div class="popUpButtonItems">EXTRA CHEESE</div>
-                    <div class="popUpButtonItems">+₹{{ getExtraCheesePrice() }}</div>
-                </div>
-
-                <div class="popUpButton" (click)="onToggleCheeseBurst()"
-                    [style]="{color: isCheeseBurst ? 'white' : 'black', backgroundColor: isCheeseBurst ? 'black' : '#f0efef' }">
-                    <div class="popUpButtonItems">CHEESE BURST </div>
-                    <div class="popUpButtonItems">+₹{{ getCheeseBurstPrice() }}</div>
-                </div>
+    <div>
+        <h2>TOPPLINGS</h2>
+        <div class="popContentButtons">
+            @for (topping of selectedItemSize?.toppings; track topping.name) {
+            <div class="popUpButton" (click)="onToggleTopping(topping)" [ngStyle]="{
+                color: selectedToppings.includes(topping) ? 'white' : 'black',
+                backgroundColor: selectedToppings.includes(topping) ? 'black' : '#f0efef'
+                }">
+                <div class="popUpButtonItems"> {{topping.name}} </div>
+                <div class="popUpButtonItems">+₹{{ topping.price }}</div>
             </div>
+            }
         </div>
     </div>
+    }
 </mat-dialog-content>
 <mat-dialog-actions>
     <div class="actionWrapper">
@@ -72,7 +43,9 @@
             <button (click)="increaseQuantity()">+</button>
         </div>
         <button class="actionButtons" style="color: black;" (click)="onClose()">CLOSE</button>
-        <button class="actionButtons" style="color: black;" [mat-dialog-close]="cartItem" cdkFocusInitial>ADD - ₹{{
-            getTotalPrice() }}</button>
+        <!-- <button class="actionButtons" style="color: black;" [mat-dialog-close]="cartItem" cdkFocusInitial>ADD - ₹{{
+            getTotalPrice() }}</button> -->
+        <button class="actionButtons" style="color: black;" (click)="onSubmit()" cdkFocusInitial>ADD - ₹{{
+                    getTotalPrice() }}</button>
     </div>
 </mat-dialog-actions>

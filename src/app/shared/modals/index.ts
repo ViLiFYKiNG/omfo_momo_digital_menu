@@ -98,6 +98,18 @@ export interface CartItem {
   withCheeseBurst?: boolean;
 }
 
+export interface NewCartItem {
+  cartItemId: number;
+  itemId: number | string;
+  name: string;
+  perItemPrice: number;
+  price: number;
+  quantity: number;
+  category: string;
+  size?: string;
+  toppings?: Topping[];
+}
+
 export interface Topping {
   name: string;
   price: number;

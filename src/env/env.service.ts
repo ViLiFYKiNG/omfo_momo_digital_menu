@@ -19,10 +19,6 @@ function getEnvironment(): Environment {
   const domainParts = hostname.split('.');
   const prefix = domainParts[0];
 
-  console.log('***');
-  console.log(hostname);
-  console.log(domainParts);
-
   switch (prefix) {
     case 'omfomomo-local':
       return Environment.LOCAL;
@@ -34,8 +30,6 @@ function getEnvironment(): Environment {
 }
 
 function getEnvSettings(env: string): ENV_MODEL {
-  console.log('KING');
-  console.log(env);
   switch (env) {
     case Environment.LOCAL:
       return ENV_LOCAL;
