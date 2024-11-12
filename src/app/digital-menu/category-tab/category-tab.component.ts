@@ -1,11 +1,8 @@
 import { NgIf } from '@angular/common';
 import { Component, inject, input } from '@angular/core';
 import {
-  PizzaItem,
-  MomoItem,
-  BurgerItem,
-  ShakeItem,
   CartItem,
+  OmfoItem,
 } from '../../shared/modals';
 import { ItemCardComponent } from '../../shared/components/item-card/item-card.component';
 import { SelectItemPopupComponent } from '../select-item-popup/select-item-popup.component';
@@ -23,21 +20,13 @@ export class CategoryTabComponent {
   category = input.required<string>();
   activeCategory = input.required<string | null>();
 
-  items = input.required<
-    PizzaItem[] | MomoItem[] | BurgerItem[] | ShakeItem[]
-  >();
+  items = input.required<OmfoItem[]>();
 
   readonly dialog = inject(MatDialog);
 
   private foodService = inject(FoodService);
 
-  public onItemSelect({
-    item,
-    event,
-  }: {
-    item: PizzaItem | MomoItem | BurgerItem | ShakeItem;
-    event: Event;
-  }): void {
+  public onItemSelect({ item, event }: { item: OmfoItem; event: Event }): void {
     event.stopPropagation();
     const dialogRef = this.dialog.open(SelectItemPopupComponent, {
       data: item,

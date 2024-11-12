@@ -10,19 +10,19 @@
   <!-- Category Tabs -->
   <div>
     <!-- MOMOS -->
-    <app-category-tab category="Momos" [activeCategory]="activeCategory" [items]="storeItems?.momosItems!"
+    <app-category-tab category="Momos" [activeCategory]="activeCategory" [items]="categorizedItems.momosItems"
       (click)="toggleCategory('Momos')"></app-category-tab>
 
     <!-- PIZZA -->
-    <app-category-tab category="Pizza" [activeCategory]="activeCategory" [items]="storeItems?.pizzaItems!"
+    <app-category-tab category="Pizza" [activeCategory]="activeCategory" [items]="categorizedItems.pizzaItems"
       (click)="toggleCategory('Pizza')"></app-category-tab>
 
     <!-- BURGERS -->
-    <app-category-tab category="Burgers" [activeCategory]="activeCategory" [items]="storeItems?.burgerItems!"
+    <app-category-tab category="Burgers" [activeCategory]="activeCategory" [items]="categorizedItems.burgerItems"
       (click)="toggleCategory('Burgers')"></app-category-tab>
 
     <!-- SHAKES -->
-    <app-category-tab category="Shakes" [activeCategory]="activeCategory" [items]="storeItems?.shakesItems!"
+    <app-category-tab category="Shakes" [activeCategory]="activeCategory" [items]="categorizedItems.shakesItems!"
       (click)="toggleCategory('Shakes')"></app-category-tab>
 
     <!-- @for (item of storeItems | keyvalue; track item.key) {

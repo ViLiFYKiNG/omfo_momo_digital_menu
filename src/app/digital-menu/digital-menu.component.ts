@@ -1,10 +1,17 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, viewChild, computed, effect } from '@angular/core';
+import {
+  Component,
+  inject,
+  viewChild,
+  computed,
+  effect,
+  OnInit,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { FoodService } from '../services/food.service';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatDialog } from '@angular/material/dialog';
-import { OmfoMomoItems } from '../shared/modals';
+import { StoreItems } from '../shared/modals';
 import { CategoryTabComponent } from './category-tab/category-tab.component';
 
 @Component({
@@ -14,24 +21,59 @@ import { CategoryTabComponent } from './category-tab/category-tab.component';
   styleUrls: ['./digital-menu.component.scss'],
   imports: [CommonModule, MatSlideToggleModule, CategoryTabComponent],
 })
-export class DigitalMenuComponent {
-  constructor(private router: Router, private foodService: FoodService) {}
-
+export class DigitalMenuComponent implements OnInit {
   activeCategory: string | null = 'Pizza';
 
-  storeItems: OmfoMomoItems | null = null;
+  categorizedItems: StoreItems = {
+    pizzaItems: [],
+    momosItems: [],
+    burgerItems: [],
+    shakesItems: [],
+  };
 
   itemAdded: boolean = false;
 
-  ngOnInit(): void {
-    this.storeItems = this.foodService.getAll();
+  constructor(private router: Router, private foodService: FoodService) {
+    effect(() => {
+      const items = this.foodService.items();
+      console.log('---');
+      console.log(items);
+
+      items.forEach((item) => {
+        switch (item.category) {
+          case 'PIZZA':
+            this.categorizedItems.pizzaItems.push(item);
+            break;
+          case 'MOMO':
+            this.categorizedItems.momosItems.push(item);
+            break;
+          case 'BURGER':
+            this.categorizedItems.burgerItems.push(item);
+            break;
+          case 'SHAKE':
+            this.categorizedItems.shakesItems.push(item);
+            break;
+          default:
+            console.warn(
+              `Unknown category: ${item.category} for item ${item.name}`
+            );
+        }
+      });
+
+      console.log('****', this.categorizedItems);
+    });
+  }
+
+  public ngOnInit(): void {
+    console.log('ON INIT');
+    this.foodService.getAll();
 
     this.foodService.itemAddedSuccessFully.subscribe(() => {
       this.showTransition();
     });
   }
 
-  toggleCategory(category: string) {
+  public toggleCategory(category: string) {
     if (this.activeCategory === category) {
       this.activeCategory = null;
     } else {
@@ -39,27 +81,27 @@ export class DigitalMenuComponent {
     }
   }
 
-  navigateToCart() {
+  public navigateToCart() {
     this.router.navigate(['/cart']);
   }
 
   readonly dialog = inject(MatDialog);
 
-  showTransition() {
+  public showTransition(): void {
     this.itemAdded = true;
     setTimeout(() => {
       this.itemAdded = false;
     }, 1000);
   }
 
-  getTotalAmount() {
+  public getTotalAmount() {
     return this.foodService.cartItems.reduce(
       (total, item) => total + item.perItemPrice * item.quantity,
       0
     );
   }
 
-  getTotalCartItems() {
+  public getTotalCartItems() {
     let totalItems = this.foodService
       .getAllCartItems()
       .reduce((total, item) => total + item.quantity, 0);

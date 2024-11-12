@@ -9,23 +9,64 @@ import {
   CartItem,
   ChineseItem,
   MomoItem,
+  OmfoItem,
   OmfoMomoItems,
   PizzaItem,
 } from '../shared/modals';
-import { Subject } from 'rxjs';
+import { map, Subject } from 'rxjs';
+import { DataStorageService } from '../admin/services/data-storage.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FoodService {
+  public items = signal<OmfoItem[]>([]);
+
+  public isFetching = signal<boolean>(false);
+
+  public error = signal<string | null>(null);
+  
   public itemAddedSuccessFully = new Subject<null>();
 
   cartItems: CartItem[] = [];
 
-  constructor() {}
+  constructor(private dataStorageService: DataStorageService) {}
 
-  getAll(): OmfoMomoItems {
-    return OMFO_MOMO_ITEMS;
+  public getAll() {
+    this.isFetching.set(true);
+    this.dataStorageService
+      .fetchItems()
+      .pipe(
+        map((response: Record<string, any> | null) => {
+          return (
+            response &&
+            Object.keys(response).map((itemId) => ({
+              itemId,
+              ...response[itemId],
+            }))
+          );
+        })
+      )
+      .subscribe({
+        next: (response: OmfoItem[] | null) => {
+          console.log('KING');
+          console.log(response);
+          if (response) this.items.set(response);
+          else this.items.set([]);
+        },
+        complete: () => {
+          console.log('KING COMPLETE');
+          this.isFetching.set(false);
+
+          console.log(this.items());
+        },
+        error: (error) => {
+          console.log('Error fetching items:', error);
+          console.log(error.message);
+          this.error.set(error.message);
+          this.isFetching.set(false);
+        },
+      });
   }
 
   getAllCartItems() {

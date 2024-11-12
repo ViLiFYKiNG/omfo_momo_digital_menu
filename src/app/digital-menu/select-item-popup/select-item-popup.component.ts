@@ -9,15 +9,10 @@ import {
   MatDialogRef,
 } from '@angular/material/dialog';
 import {
-  BurgerItem,
-  BurgerSizeType,
   CartItem,
-  MomoItem,
   MomoSizeType,
-  PizzaItem,
+  OmfoItem,
   PizzaSizeType,
-  ShakeItem,
-  ShakeSizeType,
 } from '../../shared/modals';
 import { EXTRA_PRICE, ITEMTYPES } from '../../shared/constants';
 
@@ -36,34 +31,34 @@ import { EXTRA_PRICE, ITEMTYPES } from '../../shared/constants';
 })
 export class SelectItemPopupComponent implements OnInit {
   ngOnInit(): void {
-    if (this.selectedItem.itemType === ITEMTYPES.PIZZA) {
-      this.priceForOneSelectedItem = (
-        this.selectedItem as PizzaItem
-      ).price.small;
-      this.size = 'small';
-    } else if (this.selectedItem.itemType === ITEMTYPES.MOMO) {
-      this.priceForOneSelectedItem = (this.selectedItem as MomoItem).price.half;
-      this.size = 'half';
-    } else {
-      this.priceForOneSelectedItem = (
-        this.selectedItem as BurgerItem | ShakeItem
-      ).price;
-      this.size = 'regular';
-    }
+    // if (this.selectedItem.itemType === ITEMTYPES.PIZZA) {
+    //   this.priceForOneSelectedItem = (
+    //     this.selectedItem as PizzaItem
+    //   ).price.small;
+    //   this.size = 'small';
+    // } else if (this.selectedItem.itemType === ITEMTYPES.MOMO) {
+    //   this.priceForOneSelectedItem = (this.selectedItem as MomoItem).price.half;
+    //   this.size = 'half';
+    // } else {
+    //   this.priceForOneSelectedItem = (
+    //     this.selectedItem as BurgerItem | ShakeItem
+    //   ).price;
+    //   this.size = 'regular';
+    // }
 
-    this.cartItem.perItemPrice = this.priceForOneSelectedItem;
-    this.cartItem.price = this.priceForOneSelectedItem;
+    // this.cartItem.perItemPrice = this.priceForOneSelectedItem;
+    // this.cartItem.price = this.priceForOneSelectedItem;
+    console.log('0000');
+    console.log(this.selectedItem);
   }
 
   readonly dialogRef = inject(MatDialogRef<SelectItemPopupComponent>);
 
-  readonly selectedItem = inject<PizzaItem | MomoItem | BurgerItem | ShakeItem>(
-    MAT_DIALOG_DATA
-  );
+  readonly selectedItem = inject<OmfoItem>(MAT_DIALOG_DATA);
 
   priceForOneSelectedItem: number = 0;
 
-  size: PizzaSizeType | MomoSizeType | BurgerSizeType | ShakeSizeType = 'small';
+  size = 'small';
 
   isExtraCheese: boolean = false;
 
@@ -71,12 +66,12 @@ export class SelectItemPopupComponent implements OnInit {
 
   cartItem: CartItem = {
     cartItemId: new Date().getTime(),
-    itemId: this.selectedItem.itemId,
+    itemId: this.selectedItem.itemId!,
     name: this.selectedItem.name,
     perItemPrice: 0,
     price: 0,
     quantity: 1,
-    itemType: this.selectedItem.itemType,
+    itemType: this.selectedItem.category,
     size: this.size,
     withExtraCheese: false,
     withCheeseBurst: false,
@@ -86,31 +81,29 @@ export class SelectItemPopupComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  onToggleSize(
-    size: PizzaSizeType | MomoSizeType | BurgerSizeType | ShakeSizeType
-  ) {
+  onToggleSize(size: string) {
     this.size = size;
     this.cartItem.size = size;
 
-    if (this.selectedItem.itemType === ITEMTYPES.PIZZA) {
-      this.priceForOneSelectedItem = (this.selectedItem as PizzaItem)['price'][
-        this.size as PizzaSizeType
-      ];
-      if (this.isExtraCheese)
-        this.priceForOneSelectedItem +=
-          EXTRA_PRICE[size as PizzaSizeType].EXTRA_CHEESE;
-      if (this.isCheeseBurst)
-        this.priceForOneSelectedItem +=
-          EXTRA_PRICE[size as PizzaSizeType].CHEESE_BURST;
-    } else if (this.selectedItem.itemType === ITEMTYPES.MOMO) {
-      this.priceForOneSelectedItem = (this.selectedItem as MomoItem)['price'][
-        this.size as MomoSizeType
-      ];
-    } else {
-      this.priceForOneSelectedItem = (
-        this.selectedItem as BurgerItem | ShakeItem
-      ).price;
-    }
+    // if (this.selectedItem.category === ITEMTYPES.PIZZA) {
+    //   this.priceForOneSelectedItem = (this.selectedItem as PizzaItem)['price'][
+    //     this.size as PizzaSizeType
+    //   ];
+    //   if (this.isExtraCheese)
+    //     this.priceForOneSelectedItem +=
+    //       EXTRA_PRICE[size as PizzaSizeType].EXTRA_CHEESE;
+    //   if (this.isCheeseBurst)
+    //     this.priceForOneSelectedItem +=
+    //       EXTRA_PRICE[size as PizzaSizeType].CHEESE_BURST;
+    // } else if (this.selectedItem.category === ITEMTYPES.MOMO) {
+    //   this.priceForOneSelectedItem = (this.selectedItem as MomoItem)['price'][
+    //     this.size as MomoSizeType
+    //   ];
+    // } else {
+    //   this.priceForOneSelectedItem = (
+    //     this.selectedItem as BurgerItem | ShakeItem
+    //   ).price;
+    // }
 
     this.cartItem.perItemPrice = this.priceForOneSelectedItem;
     this.cartItem.price = this.priceForOneSelectedItem * this.cartItem.quantity;
@@ -153,10 +146,11 @@ export class SelectItemPopupComponent implements OnInit {
   }
 
   getPriceForSize(size: PizzaSizeType | MomoSizeType): number {
-    if (this.selectedItem.itemType === ITEMTYPES.PIZZA) {
-      return (this.selectedItem as PizzaItem)['price'][size as PizzaSizeType];
-    }
-    return (this.selectedItem as MomoItem)['price'][size as MomoSizeType];
+    // if (this.selectedItem.itemType === ITEMTYPES.PIZZA) {
+    //   return (this.selectedItem as PizzaItem)['price'][size as PizzaSizeType];
+    // }
+    // return (this.selectedItem as MomoItem)['price'][size as MomoSizeType];
+    return 121;
   }
 
   getTotalPrice() {

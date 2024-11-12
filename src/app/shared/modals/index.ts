@@ -78,9 +78,16 @@ export interface OmfoMomoItems {
   shakesItems: ShakeItem[];
 }
 
+export interface StoreItems {
+  pizzaItems: OmfoItem[];
+  momosItems: OmfoItem[];
+  burgerItems: OmfoItem[];
+  shakesItems: OmfoItem[];
+}
+
 export interface CartItem {
   cartItemId: number;
-  itemId: number;
+  itemId: number | string;
   name: string;
   perItemPrice: number;
   price: number;

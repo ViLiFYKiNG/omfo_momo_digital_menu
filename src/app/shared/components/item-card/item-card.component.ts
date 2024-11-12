@@ -1,5 +1,5 @@
 import { Component, input, output } from '@angular/core';
-import { BurgerItem, MomoItem, PizzaItem, ShakeItem } from '../../modals';
+import { BurgerItem, MomoItem, OmfoItem, PizzaItem, ShakeItem } from '../../modals';
 import { ITEMTYPES } from '../../constants';
 
 @Component({
@@ -10,10 +10,10 @@ import { ITEMTYPES } from '../../constants';
   styleUrl: './item-card.component.scss',
 })
 export class ItemCardComponent {
-  item = input.required<PizzaItem | MomoItem | BurgerItem | ShakeItem>();
+  item = input.required<OmfoItem>();
 
   selectedItem = output<{
-    item: PizzaItem | MomoItem | BurgerItem | ShakeItem;
+    item: OmfoItem;
     event: Event;
   }>();
 
@@ -22,12 +22,6 @@ export class ItemCardComponent {
   }
 
   public getPrice(): number {
-    if (this.item().itemType === ITEMTYPES.PIZZA) {
-      return (this.item() as PizzaItem).price.small;
-    } else if (this.item().itemType === ITEMTYPES.MOMO) {
-      return (this.item() as MomoItem).price.half;
-    } else {
-      return (this.item() as BurgerItem | ShakeItem).price;
-    }
+    return this.item().sizes.at(0)?.price!;
   }
 }

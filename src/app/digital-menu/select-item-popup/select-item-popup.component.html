@@ -5,7 +5,7 @@
 
     <div>
         <h2>Choose size</h2>
-        <div class="popContentButtons" *ngIf="selectedItem.itemType === 'PIZZA'">
+        <div class="popContentButtons" *ngIf="selectedItem.category === 'PIZZA'">
             <div class="popUpButton" (click)="onToggleSize('small')"
                 [style]="{color: size === 'small' ? 'white' : 'black', backgroundColor: size === 'small' ? 'black' : '#f0efef' }">
                 <div class="popUpButtonItems">SMALL</div>
@@ -22,7 +22,7 @@
                 <div class="popUpButtonItems">₹{{ getPriceForSize('large') }}</div>
             </div>
         </div>
-        <div class="popContentButtons" *ngIf="selectedItem.itemType === 'MOMO'">
+        <div class="popContentButtons" *ngIf="selectedItem.category === 'MOMO'">
             <div class="popUpButton" mat-raised-button (click)="onToggleSize('half')"
                 [style]="{color: size === 'half' ? 'white' : 'black', backgroundColor: size === 'half' ? 'black' : '#f0efef' }">
                 <div class="popUpButtonItems">HALF</div>
@@ -34,16 +34,16 @@
                 <div class="popUpButtonItems">₹{{ getPriceForSize('full') }}</div>
             </div>
         </div>
-        <div class="popContentButtons" *ngIf="selectedItem.itemType === 'BURGER' || selectedItem.itemType === 'SHAKE'">
+        <div class="popContentButtons" *ngIf="selectedItem.category === 'BURGER' || selectedItem.category === 'SHAKE'">
             <div class="popUpButton" mat-raised-button
                 [style]="{color: size === 'regular' ? 'white' : 'black', backgroundColor: size === 'regular' ? 'black' : '#f0efef' }">
                 <div class="popUpButtonItems">REGULAR</div>
-                <div class="popUpButtonItems">₹{{ selectedItem.price }}</div>
+                <div class="popUpButtonItems">₹{{ 121 }}</div>
             </div>
         </div>
     </div>
 
-    <div *ngIf="selectedItem.itemType === 'PIZZA'">
+    <div *ngIf="selectedItem.category === 'PIZZA'">
         <br>
 
         <div>
