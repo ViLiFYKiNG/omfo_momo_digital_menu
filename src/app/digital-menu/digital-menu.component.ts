@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, effect, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FoodService } from '../services/food.service';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatDialog } from '@angular/material/dialog';
@@ -17,6 +17,10 @@ import { CategoryTabComponent } from './category-tab/category-tab.component';
 export class DigitalMenuComponent implements OnInit {
   activeCategory: string | null = 'Pizza';
 
+  private restaurantId: number = 241124;
+
+  private tableNumber: number = 0;
+
   categorizedItems: StoreItems = {
     pizzaItems: [],
     momosItems: [],
@@ -26,7 +30,11 @@ export class DigitalMenuComponent implements OnInit {
 
   itemAdded: boolean = false;
 
-  constructor(private router: Router, private foodService: FoodService) {
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private foodService: FoodService
+  ) {
     effect(() => {
       const items = this.foodService.items();
       items.forEach((item) => {
@@ -55,6 +63,27 @@ export class DigitalMenuComponent implements OnInit {
   public ngOnInit(): void {
     this.foodService.itemAddedSuccessFully.subscribe(() => {
       this.showTransition();
+    });
+
+    console.log('KING INIT');
+
+    this.route.paramMap.subscribe((params) => {
+      this.restaurantId = params.get('restaurant_id')
+        ? Number(params.get('restaurant_id'))
+        : 0;
+      this.tableNumber = params.get('table_number')
+        ? Number(params.get('table_number'))
+        : 0;
+
+
+      console.log('Restaurant ID:', this.restaurantId);
+      console.log('Table Number:', this.tableNumber);
+
+      const items = this.foodService.items();
+      if (this.restaurantId || items.length === 0) {
+        console.log('-----------------');
+        this.foodService.getAll(this.restaurantId);
+      }
     });
   }
 

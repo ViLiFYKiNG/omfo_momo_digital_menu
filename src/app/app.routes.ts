@@ -11,6 +11,14 @@ export const routes: Routes = [
     component: DigitalMenuComponent,
   },
   {
+    path: 'digital-menu/:restaurant_id',
+    component: DigitalMenuComponent,
+  },
+  {
+    path: 'digital-menu/:restaurant_id/:table_number',
+    component: DigitalMenuComponent,
+  },
+  {
     path: 'cart',
     component: CartComponent,
   },
@@ -28,4 +36,9 @@ export const routes: Routes = [
     redirectTo: '/digital-menu',
     pathMatch: 'full',
   },
+  {
+    path: '**',
+    redirectTo: '/digital-menu',
+    pathMatch: 'full',
+  }
 ];

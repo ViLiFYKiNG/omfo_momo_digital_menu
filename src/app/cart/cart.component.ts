@@ -49,7 +49,7 @@ export class CartComponent {
   }
 
   navigateToHome() {
-    this.router.navigate(['/digital-menu']);
+    this.router.navigate(['/digital-menu/00000000']);
   }
 
   phoneNumber: string = '7518999096';

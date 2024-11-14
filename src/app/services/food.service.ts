@@ -19,19 +19,28 @@ export class FoodService {
 
   constructor(private dataStorageService: DataStorageService) {}
 
-  public getAll() {
+  public getAll(restaurant_id: number) {
+    if (!restaurant_id) restaurant_id = 241124;
     this.isFetching.set(true);
     this.dataStorageService
       .fetchItems()
       .pipe(
         map((response: Record<string, any> | null) => {
-          return (
-            response &&
-            Object.keys(response).map((itemId) => ({
-              itemId,
-              ...response[itemId],
-            }))
-          );
+          if (response) {
+            return Object.keys(response)
+              .map((itemId) => ({
+                itemId,
+                ...response[itemId],
+              }))
+              .filter((item) => {
+                return (
+                  item.restaurantId.toString() === restaurant_id.toString() &&
+                  item.isAvailable
+                );
+              });
+          } else {
+            return [];
+          }
         })
       )
       .subscribe({
