@@ -13,7 +13,7 @@ import {
   OmfoItem,
   OmfoItemSize,
   Topping,
-} from '../../shared/modals';
+} from '../../../shared/modals';
 
 @Component({
   selector: 'app-select-item-popup',

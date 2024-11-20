@@ -2,7 +2,7 @@ import { NgIf } from '@angular/common';
 import { Component, inject, input } from '@angular/core';
 import { NewCartItem, OmfoItem } from '../../shared/modals';
 import { ItemCardComponent } from '../../shared/components/item-card/item-card.component';
-import { SelectItemPopupComponent } from '../select-item-popup/select-item-popup.component';
+import { SelectItemPopupComponent } from './select-item-popup/select-item-popup.component';
 import { MatDialog } from '@angular/material/dialog';
 import { FoodService } from '../../services/food.service';
 
