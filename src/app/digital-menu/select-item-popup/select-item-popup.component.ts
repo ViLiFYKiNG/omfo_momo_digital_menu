@@ -59,11 +59,6 @@ export class SelectItemPopupComponent {
     this.dialogRef.close();
   }
 
-  public onSubmit() {
-    console.log('ON SUBMIT');
-    console.log(this.cartItem);
-  }
-
   onToggleSize(itemSize: OmfoItemSize) {
     this.size = itemSize.size;
     this.cartItem.size = itemSize.size;

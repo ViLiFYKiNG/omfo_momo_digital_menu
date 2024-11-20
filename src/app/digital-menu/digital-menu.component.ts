@@ -65,8 +65,6 @@ export class DigitalMenuComponent implements OnInit {
       this.showTransition();
     });
 
-    console.log('KING INIT');
-
     this.route.paramMap.subscribe((params) => {
       this.restaurantId = params.get('restaurant_id')
         ? Number(params.get('restaurant_id'))
@@ -76,12 +74,8 @@ export class DigitalMenuComponent implements OnInit {
         : 0;
 
 
-      console.log('Restaurant ID:', this.restaurantId);
-      console.log('Table Number:', this.tableNumber);
-
       const items = this.foodService.items();
-      if (this.restaurantId || items.length === 0) {
-        console.log('-----------------');
+      if ((this.restaurantId && items.length === 0) || items.length === 0) {
         this.foodService.getAll(this.restaurantId);
       }
     });

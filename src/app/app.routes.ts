@@ -9,25 +9,14 @@ export const routes: Routes = [
   {
     path: 'digital-menu',
     component: DigitalMenuComponent,
-    children: [
-      {
-        path: ':restaurant_id',
-        children: [
-          {
-            path: ':table_number',
-            component: DigitalMenuComponent,
-          },
-          {
-            path: '',
-            component: DigitalMenuComponent,
-          },
-        ],
-      },
-      {
-        path: '',
-        component: DigitalMenuComponent,
-      },
-    ],
+  },
+  {
+    path: 'digital-menu/:restaurant_id',
+    component: DigitalMenuComponent,
+  },
+  {
+    path: 'digital-menu/:restaurant_id/table_number/:table_number',
+    component: DigitalMenuComponent,
   },
   {
     path: 'cart',
