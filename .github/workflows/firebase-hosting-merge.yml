@@ -3,7 +3,7 @@ name: CI_ON_PUSH
 on:
   push:
     branches: 
-      - '**'  # This will match all branches
+      - '**'
   workflow_dispatch:
 
 jobs:
@@ -22,7 +22,7 @@ jobs:
 
   DEPLOY_ON_PROD:
     runs-on: ubuntu-latest
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
     steps:
       - uses: actions/checkout@v4
       - run: npm ci && npm run build:PROD
