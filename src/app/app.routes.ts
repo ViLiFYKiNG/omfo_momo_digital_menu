@@ -1,22 +1,33 @@
 import { Routes } from '@angular/router';
 import { DigitalMenuComponent } from './digital-menu/digital-menu.component';
-import { CartComponent } from './cart/cart.component';
 import { AuthComponent } from './admin/auth/auth.component';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { AuthGuard } from './admin/auth.guard';
+import { CartComponent } from './digital-menu/cart/cart.component';
 
 export const routes: Routes = [
   {
     path: 'digital-menu',
     component: DigitalMenuComponent,
-  },
-  {
-    path: 'digital-menu/:restaurant_id',
-    component: DigitalMenuComponent,
-  },
-  {
-    path: 'digital-menu/:restaurant_id/:table_number',
-    component: DigitalMenuComponent,
+    children: [
+      {
+        path: ':restaurant_id',
+        children: [
+          {
+            path: ':table_number',
+            component: DigitalMenuComponent,
+          },
+          {
+            path: '',
+            component: DigitalMenuComponent,
+          },
+        ],
+      },
+      {
+        path: '',
+        component: DigitalMenuComponent,
+      },
+    ],
   },
   {
     path: 'cart',
@@ -40,5 +51,5 @@ export const routes: Routes = [
     path: '**',
     redirectTo: '/digital-menu',
     pathMatch: 'full',
-  }
+  },
 ];

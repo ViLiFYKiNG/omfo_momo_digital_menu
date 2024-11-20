@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { FoodService } from '../services/food.service';
-import { NewCartItem, OrderType } from '../shared/modals';
 import { CheckoutPopupComponent } from './checkout-popup/checkout-popup.component';
 import { MatDialog } from '@angular/material/dialog';
-import { ENV } from '../../env/env';
+import { NewCartItem, OrderType } from '../../shared/modals';
+import { FoodService } from '../../services/food.service';
+import { ENV } from '../../../env/env';
 
 @Component({
   selector: 'app-cart',

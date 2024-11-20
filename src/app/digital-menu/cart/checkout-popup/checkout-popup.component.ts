@@ -10,8 +10,8 @@ import {
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
-import { DeliveryType } from '../../shared/modals';
 import { FormsModule } from '@angular/forms';
+import { DeliveryType } from '../../../shared/modals';
 
 @Component({
   selector: 'app-checkout-popup',
