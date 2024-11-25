@@ -13,9 +13,9 @@ export const PIZZA_ITEMS: PizzaItem[] = [
     itemId: Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000,
     name: 'Tomato Pizza',
     price: {
-      small: 69,
-      medium: 139,
-      large: 199,
+      small: 110,
+      medium: 210,
+      large: 320,
     },
     description:
       'Enjoy the vibrant flavoA simple yet classic delight with fresh tomatoes perfect for a light and flavorful bite..',
@@ -27,9 +27,9 @@ export const PIZZA_ITEMS: PizzaItem[] = [
     itemId: Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000,
     name: 'Onion Pizza',
     price: {
-      small: 79,
-      medium: 159,
-      large: 219,
+      small: 110,
+      medium: 210,
+      large: 320,
     },
     description:
       'Enjoy the vibrant flavor of Onion & Amul Mozzarella creating a balanced and delicious pizza experience...',
@@ -41,9 +41,9 @@ export const PIZZA_ITEMS: PizzaItem[] = [
     itemId: Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000,
     name: 'Capsicum Pizza',
     price: {
-      small: 89,
-      medium: 179,
-      large: 249,
+      small: 110,
+      medium: 210,
+      large: 320,
     },
     description:
       'Enjoy the vibrant flavor of capsicum, creating a balanced and delicious pizza experience with Amul Mozzarella.Amul Mozzarella cheese...',
@@ -55,9 +55,9 @@ export const PIZZA_ITEMS: PizzaItem[] = [
     itemId: Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000,
     name: 'Corn Pizza',
     price: {
-      small: 99,
-      medium: 199,
-      large: 269,
+      small: 110,
+      medium: 210,
+      large: 320,
     },
     description:
       'Perfect for cheese Enjoy the sweet crunch of corn paired with Amul Mozzarella cheese creating a balanced and delicious pizza experience....',
@@ -69,9 +69,9 @@ export const PIZZA_ITEMS: PizzaItem[] = [
     itemId: Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000,
     name: 'Paneer Pizza',
     price: {
-      small: 119,
-      medium: 219,
-      large: 329,
+      small: 170,
+      medium: 330,
+      large: 500,
     },
     description:
       'Indulge in the rich taste of marinated paneer cubes, bringing a burst of Indian flavor to every slice.',
@@ -83,9 +83,9 @@ export const PIZZA_ITEMS: PizzaItem[] = [
     itemId: Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000,
     name: 'Margherita Pizza',
     price: {
-      small: 129,
-      medium: 249,
-      large: 309,
+      small: 170,
+      medium: 330,
+      large: 500,
     },
     description:
       'A timeless favorite, topped with generous amounts of gooey Mozzarella cheese for a classic Italian experience with an Indian twist.',
@@ -97,9 +97,9 @@ export const PIZZA_ITEMS: PizzaItem[] = [
     itemId: Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000,
     name: 'Veg Pizza',
     price: {
-      small: 139,
-      medium: 259,
-      large: 389,
+      small: 190,
+      medium: 370,
+      large: 560,
     },
     description:
       'Loaded with a variety of fresh vegetables, this pizza is a colorful and nutritious option for veggie lovers.',
@@ -111,9 +111,9 @@ export const PIZZA_ITEMS: PizzaItem[] = [
     itemId: Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000,
     name: 'Veg Corn Pizza',
     price: {
-      small: 149,
-      medium: 279,
-      large: 409,
+      small: 210,
+      medium: 410,
+      large: 620,
     },
     description:
       'Sweet corn kernels combined with a medley of vegetables make this pizza a delightful and satisfying choice.',
@@ -125,9 +125,9 @@ export const PIZZA_ITEMS: PizzaItem[] = [
     itemId: Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000,
     name: 'Veg Paneer Pizza',
     price: {
-      small: 159,
-      medium: 299,
-      large: 429,
+      small: 220,
+      medium: 430,
+      large: 650,
     },
     description:
       'A perfect blend of veggies and marinated paneer, this pizza offers a rich and hearty flavor in every bite.',
@@ -139,9 +139,9 @@ export const PIZZA_ITEMS: PizzaItem[] = [
     itemId: Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000,
     name: 'Peppy Paneer Pizza',
     price: {
-      small: 169,
-      medium: 319,
-      large: 449,
+      small: 240,
+      medium: 470,
+      large: 710,
     },
     description:
       'Spice up your meal with peppy paneer, featuring zesty seasonings, capsicum, red paprika and tangy paneer that excite your taste buds.',
@@ -153,9 +153,9 @@ export const PIZZA_ITEMS: PizzaItem[] = [
     itemId: Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000,
     name: 'Farmhouse Pizza',
     price: {
-      small: 179,
-      medium: 329,
-      large: 479,
+      small: 240,
+      medium: 470,
+      large: 710,
     },
     description:
       'Experience the goodness of the farm with this pizza, loaded with fresh onions, tomatoes, capsicum, paneer and mushrooms.',
@@ -167,9 +167,9 @@ export const PIZZA_ITEMS: PizzaItem[] = [
     itemId: Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000,
     name: 'Makhani Pizza',
     price: {
-      small: 189,
-      medium: 339,
-      large: 499,
+      small: 260,
+      medium: 510,
+      large: 770,
     },
     description:
       'Relish the creamy and tangy flavors of makhani sauce topped with onions, capsicum, paneer and red pepper bringing the taste of India to your plate.',
@@ -181,9 +181,9 @@ export const PIZZA_ITEMS: PizzaItem[] = [
     itemId: Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000,
     name: 'Tandoori Pizza',
     price: {
-      small: 199,
-      medium: 349,
-      large: 509,
+      small: 270,
+      medium: 530,
+      large: 800,
     },
     description:
       'A bold and flavorful choice, featuring tandoori spiced toppings like onions, tomatoes, capsicum, paneer and red paprika that give a smoky and aromatic touch to your pizza.',
@@ -195,9 +195,9 @@ export const PIZZA_ITEMS: PizzaItem[] = [
     itemId: Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000,
     name: 'Supreme Pizza',
     price: {
-      small: 209,
-      medium: 369,
-      large: 529,
+      small: 270,
+      medium: 530,
+      large: 800,
     },
     description:
       'A supreme combination of all the finest toppings, offering a rich and indulgent pizza experience with a variety of flavors in every bite.',
@@ -209,9 +209,9 @@ export const PIZZA_ITEMS: PizzaItem[] = [
     itemId: Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000,
     name: 'Veg Extra Vaganza',
     price: {
-      small: 219,
-      medium: 389,
-      large: 549,
+      small: 300,
+      medium: 590,
+      large: 890,
     },
     description:
       'An extravagant mixed of vegetables, including onions, tomatoes, capsicum, corn, mushrooms, black olives, green olives and jalapenos, this pizza is a feast for the senses, packed with fresh and vibrant flavors...',
@@ -223,9 +223,9 @@ export const PIZZA_ITEMS: PizzaItem[] = [
     itemId: Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000,
     name: 'Cheese Lover Pizza',
     price: {
-      small: 249,
-      medium: 399,
-      large: 599,
+      small: 300,
+      medium: 590,
+      large: 890,
     },
     description:
       'For the ultimate cheese enthusiast, this pizza is loaded with multiple layers of gooey and melty cheese making it a true indulgence...',
@@ -240,8 +240,8 @@ export const MOMO_ITEMS: MomoItem[] = [
     itemId: Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000,
     name: 'Veg Momo',
     price: {
-      half: 50,
-      full: 80,
+      half: 80,
+      full: 120,
     },
     description:
       'Delicious steamed momos serve with 4 dips (Chilli,Mayo,Mint & Tandoori dip) filled with fresh vegetables...',
@@ -253,8 +253,8 @@ export const MOMO_ITEMS: MomoItem[] = [
     itemId: Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000,
     name: 'Kurkure Momo',
     price: {
-      half: 80,
-      full: 120,
+      half: 120,
+      full: 180,
     },
     description:
       'Served with 4 dips chilli, mint, mayo, tandoori masala,Our best selling kurkure momos are most crunchy momo with corn flakes wrapping on it makes its test amazing you never jonna forget and stuffing of momos made with carrot, onion, cabbage and capsicum.',
@@ -266,8 +266,8 @@ export const MOMO_ITEMS: MomoItem[] = [
     itemId: Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000,
     name: 'Cheese Gravy(spicy) Momo',
     price: {
-      half: 100,
-      full: 150,
+      half: 150,
+      full: 210,
     },
     description:
       'Momos Made with pizza pasta suace ,cheese blend & mozzerella and olives & red paper baked at 297 with coal flavour',
@@ -279,8 +279,8 @@ export const MOMO_ITEMS: MomoItem[] = [
     itemId: Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000,
     name: 'Cheese Baked Momo',
     price: {
-      half: 110,
-      full: 170,
+      half: 160,
+      full: 240,
     },
     description:
       'Momos Made with cheese blend , mozzerella and pizza toppings baked at 297 with coal flavour',
@@ -321,7 +321,7 @@ export const BURGER_ITEMS: BurgerItem[] = [
   {
     itemId: Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000,
     name: 'Classic Burger',
-    price: 49,
+    price: 70,
     description:
       'delightful combination of onion, capsicum, aloo tikki and a creamy blend of Mayonnaise and burger sauce, all nestled in a soft burger bun with Amul cheese....',
     imagePath: '../../assets/images/CLASSIC_BURGER.jpeg',
@@ -331,7 +331,7 @@ export const BURGER_ITEMS: BurgerItem[] = [
   {
     itemId: Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000,
     name: 'Veg Burger',
-    price: 59,
+    price: 90,
     description:
       'Delight in our omfo momo veg burger, filled with onion, capsicum, tomato, aloo tikki and a luscious mixed of Mayonnaise and burger sauce, all embraced by a soft burger bun with Amul cheese..',
     imagePath: '../../assets/images/VEG_BURGER.jpeg',
@@ -341,7 +341,7 @@ export const BURGER_ITEMS: BurgerItem[] = [
   {
     itemId: Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000,
     name: 'Cheese Burger',
-    price: 79,
+    price: 110,
     description:
       'Indulge in our omfo momo cheese burger, boasting a medley of onion, capsicum, tomato, paneer, aloo tikki, Mozzarella cheese and a rich combination of mayonnaise and burger sauce, hugged by a soft burger bun with Amul cheese.',
     imagePath: '../../assets/images/CHEESE_BURGER.jpeg',
@@ -351,7 +351,7 @@ export const BURGER_ITEMS: BurgerItem[] = [
   {
     itemId: Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000,
     name: 'Cheese Slice Burge',
-    price: 99,
+    price: 130,
     description:
       'omfo momo cheese slice burger, packed with onion, capsicum, tomato, paneer, aloo tikki, Mozzarella cheese, a slice of cheese and a creamy blend of mayonnaise and burger sauce, all wrapped in a soft burger bun with Amul cheese.',
     imagePath: '../../assets/images/CHEESE_SLICE_BURGER.jpeg',
