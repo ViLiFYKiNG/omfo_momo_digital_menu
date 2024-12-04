@@ -5,6 +5,10 @@
 
     <div>
         <div class="popContentButtons">
+            <div class="popUpButton" mat-raised-button (click)="onToggleDeliveryType('DINE_OUT')"
+                [style]="{color: deliveryType === 'DINE_OUT' ? 'white' : 'black', backgroundColor: deliveryType === 'DINE_OUT' ? 'black' : '#f0efef' }">
+                <div class="popUpButtonItems">DINE_OUT</div>
+            </div>
             <div class="popUpButton" mat-raised-button (click)="onToggleDeliveryType('PICKUP')"
                 [style]="{color: deliveryType === 'PICKUP' ? 'white' : 'black', backgroundColor: deliveryType === 'PICKUP' ? 'black' : '#f0efef' }">
                 <div class="popUpButtonItems">PICKUP</div>

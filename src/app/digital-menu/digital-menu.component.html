@@ -10,22 +10,22 @@
   <!-- Category Tabs -->
   <div>
     <!-- MOMOS -->
-    <app-category-tab category="Momos" [activeCategory]="activeCategory" [items]="categorizedItems.momosItems"
+    <app-category-tab *ngIf="categorizedItems.momosItems.length" category="Momos" [activeCategory]="activeCategory" [items]="categorizedItems.momosItems"
       (click)="toggleCategory('Momos')"></app-category-tab>
 
     <!-- PIZZA -->
-    <app-category-tab category="Pizza" [activeCategory]="activeCategory" [items]="categorizedItems.pizzaItems"
+    <app-category-tab *ngIf="categorizedItems.pizzaItems.length" category="Pizza" [activeCategory]="activeCategory" [items]="categorizedItems.pizzaItems"
       (click)="toggleCategory('Pizza')"></app-category-tab>
 
     <!-- BURGERS -->
-    <app-category-tab category="Burgers" [activeCategory]="activeCategory" [items]="categorizedItems.burgerItems"
+    <app-category-tab *ngIf="categorizedItems.burgerItems.length" category="Burgers" [activeCategory]="activeCategory" [items]="categorizedItems.burgerItems"
       (click)="toggleCategory('Burgers')"></app-category-tab>
 
     <!-- SHAKES -->
-    <app-category-tab category="Shakes" [activeCategory]="activeCategory" [items]="categorizedItems.shakesItems!"
+    <app-category-tab *ngIf="categorizedItems.shakesItems.length" category="Shakes" [activeCategory]="activeCategory" [items]="categorizedItems.shakesItems"
       (click)="toggleCategory('Shakes')"></app-category-tab>
 
-    <!-- @for (item of storeItems | keyvalue; track item.key) {
+    <!-- @for (item of categorizedItems | keyvalue; track item.key) {
         <app-category-tab [category]="item.key" [activeCategory]="activeCategory" [items]="item.value"
           (click)="toggleCategory(item.key)"></app-category-tab>
       } -->

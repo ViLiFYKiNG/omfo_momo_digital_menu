@@ -15,11 +15,11 @@ import { CategoryTabComponent } from './category-tab/category-tab.component';
   imports: [CommonModule, MatSlideToggleModule, CategoryTabComponent],
 })
 export class DigitalMenuComponent implements OnInit {
-  activeCategory: string | null = 'Pizza';
+  activeCategory: string | null = null;
 
   private restaurantId: number = 241124;
 
-  private tableNumber: number = 0;
+  private tableNumber: number = -1;
 
   categorizedItems: StoreItems = {
     pizzaItems: [],
@@ -61,18 +61,19 @@ export class DigitalMenuComponent implements OnInit {
   }
 
   public ngOnInit(): void {
+    this.activeCategory = this.foodService.activeCategory;
+
     this.foodService.itemAddedSuccessFully.subscribe(() => {
       this.showTransition();
     });
 
-    this.route.paramMap.subscribe((params) => {
+    this.route.queryParamMap.subscribe((params) => {
       this.restaurantId = params.get('restaurant_id')
         ? Number(params.get('restaurant_id'))
         : 0;
       this.tableNumber = params.get('table_number')
         ? Number(params.get('table_number'))
-        : 0;
-
+        : -1;
 
       const items = this.foodService.items();
       if ((this.restaurantId && items.length === 0) || items.length === 0) {
@@ -87,10 +88,17 @@ export class DigitalMenuComponent implements OnInit {
     } else {
       this.activeCategory = category;
     }
+
+    this.foodService.activeCategory = this.activeCategory;
   }
 
   public navigateToCart() {
-    this.router.navigate(['/cart']);
+    this.router.navigate(['/cart'], {
+      queryParams: {
+        restaurant_id: this.restaurantId,
+        table_number: this.tableNumber,
+      },
+    });
   }
 
   readonly dialog = inject(MatDialog);

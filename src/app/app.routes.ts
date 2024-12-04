@@ -11,14 +11,6 @@ export const routes: Routes = [
     component: DigitalMenuComponent,
   },
   {
-    path: 'digital-menu/:restaurant_id',
-    component: DigitalMenuComponent,
-  },
-  {
-    path: 'digital-menu/:restaurant_id/table_number/:table_number',
-    component: DigitalMenuComponent,
-  },
-  {
     path: 'cart',
     component: CartComponent,
   },

@@ -2,12 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { OmfoItem } from '../../shared/modals';
+import { ENV } from '../../../env/env';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DataStorageService {
-  private BASE_URL = 'https://omfomomo-test-default-rtdb.firebaseio.com/items';
+  private BASE_URL = ENV.DS_URL;
 
   constructor(private http: HttpClient, private router: Router) {}
 

@@ -9,6 +9,8 @@ import { DataStorageService } from '../admin/services/data-storage.service';
 export class FoodService {
   public items = signal<OmfoItem[]>([]);
 
+  activeCategory: string | null = 'Pizza';
+
   public isFetching = signal<boolean>(false);
 
   public error = signal<string | null>(null);

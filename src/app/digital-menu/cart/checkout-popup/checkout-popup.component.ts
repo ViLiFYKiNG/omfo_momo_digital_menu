@@ -33,7 +33,7 @@ export class CheckoutPopupComponent {
 
   readonly orderAmount = inject<number>(MAT_DIALOG_DATA);
 
-  deliveryType: DeliveryType = 'DELIVERY';
+  deliveryType: DeliveryType = 'DINE_OUT';
 
   message: string = '';
 

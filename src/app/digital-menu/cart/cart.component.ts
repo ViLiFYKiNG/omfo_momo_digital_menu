@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CheckoutPopupComponent } from './checkout-popup/checkout-popup.component';
 import { MatDialog } from '@angular/material/dialog';
 import { NewCartItem, OrderType } from '../../shared/modals';
@@ -15,7 +15,15 @@ import { ENV } from '../../../env/env';
   styleUrl: './cart.component.scss',
 })
 export class CartComponent {
-  constructor(private router: Router, private foodService: FoodService) {}
+  private restaurantId: number = 241124;
+
+  private tableNumber: number = -1;
+
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private foodService: FoodService
+  ) {}
 
   newCartItems: NewCartItem[] = [];
 
@@ -27,6 +35,15 @@ export class CartComponent {
     if (!ENV.isProd) {
       this.phoneNumber = '8869860624';
     }
+
+    this.route.queryParamMap.subscribe((params) => {
+      this.restaurantId = params.get('restaurant_id')
+        ? Number(params.get('restaurant_id'))
+        : 0;
+      this.tableNumber = params.get('table_number')
+        ? Number(params.get('table_number'))
+        : -1;
+    });
   }
 
   getTotalAmount() {
@@ -49,7 +66,12 @@ export class CartComponent {
   }
 
   navigateToHome() {
-    this.router.navigate(['/digital-menu/00000000']);
+    this.router.navigate(['/digital-menu'], {
+      queryParams: {
+        restaurant_id: this.restaurantId,
+        table_number: this.tableNumber,
+      },
+    });
   }
 
   phoneNumber: string = '7518999096';
@@ -95,6 +117,10 @@ export class CartComponent {
       orderType.deliveryType
     }${encodeURI('\n')}${
       orderType.deliveryType === 'DELIVERY' ? 'ADD - ' + orderType.message : ''
+    }${encodeURI('\n')}**************************${encodeURI(
+      '\n'
+    )}RESTAURANT_ID - ${this.restaurantId}${encodeURI('\n')}TABLE_NUMBER - ${
+      this.tableNumber
     }`;
   }
 
@@ -108,7 +134,7 @@ export class CartComponent {
     this.newCartItems = this.foodService.getAllCartItems();
   }
 
-    orderNow() {
+  orderNow() {
     const dialogRef = this.dialog.open(CheckoutPopupComponent, {
       data: this.getTotalAmount(),
     });
