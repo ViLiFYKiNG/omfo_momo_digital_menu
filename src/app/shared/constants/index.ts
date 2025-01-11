@@ -4,6 +4,8 @@ export const ITEMTYPES = {
   CHINESE: 'CHINESE',
   BURGER: 'BURGER',
   SHAKE: 'SHAKE',
+  CHAAP: 'CHAAP',
+  OTHER: 'OTHER',
 } as const;
 
 export const CATEGORYTYPES: { cNAME: string; cVALUE: string }[] = [
@@ -12,4 +14,6 @@ export const CATEGORYTYPES: { cNAME: string; cVALUE: string }[] = [
   { cNAME: 'CHINESE', cVALUE: 'CHINESE' },
   { cNAME: 'BURGER', cVALUE: 'BURGER' },
   { cNAME: 'SHAKE', cVALUE: 'SHAKE' },
+  { cNAME: 'CHAAP', cVALUE: 'CHAAP' },
+  { cNAME: 'OTHER', cVALUE: 'OTHER' },
 ] as const;

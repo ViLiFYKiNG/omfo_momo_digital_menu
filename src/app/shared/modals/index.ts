@@ -11,6 +11,9 @@ export interface StoreItems {
   momosItems: OmfoItem[];
   burgerItems: OmfoItem[];
   shakesItems: OmfoItem[];
+  chaapItems: OmfoItem[];
+  chineseItems: OmfoItem[];
+  otherItems: OmfoItem[];
 }
 
 export interface NewCartItem {
@@ -41,7 +44,7 @@ export interface OmfoItem {
   restaurantId?: number | string;
   name: string;
   description: string;
-  category: 'PIZZA' | 'MOMO' | 'CHINESE' | 'BURGER' | 'SHAKE';
+  category: 'PIZZA' | 'MOMO' | 'CHINESE' | 'BURGER' | 'SHAKE' | 'CHAAP' | 'OTHER';
   isAvailable: boolean;
   imageURL: string;
   sizes: OmfoItemSize[];

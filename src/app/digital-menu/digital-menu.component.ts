@@ -26,6 +26,9 @@ export class DigitalMenuComponent implements OnInit {
     momosItems: [],
     burgerItems: [],
     shakesItems: [],
+    chaapItems: [],
+    chineseItems: [],
+    otherItems: [],
   };
 
   itemAdded: boolean = false;
@@ -50,6 +53,15 @@ export class DigitalMenuComponent implements OnInit {
             break;
           case 'SHAKE':
             this.categorizedItems.shakesItems.push(item);
+            break;
+          case 'CHAAP':
+            this.categorizedItems.chaapItems.push(item);
+            break;
+          case 'CHINESE':
+            this.categorizedItems.chineseItems.push(item);
+            break;
+          case 'OTHER':
+            this.categorizedItems.otherItems.push(item);
             break;
           default:
             console.warn(
