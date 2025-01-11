@@ -1,185 +1,131 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, viewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, inject, effect, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FoodService } from '../services/food.service';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { MatMenuTrigger } from '@angular/material/menu';
 import { MatDialog } from '@angular/material/dialog';
-import { PizzaPopupComponent } from './pizza-popup/pizza-popup.component';
-import { MomoPopupComponent } from './momo-popup/momo-popup.component';
-import { ChinesePopupComponent } from './chinese-popup/chinese-popup.component';
-import {
-  BurgerItem,
-  CartItem,
-  ChineseItem,
-  MomoItem,
-  OmfoMomoItems,
-  PizzaItem,
-  ShakeItem,
-} from '../shared/modals';
-import { BurgerPopupComponent } from './burger-popup/burger-popup.component';
-import { ShakePopupComponent } from './shake-popup/shake-popup.component';
-import { OutletSelectionPopupComponent } from './outlet-selection-popup/outlet-selection-popup.component';
+import { StoreItems } from '../shared/modals';
+import { CategoryTabComponent } from './category-tab/category-tab.component';
 
 @Component({
   selector: 'app-digital-menu',
   standalone: true,
   templateUrl: './digital-menu.component.html',
   styleUrls: ['./digital-menu.component.scss'],
-  imports: [CommonModule, MatSlideToggleModule],
+  imports: [CommonModule, MatSlideToggleModule, CategoryTabComponent],
 })
-export class DigitalMenuComponent {
-  static selectOutlet: string;
-  constructor(private router: Router, private foodService: FoodService) {}
+export class DigitalMenuComponent implements OnInit {
+  activeCategory: string | null = null;
 
-  activeCategory: string | null = 'Pizza';
+  private restaurantId: number = 241124;
 
-  selectedOutlet: string = 'SITAPUR';
+  private tableNumber: number = -1;
 
-  storeItems: OmfoMomoItems | null = null;
+  categorizedItems: StoreItems = {
+    pizzaItems: [],
+    momosItems: [],
+    burgerItems: [],
+    shakesItems: [],
+    chaapItems: [],
+    chineseItems: [],
+    otherItems: [],
+  };
 
   itemAdded: boolean = false;
 
-  ngOnInit(): void {
-    this.activeCategory = this.foodService.activeCategory;
-    this.storeItems = this.foodService.getAll();
-
-    this.foodService.selectedValue$.subscribe((value) => {
-      this.selectedOutlet = value;
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private foodService: FoodService
+  ) {
+    effect(() => {
+      const items = this.foodService.items();
+      items.forEach((item) => {
+        switch (item.category) {
+          case 'PIZZA':
+            this.categorizedItems.pizzaItems.push(item);
+            break;
+          case 'MOMO':
+            this.categorizedItems.momosItems.push(item);
+            break;
+          case 'BURGER':
+            this.categorizedItems.burgerItems.push(item);
+            break;
+          case 'SHAKE':
+            this.categorizedItems.shakesItems.push(item);
+            break;
+          case 'CHAAP':
+            this.categorizedItems.chaapItems.push(item);
+            break;
+          case 'CHINESE':
+            this.categorizedItems.chineseItems.push(item);
+            break;
+          case 'OTHER':
+            this.categorizedItems.otherItems.push(item);
+            break;
+          default:
+            console.warn(
+              `Unknown category: ${item.category} for item ${item.name}`
+            );
+        }
+      });
     });
   }
 
-  toggleCategory(category: string) {
+  public ngOnInit(): void {
+    this.activeCategory = this.foodService.activeCategory;
+
+    this.foodService.itemAddedSuccessFully.subscribe(() => {
+      this.showTransition();
+    });
+
+    this.route.queryParamMap.subscribe((params) => {
+      this.restaurantId = params.get('restaurant_id')
+        ? Number(params.get('restaurant_id'))
+        : 0;
+      this.tableNumber = params.get('table_number')
+        ? Number(params.get('table_number'))
+        : -1;
+
+      const items = this.foodService.items();
+      if ((this.restaurantId && items.length === 0) || items.length === 0) {
+        this.foodService.getAll(this.restaurantId);
+      }
+    });
+  }
+
+  public toggleCategory(category: string) {
     if (this.activeCategory === category) {
       this.activeCategory = null;
     } else {
       this.activeCategory = category;
     }
+
     this.foodService.activeCategory = this.activeCategory;
   }
 
-  increaseQuantity(item: CartItem) {
-    this.foodService.increaseQuantity(item);
+  public navigateToCart() {
+    this.router.navigate(['/cart'], {
+      queryParams: {
+        restaurant_id: this.restaurantId,
+        table_number: this.tableNumber,
+      },
+    });
   }
-
-  navigateToCart() {
-    this.router.navigate(['/cart']);
-  }
-
-  readonly menuTrigger = viewChild.required(MatMenuTrigger);
 
   readonly dialog = inject(MatDialog);
 
-  showTransition() {
+  public showTransition(): void {
     this.itemAdded = true;
     setTimeout(() => {
       this.itemAdded = false;
     }, 1000);
   }
 
-  openDialog(item: PizzaItem) {
-    const dialogRef = this.dialog.open(PizzaPopupComponent, {
-      data: item,
-    });
-
-    dialogRef.afterClosed().subscribe((result: CartItem) => {
-      if (result) {
-        this.increaseQuantity(result);
-        this.showTransition();
-      }
-    });
-  }
-
-  openDialogForMOMO(item: MomoItem) {
-    const dialogRef = this.dialog.open(MomoPopupComponent, {
-      data: item,
-    });
-
-    dialogRef.afterClosed().subscribe((result: CartItem) => {
-      if (result) {
-        this.increaseQuantity(result);
-        this.showTransition();
-      }
-    });
-  }
-
-  openDialogForCHINESE(item: ChineseItem) {
-    const dialogRef = this.dialog.open(ChinesePopupComponent, {
-      data: item,
-    });
-
-    dialogRef.afterClosed().subscribe((result: CartItem) => {
-      if (result) {
-        this.increaseQuantity(result);
-        this.showTransition();
-      }
-    });
-  }
-
-  openDialogForBURGER(item: BurgerItem) {
-    const dialogRef = this.dialog.open(BurgerPopupComponent, {
-      data: item,
-    });
-
-    dialogRef.afterClosed().subscribe((result: CartItem) => {
-      if (result) {
-        this.increaseQuantity(result);
-        this.showTransition();
-      }
-    });
-  }
-
-  openDialogForSHAKE(item: ShakeItem) {
-    const dialogRef = this.dialog.open(ShakePopupComponent, {
-      data: item,
-    });
-
-    dialogRef.afterClosed().subscribe((result: CartItem) => {
-      if (result) {
-        this.increaseQuantity(result);
-        this.showTransition();
-      }
-    });
-  }
-
-  getTotalAmount() {
-    return this.foodService.cartItems.reduce(
-      (total, item) => total + item.perItemPrice * item.quantity,
-      0
-    );
-  }
-
-  isTotalOver200(): boolean {
-    const totalAmount = this.getTotalAmount();
-    return (
-      totalAmount < 300 &&
-      totalAmount >= 200 &&
-      this.selectedOutlet === 'SITAPUR--'
-    );
-  }
-
-  isTotalOver300(): boolean {
-    const totalAmount = this.getTotalAmount();
-    return totalAmount >= 300 && this.selectedOutlet === 'SITAPUR--';
-  }
-
-  getTotalCartItems() {
+  public getTotalCartItems() {
     let totalItems = this.foodService
       .getAllCartItems()
       .reduce((total, item) => total + item.quantity, 0);
-    if (this.isTotalOver200() || this.isTotalOver300()) {
-      totalItems++;
-    }
     return totalItems;
-  }
-
-  openOutletSelectionPopup() {
-    const dialogRef = this.dialog.open(OutletSelectionPopupComponent);
-
-    dialogRef.afterClosed().subscribe((result: any) => {
-      if (result) {
-        this.foodService.setSelectedValue(result);
-      }
-    });
   }
 }

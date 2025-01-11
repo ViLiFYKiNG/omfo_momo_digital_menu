@@ -1,129 +1,136 @@
-import { Injectable } from '@angular/core';
-import {
-  OMFO_MOMO_ITEMS,
-  PIZZA_ITEMS,
-  MOMO_ITEMS,
-  CHINESE_ITEM,
-} from '../../data';
-import { CartItem, ChineseItem, MomoItem, OmfoMomoItems, PizzaItem } from '../shared/modals';
-import { BehaviorSubject } from 'rxjs';
+import { Injectable, signal } from '@angular/core';
+import { NewCartItem, OmfoItem } from '../shared/modals';
+import { map, Subject } from 'rxjs';
+import { DataStorageService } from '../admin/services/data-storage.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FoodService {
-  cartItems: CartItem[] = [];
+  public items = signal<OmfoItem[]>([]);
 
   activeCategory: string | null = 'Pizza';
 
-  selectedValueSource = new BehaviorSubject<string>('SITAPUR');
+  public isFetching = signal<boolean>(false);
 
-  selectedValue$ = this.selectedValueSource.asObservable();
+  public error = signal<string | null>(null);
 
-  constructor() {}
+  public itemAddedSuccessFully = new Subject<null>();
 
-  setSelectedValue(value: string) {
-    this.selectedValueSource.next(value);
-  }
+  public newCartItems: NewCartItem[] = [];
 
-  getAll(): OmfoMomoItems {
-    return OMFO_MOMO_ITEMS;
-  }
+  constructor(private dataStorageService: DataStorageService) {}
 
-  getAllCartItems() {
-    return this.cartItems;
-  }
-
-  increaseQuantity(item: CartItem) {
-    if (item.itemType === 'PIZZA') {
-      PIZZA_ITEMS.forEach((pizzItem: PizzaItem) => {
-        if (pizzItem.name === item.name) {
-          pizzItem.quantity = (pizzItem.quantity || 0) + 1;
-        }
+  public getAll(restaurant_id: number) {
+    if (!restaurant_id) restaurant_id = 241124;
+    this.isFetching.set(true);
+    this.dataStorageService
+      .fetchItems()
+      .pipe(
+        map((response: Record<string, any> | null) => {
+          if (response) {
+            return Object.keys(response)
+              .map((itemId) => ({
+                itemId,
+                ...response[itemId],
+              }))
+              .filter((item) => {
+                return (
+                  item.restaurantId.toString() === restaurant_id.toString() &&
+                  item.isAvailable
+                );
+              });
+          } else {
+            return [];
+          }
+        })
+      )
+      .subscribe({
+        next: (response: OmfoItem[] | null) => {
+          if (response) this.items.set(response);
+          else this.items.set([]);
+        },
+        complete: () => {
+          this.isFetching.set(false);
+        },
+        error: (error) => {
+          this.error.set(error.message);
+          this.isFetching.set(false);
+        },
       });
-    }
-    if (item.itemType === 'MOMO') {
-      MOMO_ITEMS.forEach((momoItem: MomoItem) => {
-        if (momoItem.name === item.name) {
-          momoItem.quantity = (momoItem.quantity || 0) + 1;
-        }
-      });
-    }
-    if (item.itemType === 'CHINESE') {
-      CHINESE_ITEM.forEach((chineseItem: ChineseItem) => {
-        if (chineseItem.name === item.name) {
-          chineseItem.quantity = (chineseItem.quantity || 0) + 1;
-        }
-      });
-    }
-    this.updateCart(item);
   }
 
-  decreaseQuantity(item: CartItem) {
-    if (item.quantity && item.quantity > 0) {
-      item.quantity--;
-      this.decreaseItemQuantityInCart(item);
-    }
+  public getAllCartItems() {
+    return this.newCartItems;
   }
 
-  updateCart(item: CartItem) {
-    const index = this.cartItems.findIndex(
+  private areToppingsEqual(
+    toppingArray_1: string[],
+    toppingArray_2: string[]
+  ): boolean {
+    if (toppingArray_1.length !== toppingArray_2.length) return false;
+
+    const sortedArr1 = toppingArray_1.slice().sort();
+    const sortedArr2 = toppingArray_2.slice().sort();
+
+    for (let i = 0; i < sortedArr1.length; i++) {
+      if (sortedArr1[i] !== sortedArr2[i]) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  updateCartNew(item: NewCartItem) {
+    const index = this.newCartItems.findIndex(
       (cartItem) =>
         cartItem.name === item.name &&
         cartItem.size === item.size &&
-        cartItem.withExtraCheese === item.withExtraCheese &&
-        cartItem.withCheeseBurst === item.withCheeseBurst
+        this.areToppingsEqual(cartItem.toppings, item.toppings)
     );
     if (index > -1) {
-      item.quantity = item.quantity + this.cartItems[index].quantity;
-      this.cartItems[index] = { ...item };
+      item.quantity = item.quantity + this.newCartItems[index].quantity;
+      this.newCartItems[index] = { ...item };
     } else {
-      this.cartItems.push({ ...item });
+      this.newCartItems.push({ ...item });
     }
+
+    this.itemAddedSuccessFully.next(null);
   }
 
-  increaseItemQuantityInCart(item: CartItem) {
-    const index = this.cartItems.findIndex(
+  increaseItemQuantityInCartNew(item: NewCartItem) {
+    const index = this.newCartItems.findIndex(
       (cartItem) =>
         cartItem.name === item.name &&
         cartItem.size === item.size &&
-        cartItem.withExtraCheese === item.withExtraCheese &&
-        cartItem.withCheeseBurst === item.withCheeseBurst
+        this.areToppingsEqual(cartItem.toppings, item.toppings)
     );
 
     if (index > -1) {
-      this.cartItems[index].quantity = item.quantity + 1;
+      this.newCartItems[index].quantity = item.quantity + 1;
     }
   }
 
-  decreaseItemQuantityInCart(item: CartItem) {
-    const index = this.cartItems.findIndex(
+  decreaseItemQuantityInCartNew(item: NewCartItem) {
+    const index = this.newCartItems.findIndex(
       (cartItem) =>
         cartItem.name === item.name &&
         cartItem.size === item.size &&
-        cartItem.withExtraCheese === item.withExtraCheese &&
-        cartItem.withCheeseBurst === item.withCheeseBurst
+        this.areToppingsEqual(cartItem.toppings, item.toppings)
     );
 
     if (index > -1) {
-      if (this.cartItems[index].quantity > 1) {
-        this.cartItems[index].quantity = this.cartItems[index].quantity - 1;
+      if (this.newCartItems[index].quantity > 1) {
+        this.newCartItems[index].quantity =
+          this.newCartItems[index].quantity - 1;
       } else {
-        this.cartItems.splice(index, 1);
+        this.newCartItems.splice(index, 1);
       }
     }
   }
 
   clearCart() {
-    PIZZA_ITEMS.forEach((item: PizzaItem) => {
-      item.quantity = 0;
-    });
-    MOMO_ITEMS.forEach((item: MomoItem) => {
-      item.quantity = 0;
-    });
-    CHINESE_ITEM.forEach((item: ChineseItem) => {
-      item.quantity = 0;
-    });
-    this.cartItems = [];
+    this.newCartItems = [];
   }
 }

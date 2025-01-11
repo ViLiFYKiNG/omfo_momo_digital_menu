@@ -31,7 +31,7 @@
             "scripts": []
           },
           "configurations": {
-            "production": {
+            "PROD": {
               "budgets": [
                 {
                   "type": "initial",
@@ -44,27 +44,53 @@
                   "maximumError": "4kB"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "fileReplacements": [
+                {
+                  "replace": "src/env/env.ts",
+                  "with": "src/env/env.prod.ts"
+                }
+              ]
             },
-            "development": {
+            "DEV": {
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true
+              "sourceMap": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/env/env.ts",
+                  "with": "src/env/env.local.ts"
+                }
+              ]
+            },
+            "TEST": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/env/env.ts",
+                  "with": "src/env/env.test.ts"
+                }
+              ]
             }
           },
-          "defaultConfiguration": "production"
+          "defaultConfiguration": "PROD"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
-            "production": {
-              "buildTarget": "omfomomo:build:production"
+            "TEST": {
+              "buildTarget": "omfomomo:build:TEST"
             },
-            "development": {
-              "buildTarget": "omfomomo:build:development"
+            "PROD": {
+              "buildTarget": "omfomomo:build:PROD"
+            },
+            "DEV": {
+              "buildTarget": "omfomomo:build:DEV"
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "DEV"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n"

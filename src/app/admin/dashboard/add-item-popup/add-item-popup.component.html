@@ -1,0 +1,88 @@
+<mat-dialog-content>
+    <h1 style="line-height: 30px; min-width: 285px;">{{ inputItem ? 'EDIT ITEM' : 'ADD ITEM' }}</h1>
+
+    <br>
+
+    <div>
+        <form [formGroup]="sizeForm" class="form" action="">
+            <div class="inputField">
+                <mat-form-field appearance="outline">
+                    <mat-label>NAME</mat-label>
+                    <input matInput formControlName="name">
+                </mat-form-field>
+            </div>
+            <div class="inputField">
+                <mat-form-field appearance="outline">
+                    <mat-label>DESCRIPTION</mat-label>
+                    <textarea matInput formControlName="description"></textarea>
+                </mat-form-field>
+            </div>
+            <div class="inputField">
+                <mat-form-field appearance="outline">
+                    <mat-label>RESTAURANT ID</mat-label>
+                    <input matInput formControlName="restaurantId">
+                </mat-form-field>
+            </div>
+            <div class="inputField">
+                <mat-form-field appearance="outline">
+                    <mat-label>IMAGE URL</mat-label>
+                    <input matInput formControlName="imageURL">
+                </mat-form-field>
+            </div>
+            <div class="inputField">
+                <mat-form-field appearance="outline">
+                    <mat-label>CATEGORY</mat-label>
+                    <mat-select formControlName="category">
+                        @for (item of CATEGORYTYPES; track item.cVALUE) {
+                        <mat-option [value]="item.cVALUE">{{item.cNAME}}</mat-option>
+                        }
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div formArrayName="sizes" class="size">
+                <div *ngFor="let sizeField of sizes.controls; let i = index">
+                    <div [formGroupName]="i" class="sizes">
+                        <div class="sizeField">
+                            <mat-form-field appearance="outline">
+                                <mat-label>SIZE</mat-label>
+                                <input matInput formControlName="size">
+                            </mat-form-field>
+                        </div>
+                        <div class="sizeField">
+                            <mat-form-field appearance="outline">
+                                <mat-label>PRICE</mat-label>
+                                <input type="number" matInput formControlName="price" />
+                            </mat-form-field>
+                        </div>
+                        <button mat-mini-fab matTooltip="ADD/EDIT TOPPINGS" matTooltipPosition="above"
+                            (click)="addToppingPopUp(i)" [disabled]="!isSizeValid(i)">
+                            <mat-icon class="icon" aria-hidden="false" fontIcon="add"></mat-icon>
+                        </button>
+                        <button mat-mini-fab matTooltip="DELETE SIZE" matTooltipPosition="above"
+                            (click)="removeSizeField(i)">
+                            <mat-icon class="icon" aria-hidden="false" fontIcon="delete_outline"></mat-icon>
+                        </button>
+
+                    </div>
+                </div>
+                <br>
+                <span (click)="addSizeField()" style="cursor:pointer; color:blue;">+ ADD SIZES</span>
+            </div>
+
+            <div class="inputField checkbox">
+                <mat-checkbox formControlName="isAvailable">PUBLISH</mat-checkbox>
+            </div>
+
+
+        </form>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <div class="actionWrapper">
+        <button class="actionButtons mr-10" (click)="onClose()" cdkFocusInitial>CANCEL</button>
+        <button class="actionButtons" (click)="onSubmit()" [disabled]="!sizeForm.valid" cdkFocusInitial>{{ inputItem ?
+            'UPDATE' : 'ADD' }}
+        </button>
+    </div>
+</mat-dialog-actions>
