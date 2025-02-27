@@ -15,7 +15,7 @@ import { ENV } from '../../../env/env';
   styleUrl: './cart.component.scss',
 })
 export class CartComponent {
-  private restaurantId: number = 241124;
+  private restaurantId: number = 226021;
 
   private tableNumber: number = -1;
 
@@ -127,7 +127,7 @@ export class CartComponent {
   generateWhatsAppLink(orderType: OrderType): string {
     const formattedOrderDetails = this.formatOrderDetails(orderType);
 
-    if(this.restaurantId === 226021) {
+    if (this.restaurantId === 226021) {
       this.phoneNumber = '9119682004';
     }
 

@@ -17,7 +17,7 @@ import { CategoryTabComponent } from './category-tab/category-tab.component';
 export class DigitalMenuComponent implements OnInit {
   activeCategory: string | null = null;
 
-  private restaurantId: number = 241124;
+  private restaurantId: number = 226021;
 
   private tableNumber: number = -1;
 

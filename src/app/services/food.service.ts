@@ -22,7 +22,7 @@ export class FoodService {
   constructor(private dataStorageService: DataStorageService) {}
 
   public getAll(restaurant_id: number) {
-    if (!restaurant_id) restaurant_id = 241124;
+    if (!restaurant_id) restaurant_id = 226021;
     this.isFetching.set(true);
     this.dataStorageService
       .fetchItems()
