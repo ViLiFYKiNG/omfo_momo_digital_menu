@@ -126,6 +126,11 @@ export class CartComponent {
 
   generateWhatsAppLink(orderType: OrderType): string {
     const formattedOrderDetails = this.formatOrderDetails(orderType);
+
+    if(this.restaurantId === 226021) {
+      this.phoneNumber = '9119682004';
+    }
+
     return `https://api.whatsapp.com/send?phone=${this.phoneNumber}&text=${formattedOrderDetails}`;
   }
 
