@@ -74,7 +74,7 @@ export class CartComponent {
     });
   }
 
-  phoneNumber: string = '7518999096';
+  phoneNumber: string = '9119682004';
 
   shouldTakeDeliveryCharge(orderType: OrderType) {
     return orderType.deliveryType === 'DELIVERY' && this.getTotalAmount() < 300;
@@ -127,8 +127,8 @@ export class CartComponent {
   generateWhatsAppLink(orderType: OrderType): string {
     const formattedOrderDetails = this.formatOrderDetails(orderType);
 
-    if (this.restaurantId === 226021) {
-      this.phoneNumber = '9119682004';
+    if (this.restaurantId === 241124) {
+      this.phoneNumber = '7518999096';
     }
 
     return `https://api.whatsapp.com/send?phone=${this.phoneNumber}&text=${formattedOrderDetails}`;
