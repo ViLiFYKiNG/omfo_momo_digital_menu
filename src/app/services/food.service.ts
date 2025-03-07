@@ -27,8 +27,6 @@ export class FoodService {
   constructor(private dataStorageService: DataStorageService) {}
 
   public getAll(restaurant_id: number): Observable<OmfoItem[]> {
-    console.log('***');
-    console.log(restaurant_id);
     this.isFetching.set(true);
 
     return this.dataStorageService.fetchItems().pipe(
@@ -50,8 +48,6 @@ export class FoodService {
         }
       }),
       tap((items) => {
-        console.log('&&&');
-        console.log(items);
         this.items.set(items || []);
         this.isFetching.set(false);
       }),

@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/no-floating-promises */
@@ -55,10 +56,6 @@ export class DigitalMenuComponent implements OnInit {
       const items = this.foodService.items();
       this.totalRestaurantItems = items.length;
 
-      console.log('***');
-      console.log(items);
-      console.log(this.totalRestaurantItems);
-
       items.forEach((item) => {
         switch (item.category) {
           case 'PIZZA':
@@ -115,14 +112,8 @@ export class DigitalMenuComponent implements OnInit {
 
         dialogRef.afterClosed().subscribe((RESTAURANT_NAME: string) => {
           if (RESTAURANT_NAME) {
-            console.log('MACHU...');
-            console.log(RESTAURANT_NAME);
-
             this.restaurantId =
               this.getRestaurantIdByName(RESTAURANT_NAME) || 0;
-
-            console.log('000');
-            console.log(this.restaurantId);
 
             if (this.restaurantId) {
               this.router
@@ -139,8 +130,6 @@ export class DigitalMenuComponent implements OnInit {
           }
         });
       } else {
-        console.log('222');
-        console.log(this.restaurantId);
         const items = this.foodService.items();
         if ((this.restaurantId && items.length === 0) || items.length === 0) {
           this.foodService.getAll(this.restaurantId).subscribe((_response) => {

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import {
   MatDialogActions,
@@ -29,11 +29,8 @@ import { FoodService } from '../../services/food.service';
   templateUrl: './outlet-selection-popup.component.html',
   styleUrl: './outlet-selection-popup.component.scss',
 })
-export class OutletSelectionPopupComponent implements OnInit {
+export class OutletSelectionPopupComponent {
   constructor(private foodService: FoodService) {}
-  ngOnInit(): void {
-    console.log('HOLA KING AB');
-  }
 
   readonly dialogRef = inject(MatDialogRef<OutletSelectionPopupComponent>);
 
