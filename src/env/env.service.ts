@@ -12,10 +12,6 @@ export enum Environment {
 const { hostname } = window.location;
 
 function getEnvironment(): Environment {
-  let env = Environment.PROD;
-
-  if (['localhost', '127.0.0.1'].includes(hostname)) env = Environment.LOCAL;
-
   const domainParts = hostname.split('.');
   const prefix = domainParts[0];
 
@@ -29,7 +25,7 @@ function getEnvironment(): Environment {
   }
 }
 
-function getEnvSettings(env: string): ENV_MODEL {
+function getEnvSettings(env: Environment): ENV_MODEL {
   switch (env) {
     case Environment.LOCAL:
       return ENV_LOCAL;

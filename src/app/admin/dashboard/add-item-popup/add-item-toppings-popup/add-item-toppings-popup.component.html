@@ -1,41 +1,59 @@
 <mat-dialog-content>
-    <h1 style="line-height: 30px; min-width: 285px;">ADD TOPPINGS</h1>
+  <h1 style="line-height: 30px; min-width: 285px">ADD TOPPINGS</h1>
 
-    <br>
+  <br />
 
-    <div>
-        <form [formGroup]="toppingsForm" class="form" action="">
-            <div formArrayName="toppings" class="toppingsWrapper">
-                <div *ngFor="let toppingField of toppings.controls; let i = index">
-                    <div [formGroupName]="i" class="toppings">
-                        <div class="toppingField">
-                            <mat-form-field appearance="outline">
-                                <mat-label>NAME</mat-label>
-                                <input matInput formControlName="name">
-                            </mat-form-field>
-                        </div>
-                        <div class="toppingField">
-                            <mat-form-field appearance="outline">
-                                <mat-label>PRICE</mat-label>
-                                <input type="number" matInput formControlName="price" />
-                            </mat-form-field>
-                        </div>
-                        <button mat-mini-fab matTooltip="DELETE TOPPING" matTooltipPosition="above"
-                            (click)="removeToppingField(i)">
-                            <mat-icon class="icon" aria-hidden="false" fontIcon="delete_outline"></mat-icon>
-                        </button>
-                    </div>
-                </div>
-                <br>
-                <span (click)="addToppingField()" style="cursor:pointer; color:blue;">+ ADD TOPPING</span>
+  <div>
+    <form [formGroup]="toppingsForm" class="form" action="">
+      <div formArrayName="toppings" class="toppingsWrapper">
+        <div *ngFor="let toppingField of toppings.controls; let i = index">
+          <div [formGroupName]="i" class="toppings">
+            <div class="toppingField">
+              <mat-form-field appearance="outline">
+                <mat-label>NAME</mat-label>
+                <input matInput formControlName="name" />
+              </mat-form-field>
             </div>
-        </form>
-    </div>
+            <div class="toppingField">
+              <mat-form-field appearance="outline">
+                <mat-label>PRICE</mat-label>
+                <input type="number" matInput formControlName="price" />
+              </mat-form-field>
+            </div>
+            <button
+              mat-mini-fab
+              matTooltip="DELETE TOPPING"
+              matTooltipPosition="above"
+              (click)="removeToppingField(i)"
+            >
+              <mat-icon
+                class="icon"
+                aria-hidden="false"
+                fontIcon="delete_outline"
+              ></mat-icon>
+            </button>
+          </div>
+        </div>
+        <br />
+        <span (click)="addToppingField()" style="cursor: pointer; color: blue"
+          >+ ADD TOPPING</span
+        >
+      </div>
+    </form>
+  </div>
 </mat-dialog-content>
 <mat-dialog-actions>
-    <div class="actionWrapper">
-        <button class="actionButtons mr-10" (click)="onClose()" cdkFocusInitial>CANCEL</button>
-        <button class="actionButtons" (click)="onSubmit()" [disabled]="!toppingsForm.valid" cdkFocusInitial>ADD
-            TOPPING</button>
-    </div>
+  <div class="actionWrapper">
+    <button class="actionButtons mr-10" (click)="onClose()" cdkFocusInitial>
+      CANCEL
+    </button>
+    <button
+      class="actionButtons"
+      (click)="onSubmit()"
+      [disabled]="!toppingsForm.valid"
+      cdkFocusInitial
+    >
+      ADD TOPPING
+    </button>
+  </div>
 </mat-dialog-actions>

@@ -1,36 +1,60 @@
 <div class="login-container">
+  <mat-card class="login-card">
+    <mat-card-title class="login-title"
+      ><img style="width: 100px" src="/assets/images/logo.png" alt="HELLO"
+    /></mat-card-title>
+    <div class="login-error" *ngIf="error">
+      <span>{{ error }}</span>
+    </div>
+    <div *ngIf="isLoading" class="login-spinner">
+      <app-loading-spinner></app-loading-spinner>
+    </div>
+    <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)" *ngIf="!isLoading">
+      <div class="inputField">
+        <mat-form-field appearance="outline">
+          <mat-label>EMAIL</mat-label>
+          <input
+            type="email"
+            ngModel
+            name="email"
+            required
+            email
+            #email="ngModel"
+            matInput
+          />
+        </mat-form-field>
+      </div>
+      <div class="fieldError" *ngIf="email.invalid && email.touched">
+        Enter a valid email.
+      </div>
 
-    <mat-card class="login-card">
-        <mat-card-title class="login-title"><img style="width: 100px;" src="/assets/images/logo.png" alt="HELLO"/></mat-card-title>
-        <div class="login-error" *ngIf="error">
-            <span>{{ error }}</span>
-        </div>
-        <div *ngIf="isLoading" class="login-spinner">
-            <app-loading-spinner></app-loading-spinner>
-        </div>
-        <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)" *ngIf="!isLoading">
-            <div class="inputField">
-                <mat-form-field appearance="outline">
-                    <mat-label>EMAIL</mat-label>
-                    <input type="email" ngModel name="email" required email #email="ngModel" matInput>
-                </mat-form-field>
-            </div>
-            <div class="fieldError" *ngIf="email.invalid && email.touched">
-                Enter a valid email.
-            </div>
+      <div class="inputField">
+        <mat-form-field appearance="outline">
+          <mat-label>PASSWORD</mat-label>
+          <input
+            matInput
+            type="password"
+            ngModel
+            name="password"
+            required
+            minlength="6"
+            #password="ngModel"
+          />
+        </mat-form-field>
+      </div>
+      <div class="fieldError" *ngIf="password.invalid && password.touched">
+        Enter a valid password with at least 6 characters.
+      </div>
 
-            <div class="inputField">
-                <mat-form-field appearance="outline">
-                    <mat-label>PASSWORD</mat-label>
-                    <input matInput type="password" ngModel name="password" required minlength="6" #password="ngModel">
-                </mat-form-field>
-            </div>
-            <div class="fieldError" *ngIf="password.invalid && password.touched">
-                Enter a valid password with at least 6 characters.
-            </div>
-
-            <button class="login-button" type="submit" [disabled]="!authForm.valid" mat-raised-button
-                color="primary">Login</button>
-        </form>
-    </mat-card>
+      <button
+        class="login-button"
+        type="submit"
+        [disabled]="!authForm.valid"
+        mat-raised-button
+        color="primary"
+      >
+        Login
+      </button>
+    </form>
+  </mat-card>
 </div>

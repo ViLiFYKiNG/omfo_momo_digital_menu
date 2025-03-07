@@ -54,7 +54,7 @@ export class FoodService {
         this.error.set(error.message);
         this.isFetching.set(false);
         return of([]);
-      })
+      }),
     );
   }
 
@@ -64,7 +64,7 @@ export class FoodService {
 
   private areToppingsEqual(
     toppingArray_1: string[],
-    toppingArray_2: string[]
+    toppingArray_2: string[],
   ): boolean {
     if (toppingArray_1.length !== toppingArray_2.length) return false;
 
@@ -85,7 +85,7 @@ export class FoodService {
       (cartItem) =>
         cartItem.name === item.name &&
         cartItem.size === item.size &&
-        this.areToppingsEqual(cartItem.toppings, item.toppings)
+        this.areToppingsEqual(cartItem.toppings, item.toppings),
     );
     if (index > -1) {
       item.quantity = item.quantity + this.newCartItems[index].quantity;
@@ -102,7 +102,7 @@ export class FoodService {
       (cartItem) =>
         cartItem.name === item.name &&
         cartItem.size === item.size &&
-        this.areToppingsEqual(cartItem.toppings, item.toppings)
+        this.areToppingsEqual(cartItem.toppings, item.toppings),
     );
 
     if (index > -1) {
@@ -115,7 +115,7 @@ export class FoodService {
       (cartItem) =>
         cartItem.name === item.name &&
         cartItem.size === item.size &&
-        this.areToppingsEqual(cartItem.toppings, item.toppings)
+        this.areToppingsEqual(cartItem.toppings, item.toppings),
     );
 
     if (index > -1) {

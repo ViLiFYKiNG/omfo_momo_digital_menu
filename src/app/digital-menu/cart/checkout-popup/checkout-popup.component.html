@@ -1,50 +1,91 @@
 <mat-dialog-content>
-    <h1 style="line-height: 30px; min-width: 285px;">DELIVERY TYPE</h1>
+  <h1 style="line-height: 30px; min-width: 285px">DELIVERY TYPE</h1>
 
-    <br>
+  <br />
 
-    <div>
-        <div class="popContentButtons">
-            <div class="popUpButton" mat-raised-button (click)="onToggleDeliveryType('DINE_OUT')"
-                [style]="{color: deliveryType === 'DINE_OUT' ? 'white' : 'black', backgroundColor: deliveryType === 'DINE_OUT' ? 'black' : '#f0efef' }">
-                <div class="popUpButtonItems">DINE_OUT</div>
-            </div>
-            <div class="popUpButton" mat-raised-button (click)="onToggleDeliveryType('PICKUP')"
-                [style]="{color: deliveryType === 'PICKUP' ? 'white' : 'black', backgroundColor: deliveryType === 'PICKUP' ? 'black' : '#f0efef' }">
-                <div class="popUpButtonItems">PICKUP</div>
-            </div>
-            <div class="popUpButton" mat-raised-button (click)="onToggleDeliveryType('DELIVERY')"
-                [style]="{color: deliveryType === 'DELIVERY' ? 'white' : 'black', backgroundColor: deliveryType === 'DELIVERY' ? 'black' : '#f0efef' }">
-                <div class="popUpButtonItems">DELIVERY</div>
-                <div class="popUpButtonItems" *ngIf="(orderAmount < 300 && deliveryType === 'DELIVERY')">₹20</div>
-            </div>
-            <div class="deliveryChargeInfo" *ngIf="(orderAmount < 300 && deliveryType === 'DELIVERY')">
-                Add ₹{{ getRemainingAmount() }} more to save delivery charge.
-            </div>
-            <div class="inputField">
-                <mat-form-field appearance="outline">
-                    <mat-label>NAME</mat-label>
-                    <input matInput [(ngModel)]="name" (ngModelChange)="onNameChange()">
-                </mat-form-field>
-            </div>
-            <div class="fieldError" *ngIf="isNameError">
-                Please enter your name.
-            </div>
-            <div class="inputField" *ngIf="deliveryType === 'DELIVERY'">
-                <mat-form-field appearance="outline">
-                    <mat-label>ADDRESS</mat-label>
-                    <textarea matInput [(ngModel)]="message" (ngModelChange)="onADDChange()"></textarea>
-                </mat-form-field>
-            </div>
-            <div class="fieldError" *ngIf="isError">
-                Please enter your complete address.
-            </div>
+  <div>
+    <div class="popContentButtons">
+      <div
+        class="popUpButton"
+        mat-raised-button
+        (click)="onToggleDeliveryType('DINE_OUT')"
+        [style]="{
+          color: deliveryType === 'DINE_OUT' ? 'white' : 'black',
+          backgroundColor: deliveryType === 'DINE_OUT' ? 'black' : '#f0efef',
+        }"
+      >
+        <div class="popUpButtonItems">DINE_OUT</div>
+      </div>
+      <div
+        class="popUpButton"
+        mat-raised-button
+        (click)="onToggleDeliveryType('PICKUP')"
+        [style]="{
+          color: deliveryType === 'PICKUP' ? 'white' : 'black',
+          backgroundColor: deliveryType === 'PICKUP' ? 'black' : '#f0efef',
+        }"
+      >
+        <div class="popUpButtonItems">PICKUP</div>
+      </div>
+      <div
+        class="popUpButton"
+        mat-raised-button
+        (click)="onToggleDeliveryType('DELIVERY')"
+        [style]="{
+          color: deliveryType === 'DELIVERY' ? 'white' : 'black',
+          backgroundColor: deliveryType === 'DELIVERY' ? 'black' : '#f0efef',
+        }"
+      >
+        <div class="popUpButtonItems">DELIVERY</div>
+        <div
+          class="popUpButtonItems"
+          *ngIf="orderAmount < 300 && deliveryType === 'DELIVERY'"
+        >
+          ₹20
         </div>
+      </div>
+      <div
+        class="deliveryChargeInfo"
+        *ngIf="orderAmount < 300 && deliveryType === 'DELIVERY'"
+      >
+        Add ₹{{ getRemainingAmount() }} more to save delivery charge.
+      </div>
+      <div class="inputField">
+        <mat-form-field appearance="outline">
+          <mat-label>NAME</mat-label>
+          <input matInput [(ngModel)]="name" (ngModelChange)="onNameChange()" />
+        </mat-form-field>
+      </div>
+      <div class="fieldError" *ngIf="isNameError">Please enter your name.</div>
+      <div class="inputField" *ngIf="deliveryType === 'DELIVERY'">
+        <mat-form-field appearance="outline">
+          <mat-label>ADDRESS</mat-label>
+          <textarea
+            matInput
+            [(ngModel)]="message"
+            (ngModelChange)="onADDChange()"
+          ></textarea>
+        </mat-form-field>
+      </div>
+      <div class="fieldError" *ngIf="isError">
+        Please enter your complete address.
+      </div>
     </div>
+  </div>
 </mat-dialog-content>
 <mat-dialog-actions>
-    <div class="actionWrapper">
-        <button class="actionButtons" style="color: black;" (click)="onNoClick()">CLOSE</button>
-        <button class="actionButtons" style="color: black;" (click)="onSubmit()" [disabled]="isNameError" cdkFocusInitial>CONFIRM</button>
-    </div>
+  <div class="actionWrapper">
+    <button class="actionButtons" style="color: black" (click)="onNoClick()">
+      CLOSE
+    </button>
+    <button
+      class="actionButtons"
+      style="color: black"
+      (click)="onSubmit()"
+      [disabled]="isNameError"
+      cdkFocusInitial
+    >
+      CONFIRM
+    </button>
+  </div>
 </mat-dialog-actions>

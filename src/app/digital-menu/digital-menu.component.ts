@@ -46,7 +46,7 @@ export class DigitalMenuComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private foodService: FoodService
+    private foodService: FoodService,
   ) {
     effect(() => {
       const items = this.foodService.items();
@@ -81,7 +81,7 @@ export class DigitalMenuComponent implements OnInit {
             break;
           default:
             console.warn(
-              `Unknown category: ${item.category} for item ${item.name}`
+              `Unknown category: ${item.category} for item ${item.name}`,
             );
         }
       });

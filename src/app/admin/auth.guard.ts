@@ -11,11 +11,14 @@ import { map, Observable, take } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+  ) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
+    state: RouterStateSnapshot,
   ): boolean | Promise<boolean> | Observable<boolean | UrlTree> {
     return this.authService.user.pipe(
       take(1),
@@ -24,7 +27,7 @@ export class AuthGuard implements CanActivate {
         if (isAuth) return true;
 
         return this.router.createUrlTree(['/auth']);
-      })
+      }),
     );
   }
 }

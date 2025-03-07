@@ -108,7 +108,7 @@ export class AddItemPopupComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private dataStorageService: DataStorageService
+    private dataStorageService: DataStorageService,
   ) {}
 
   getToppings(index: number): FormArray {
@@ -128,7 +128,7 @@ export class AddItemPopupComponent implements OnInit {
         this.fb.group({
           name: [topping.name],
           price: [topping.price],
-        })
+        }),
       );
     });
 
@@ -182,7 +182,7 @@ export class AddItemPopupComponent implements OnInit {
       await this.dataStorageService
         .updateItem(
           this.inputItem.itemId?.toString() ?? '',
-          this.sizeForm.value
+          this.sizeForm.value,
         )
         .subscribe(() => {
           this.dialogRef.close('ADD');

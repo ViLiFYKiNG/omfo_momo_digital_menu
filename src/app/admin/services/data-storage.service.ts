@@ -10,7 +10,10 @@ import { ENV } from '../../../env/env';
 export class DataStorageService {
   private BASE_URL = ENV.DS_URL;
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+  ) {}
 
   public storeItem(item: OmfoItem) {
     return this.http.post(`${this.BASE_URL}.json`, JSON.stringify(item));

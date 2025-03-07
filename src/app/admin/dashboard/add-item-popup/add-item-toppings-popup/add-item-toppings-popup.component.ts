@@ -50,7 +50,7 @@ export class AddItemToppingsPopupComponent {
           this.fb.group({
             name: [topping.name, Validators.required],
             price: [topping.price, Validators.required],
-          })
+          }),
         );
       });
     } else {

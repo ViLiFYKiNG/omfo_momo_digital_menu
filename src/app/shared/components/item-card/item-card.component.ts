@@ -1,5 +1,5 @@
 import { Component, input, output } from '@angular/core';
-import { OmfoItem} from '../../modals';
+import { OmfoItem } from '../../modals';
 
 @Component({
   selector: 'app-item-card',

@@ -1,20 +1,36 @@
 <div>
-    <div class="category-tab">
-        <div class="category-name">{{ category().toUpperCase() }}</div>
-        <div class="category-icon" *ngIf="!ShowOrHide">
-            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#ff4c4c">
-                <path d="m280-400 200-200 200 200H280Z" />
-            </svg>
-        </div>
-        <div class="category-icon" *ngIf="ShowOrHide">
-            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#ff4c4c">
-                <path d="M480-360 280-560h400L480-360Z" />
-            </svg>
-        </div>
+  <div class="category-tab">
+    <div class="category-name">{{ category().toUpperCase() }}</div>
+    <div class="category-icon" *ngIf="!ShowOrHide">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        height="24px"
+        viewBox="0 -960 960 960"
+        width="24px"
+        fill="#ff4c4c"
+      >
+        <path d="m280-400 200-200 200 200H280Z" />
+      </svg>
     </div>
-    <div class="product-list" *ngIf="ShowOrHide">
-        @for (item of items(); track item.itemId) {
-        <app-item-card class="product" [item]="item" (selectedItem)="onItemSelect($event)"></app-item-card>
-        }
+    <div class="category-icon" *ngIf="ShowOrHide">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        height="24px"
+        viewBox="0 -960 960 960"
+        width="24px"
+        fill="#ff4c4c"
+      >
+        <path d="M480-360 280-560h400L480-360Z" />
+      </svg>
     </div>
+  </div>
+  <div class="product-list" *ngIf="ShowOrHide">
+    @for (item of items(); track item.itemId) {
+      <app-item-card
+        class="product"
+        [item]="item"
+        (selectedItem)="onItemSelect($event)"
+      ></app-item-card>
+    }
+  </div>
 </div>

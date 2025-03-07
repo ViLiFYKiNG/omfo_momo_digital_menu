@@ -1,49 +1,73 @@
 <mat-dialog-content>
-    <h1 style="line-height: 30px; min-width: 285px;">{{ selectedItem.name }}</h1>
+  <h1 style="line-height: 30px; min-width: 285px">{{ selectedItem.name }}</h1>
 
-    <br>
+  <br />
+
+  <div>
+    <h2>Choose size</h2>
+    <div class="popContentButtons">
+      @for (itemSize of itemSizes; track itemSize.size) {
+        <div
+          class="popUpButton"
+          (click)="onToggleSize(itemSize)"
+          [style]="{
+            color: size === itemSize.size ? 'white' : 'black',
+            backgroundColor: size === itemSize.size ? 'black' : '#f0efef',
+          }"
+        >
+          <div class="popUpButtonItems">
+            {{ itemSize.size.toUpperCase() }}
+          </div>
+          <div class="popUpButtonItems">₹{{ itemSize.price }}</div>
+        </div>
+      }
+    </div>
+  </div>
+
+  @if (selectedItem.category === 'PIZZA' && selectedItemSize?.toppings) {
+    <br />
 
     <div>
-        <h2>Choose size</h2>
-        <div class="popContentButtons">
-            @for (itemSize of itemSizes; track itemSize.size) {
-            <div class="popUpButton" (click)="onToggleSize(itemSize)"
-                [style]="{color: size === itemSize.size  ? 'white' : 'black', backgroundColor: size === itemSize.size  ? 'black' : '#f0efef' }">
-                <div class="popUpButtonItems"> {{ itemSize.size.toUpperCase() }}</div>
-                <div class="popUpButtonItems">₹{{ itemSize.price }}</div>
-            </div>
-            }
-        </div>
+      <h2>TOPPLINGS</h2>
+      <div class="popContentButtons">
+        @for (topping of selectedItemSize?.toppings; track topping.name) {
+          <div
+            class="popUpButton"
+            (click)="onToggleTopping(topping)"
+            [ngStyle]="{
+              color: selectedToppings.includes(topping.name)
+                ? 'white'
+                : 'black',
+              backgroundColor: selectedToppings.includes(topping.name)
+                ? 'black'
+                : '#f0efef',
+            }"
+          >
+            <div class="popUpButtonItems">{{ topping.name }}</div>
+            <div class="popUpButtonItems">+₹{{ topping.price }}</div>
+          </div>
+        }
+      </div>
     </div>
-
-    @if (selectedItem.category === 'PIZZA' && selectedItemSize?.toppings) {
-    <br>
-
-    <div>
-        <h2>TOPPLINGS</h2>
-        <div class="popContentButtons">
-            @for (topping of selectedItemSize?.toppings; track topping.name) {
-            <div class="popUpButton" (click)="onToggleTopping(topping)" [ngStyle]="{
-                color: selectedToppings.includes(topping.name) ? 'white' : 'black',
-                backgroundColor: selectedToppings.includes(topping.name) ? 'black' : '#f0efef'
-                }">
-                <div class="popUpButtonItems"> {{topping.name}} </div>
-                <div class="popUpButtonItems">+₹{{ topping.price }}</div>
-            </div>
-            }
-        </div>
-    </div>
-    }
+  }
 </mat-dialog-content>
 <mat-dialog-actions>
-    <div class="actionWrapper">
-        <div class="quantity-controls">
-            <button (click)="decreaseQuantity()">-</button>
-            <span style="color: white;">{{ getCartItemQuantity() }}</span>
-            <button (click)="increaseQuantity()">+</button>
-        </div>
-        <button class="actionButtons" style="color: black;" (click)="onClose()">CLOSE</button>
-        <button class="actionButtons" style="color: black;" [mat-dialog-close]="cartItem" cdkFocusInitial>ADD - ₹{{
-            getTotalPrice() }}</button>
+  <div class="actionWrapper">
+    <div class="quantity-controls">
+      <button (click)="decreaseQuantity()">-</button>
+      <span style="color: white">{{ getCartItemQuantity() }}</span>
+      <button (click)="increaseQuantity()">+</button>
     </div>
+    <button class="actionButtons" style="color: black" (click)="onClose()">
+      CLOSE
+    </button>
+    <button
+      class="actionButtons"
+      style="color: black"
+      [mat-dialog-close]="cartItem"
+      cdkFocusInitial
+    >
+      ADD - ₹{{ getTotalPrice() }}
+    </button>
+  </div>
 </mat-dialog-actions>

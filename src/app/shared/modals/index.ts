@@ -44,7 +44,14 @@ export interface OmfoItem {
   restaurantId?: number | string;
   name: string;
   description: string;
-  category: 'PIZZA' | 'MOMO' | 'CHINESE' | 'BURGER' | 'SHAKE' | 'CHAAP' | 'OTHER';
+  category:
+    | 'PIZZA'
+    | 'MOMO'
+    | 'CHINESE'
+    | 'BURGER'
+    | 'SHAKE'
+    | 'CHAAP'
+    | 'OTHER';
   isAvailable: boolean;
   imageURL: string;
   sizes: OmfoItemSize[];

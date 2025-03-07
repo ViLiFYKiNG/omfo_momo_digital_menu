@@ -59,7 +59,7 @@ export class DashboardComponent implements OnInit {
               ...response[itemId],
             }))
           );
-        })
+        }),
       )
       .subscribe({
         next: (response: OmfoItem[] | null) => {

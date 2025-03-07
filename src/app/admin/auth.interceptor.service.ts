@@ -15,7 +15,7 @@ export class AuthInterceptorService implements HttpInterceptor {
 
   intercept(
     req: HttpRequest<any>,
-    next: HttpHandler
+    next: HttpHandler,
   ): Observable<HttpEvent<any>> {
     return this.authService.user.pipe(
       take(1),
@@ -28,7 +28,7 @@ export class AuthInterceptorService implements HttpInterceptor {
         });
         return modifiedRequest;
       }),
-      exhaustMap((modifiedRequest) => next.handle(modifiedRequest))
+      exhaustMap((modifiedRequest) => next.handle(modifiedRequest)),
     );
   }
 }

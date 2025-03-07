@@ -22,7 +22,7 @@ export class CartComponent {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private foodService: FoodService
+    private foodService: FoodService,
   ) {}
 
   newCartItems: NewCartItem[] = [];
@@ -49,14 +49,14 @@ export class CartComponent {
   getTotalAmount() {
     return this.newCartItems.reduce(
       (total, item) => total + item.perItemPrice * item.quantity,
-      0
+      0,
     );
   }
 
   getTotalItems() {
-    let totalItems = this.newCartItems.reduce(
+    const totalItems = this.newCartItems.reduce(
       (total, item) => total + item.quantity,
-      0
+      0,
     );
     return totalItems;
   }
@@ -97,11 +97,11 @@ export class CartComponent {
     return `ORDER ID - ${new Date().getTime()}${encodeURI('\n')}NAME - ${
       orderType.name
     }${encodeURI('\n')}**************************${encodeURI(
-      '\n'
+      '\n',
     )}ITEMS DETAILS - ${encodeURI('\n')}${orderItems}${encodeURI(
-      '\n'
+      '\n',
     )}**************************${encodeURI(
-      '\n'
+      '\n',
     )}TOTAL ITEMS - ${this.getTotalItems()}${encodeURI('\n')}${
       this.shouldTakeDeliveryCharge(orderType)
         ? 'ITEMS TOTAL - ' + this.getTotalAmount() + encodeURI('\n')
@@ -118,7 +118,7 @@ export class CartComponent {
     }${encodeURI('\n')}${
       orderType.deliveryType === 'DELIVERY' ? 'ADD - ' + orderType.message : ''
     }${encodeURI('\n')}**************************${encodeURI(
-      '\n'
+      '\n',
     )}RESTAURANT_ID - ${this.restaurantId}${encodeURI('\n')}TABLE_NUMBER - ${
       this.tableNumber
     }`;

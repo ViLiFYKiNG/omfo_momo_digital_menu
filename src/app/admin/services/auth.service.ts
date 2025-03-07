@@ -24,7 +24,10 @@ export class AuthService {
 
   private tokenExpirationTimer: ReturnType<typeof setTimeout> | null = null;
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+  ) {}
 
   public login(email: string, password: string): Observable<AuthResponseData> {
     return this.http
@@ -40,9 +43,9 @@ export class AuthService {
             resData.email,
             resData.localId,
             resData.idToken,
-            +resData.expiresIn
+            +resData.expiresIn,
           );
-        })
+        }),
       );
   }
 
@@ -50,7 +53,7 @@ export class AuthService {
     email: string,
     userId: string,
     token: string,
-    expiresIn: number
+    expiresIn: number,
   ) {
     const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
     const user = new User(email, userId, token, expirationDate);
@@ -93,7 +96,7 @@ export class AuthService {
       userData.email,
       userData.id,
       userData._token,
-      new Date(userData._tokenExpirationDate)
+      new Date(userData._tokenExpirationDate),
     );
 
     if (loadedUser.token) {
