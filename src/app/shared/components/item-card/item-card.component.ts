@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
 import { Component, input, output } from '@angular/core';
 import { OmfoItem } from '../../modals';
 

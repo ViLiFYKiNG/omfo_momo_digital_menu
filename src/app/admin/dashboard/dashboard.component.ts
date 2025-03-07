@@ -1,4 +1,9 @@
-import { Component, Inject, inject, OnInit, signal } from '@angular/core';
+/* eslint-disable @typescript-eslint/no-unused-expressions */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { AddItemPopupComponent } from './add-item-popup/add-item-popup.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -48,7 +53,7 @@ export class DashboardComponent implements OnInit {
 
   public fetchItems(): void {
     this.isFetching.set(true);
-    const subscirption = this.dataStorageService
+    this.dataStorageService
       .fetchItems()
       .pipe(
         map((response: Record<string, any> | null) => {

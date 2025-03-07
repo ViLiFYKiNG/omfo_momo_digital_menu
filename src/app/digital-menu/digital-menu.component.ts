@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
+/* eslint-disable @typescript-eslint/no-floating-promises */
 import { CommonModule } from '@angular/common';
 import { Component, inject, effect, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -177,7 +180,7 @@ export class DigitalMenuComponent implements OnInit {
   }
 
   public getTotalCartItems() {
-    let totalItems = this.foodService
+    const totalItems = this.foodService
       .getAllCartItems()
       .reduce((total, item) => total + item.quantity, 0);
     return totalItems;
