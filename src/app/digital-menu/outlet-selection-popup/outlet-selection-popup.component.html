@@ -1,0 +1,23 @@
+<mat-dialog-content>
+    <h1 style="line-height: 30px; min-width: 285px;">SELECT OUTLET</h1>
+
+    <br>
+
+    <div>
+        <div class="popContentButtons">
+            <div class="popUpButton" mat-raised-button (click)="onToggleOUTLET('LUCKNOW')"
+                [style]="{color: outlet === 'LUCKNOW' ? 'white' : 'black', backgroundColor: outlet === 'LUCKNOW' ? 'black' : '#f0efef' }">
+                <div class="popUpButtonItems">LUCKNOW</div>
+            </div>
+            <div class="popUpButton" mat-raised-button (click)="onToggleOUTLET('SHAHABAD')"
+                [style]="{color: outlet === 'SHAHABAD' ? 'white' : 'black', backgroundColor: outlet === 'SHAHABAD' ? 'black' : '#f0efef' }">
+                <div class="popUpButtonItems">SHAHABAD</div>
+            </div>
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <div class="actionWrapper">
+        <button class="actionButtons" style="color: black;" (click)="onSubmit()" cdkFocusInitial>CONFIRM</button>
+    </div>
+</mat-dialog-actions>

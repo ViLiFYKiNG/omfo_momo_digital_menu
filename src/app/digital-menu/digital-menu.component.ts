@@ -6,6 +6,12 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatDialog } from '@angular/material/dialog';
 import { StoreItems } from '../shared/modals';
 import { CategoryTabComponent } from './category-tab/category-tab.component';
+import { OutletSelectionPopupComponent } from './outlet-selection-popup/outlet-selection-popup.component';
+
+export enum RestaurantEnum {
+  LUCKNOW = 226021,
+  SHAHABAD = 241124,
+}
 
 @Component({
   selector: 'app-digital-menu',
@@ -17,9 +23,13 @@ import { CategoryTabComponent } from './category-tab/category-tab.component';
 export class DigitalMenuComponent implements OnInit {
   activeCategory: string | null = null;
 
-  private restaurantId: number = 226021;
+  private restaurantId: number = 0;
 
   private tableNumber: number = -1;
+
+  public totalRestaurantItems: number = 0;
+
+  public isItemLoaded: boolean = false;
 
   categorizedItems: StoreItems = {
     pizzaItems: [],
@@ -40,6 +50,12 @@ export class DigitalMenuComponent implements OnInit {
   ) {
     effect(() => {
       const items = this.foodService.items();
+      this.totalRestaurantItems = items.length;
+
+      console.log('***');
+      console.log(items);
+      console.log(this.totalRestaurantItems);
+
       items.forEach((item) => {
         switch (item.category) {
           case 'PIZZA':
@@ -72,6 +88,10 @@ export class DigitalMenuComponent implements OnInit {
     });
   }
 
+  getRestaurantIdByName(name: string): number {
+    return RestaurantEnum[name.toUpperCase() as keyof typeof RestaurantEnum];
+  }
+
   public ngOnInit(): void {
     this.activeCategory = this.foodService.activeCategory;
 
@@ -87,9 +107,43 @@ export class DigitalMenuComponent implements OnInit {
         ? Number(params.get('table_number'))
         : -1;
 
-      const items = this.foodService.items();
-      if ((this.restaurantId && items.length === 0) || items.length === 0) {
-        this.foodService.getAll(this.restaurantId);
+      if (this.restaurantId === 0) {
+        const dialogRef = this.dialog.open(OutletSelectionPopupComponent);
+
+        dialogRef.afterClosed().subscribe((RESTAURANT_NAME: string) => {
+          if (RESTAURANT_NAME) {
+            console.log('MACHU...');
+            console.log(RESTAURANT_NAME);
+
+            this.restaurantId =
+              this.getRestaurantIdByName(RESTAURANT_NAME) || 0;
+
+            console.log('000');
+            console.log(this.restaurantId);
+
+            if (this.restaurantId) {
+              this.router
+                .navigate(['/digital-menu'], {
+                  queryParams: {
+                    restaurant_id: this.restaurantId,
+                    table_number: this.tableNumber,
+                  },
+                })
+                .then(() => {
+                  window.location.reload();
+                });
+            }
+          }
+        });
+      } else {
+        console.log('222');
+        console.log(this.restaurantId);
+        const items = this.foodService.items();
+        if ((this.restaurantId && items.length === 0) || items.length === 0) {
+          this.foodService.getAll(this.restaurantId).subscribe((_response) => {
+            this.isItemLoaded = true;
+          });
+        }
       }
     });
   }

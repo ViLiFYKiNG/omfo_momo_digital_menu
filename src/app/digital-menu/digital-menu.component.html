@@ -9,6 +9,19 @@
 
   <!-- Category Tabs -->
   <div>
+
+
+    <!-- IN CASE OF ZERO ITEM -->
+    <div *ngIf="totalRestaurantItems === 0 && isItemLoaded">
+      <div class="no-item">
+        <h2>SO SORRY..! </h2>
+        <h2>NO ITEM AVAILABLE.!</h2>
+      </div>
+
+    </div>
+
+
+
     <!-- MOMOS -->
     <app-category-tab *ngIf="categorizedItems.momosItems.length" category="Momos" [activeCategory]="activeCategory"
       [items]="categorizedItems.momosItems" (click)="toggleCategory('Momos')"></app-category-tab>

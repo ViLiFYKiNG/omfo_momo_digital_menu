@@ -1,6 +1,6 @@
 import { Injectable, signal } from '@angular/core';
 import { NewCartItem, OmfoItem } from '../shared/modals';
-import { map, Subject } from 'rxjs';
+import { catchError, map, Observable, of, Subject, tap } from 'rxjs';
 import { DataStorageService } from '../admin/services/data-storage.service';
 
 @Injectable({
@@ -21,43 +21,41 @@ export class FoodService {
 
   constructor(private dataStorageService: DataStorageService) {}
 
-  public getAll(restaurant_id: number) {
-    if (!restaurant_id) restaurant_id = 226021;
+  public getAll(restaurant_id: number): Observable<OmfoItem[]> {
+    console.log('***');
+    console.log(restaurant_id);
     this.isFetching.set(true);
-    this.dataStorageService
-      .fetchItems()
-      .pipe(
-        map((response: Record<string, any> | null) => {
-          if (response) {
-            return Object.keys(response)
-              .map((itemId) => ({
-                itemId,
-                ...response[itemId],
-              }))
-              .filter((item) => {
-                return (
-                  item.restaurantId.toString() === restaurant_id.toString() &&
-                  item.isAvailable
-                );
-              });
-          } else {
-            return [];
-          }
-        })
-      )
-      .subscribe({
-        next: (response: OmfoItem[] | null) => {
-          if (response) this.items.set(response);
-          else this.items.set([]);
-        },
-        complete: () => {
-          this.isFetching.set(false);
-        },
-        error: (error) => {
-          this.error.set(error.message);
-          this.isFetching.set(false);
-        },
-      });
+
+    return this.dataStorageService.fetchItems().pipe(
+      map((response: Record<string, any> | null) => {
+        if (response) {
+          return Object.keys(response)
+            .map((itemId) => ({
+              itemId,
+              ...response[itemId],
+            }))
+            .filter((item) => {
+              return (
+                item.restaurantId.toString() === restaurant_id.toString() &&
+                item.isAvailable
+              );
+            });
+        } else {
+          return [];
+        }
+      }),
+      tap((items) => {
+        console.log('&&&');
+        console.log(items);
+        this.items.set(items || []);
+        this.isFetching.set(false);
+      }),
+      catchError((error) => {
+        this.error.set(error.message);
+        this.isFetching.set(false);
+        return of([]);
+      })
+    );
   }
 
   public getAllCartItems() {

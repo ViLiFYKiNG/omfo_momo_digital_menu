@@ -8,6 +8,19 @@
     margin-top: 25px;
     margin-bottom: 10px;
   }
+
+  .no-item {
+    text-align: center;
+
+    h2 {
+      font-size: 35px;
+    }
+
+    span {
+      font-size: 20px;
+      font-weight: 700;
+    }
+  }
 }
 
 .notify-button {
