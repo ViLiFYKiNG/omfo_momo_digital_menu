@@ -12,6 +12,7 @@
     "format:fix": "prettier . --write",
     "format:check": "prettier . --check",
     "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "prepare": "husky"
   },
   "private": true,
@@ -52,7 +53,7 @@
   "lint-staged": {
     "*.ts": [
       "nm run format:fix",
-      "npm run lint"
+      "npm run lint:fix"
     ]
   }
 }
