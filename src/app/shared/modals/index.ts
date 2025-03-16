@@ -1,4 +1,4 @@
-export type DeliveryType = 'PICKUP' | 'DELIVERY' | 'DINE_OUT';
+export type DeliveryType = 'PICKUP' | 'DELIVERY' | 'DINE_IN';
 
 export interface OrderType {
   deliveryType: DeliveryType;

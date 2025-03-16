@@ -33,7 +33,7 @@ export class CheckoutPopupComponent {
 
   readonly orderAmount = inject<number>(MAT_DIALOG_DATA);
 
-  deliveryType: DeliveryType = 'DINE_OUT';
+  deliveryType: DeliveryType = 'DINE_IN';
 
   message: string = '';
 
@@ -91,6 +91,6 @@ export class CheckoutPopupComponent {
   }
 
   getRemainingAmount() {
-    return 300 - (this.orderAmount ?? 0);
+    return 150 - (this.orderAmount ?? 0);
   }
 }

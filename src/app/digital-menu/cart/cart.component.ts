@@ -78,7 +78,7 @@ export class CartComponent {
   phoneNumber: string = '9119682004';
 
   shouldTakeDeliveryCharge(orderType: OrderType) {
-    return orderType.deliveryType === 'DELIVERY' && this.getTotalAmount() < 300;
+    return orderType.deliveryType === 'DELIVERY' && this.getTotalAmount() < 150;
   }
 
   formatOrderDetails(orderType: OrderType) {
@@ -109,11 +109,11 @@ export class CartComponent {
         : ''
     }${
       this.shouldTakeDeliveryCharge(orderType)
-        ? 'DELIVERY CHARGE - 20' + encodeURI('\n')
+        ? 'DELIVERY CHARGE - 30' + encodeURI('\n')
         : ''
     }TOTAL - ${
       this.getTotalAmount() +
-      (this.shouldTakeDeliveryCharge(orderType) ? 20 : 0)
+      (this.shouldTakeDeliveryCharge(orderType) ? 30 : 0)
     }${encodeURI('\n')}**************************${encodeURI('\n')}MODE - ${
       orderType.deliveryType
     }${encodeURI('\n')}${
@@ -129,7 +129,7 @@ export class CartComponent {
     const formattedOrderDetails = this.formatOrderDetails(orderType);
 
     if (this.restaurantId === 241124) {
-      this.phoneNumber = '7518999096';
+      this.phoneNumber = '9517242377';
     }
 
     return `https://api.whatsapp.com/send?phone=${this.phoneNumber}&text=${formattedOrderDetails}`;
