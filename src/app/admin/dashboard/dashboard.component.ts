@@ -57,6 +57,8 @@ export class DashboardComponent implements OnInit {
 
   public filteredItems = signal<OmfoItem[] | []>([]);
 
+  public filterValue: string = '';
+
   public isFetching = signal<boolean>(false);
 
   public error = signal<string | null>(null);
@@ -101,6 +103,7 @@ export class DashboardComponent implements OnInit {
           if (response) {
             this.items.set(response);
             this.filteredItems.set(response);
+            this.filterValue && this.applyFilter(this.filterValue);
             console.log(response);
           } else this.items.set([]);
         },
@@ -115,6 +118,7 @@ export class DashboardComponent implements OnInit {
   }
 
   public applyFilter(filterValue: string): void {
+    this.filterValue = filterValue;
     const filtered = this.items().filter(
       (item) =>
         item.restaurantId
@@ -180,6 +184,7 @@ export class DashboardComponent implements OnInit {
       }
     });
   }
+
   public deleteItem(item: OmfoItem): void {
     this.isFetching.set(true);
     item.itemId &&
