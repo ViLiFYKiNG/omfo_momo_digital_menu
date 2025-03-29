@@ -22,7 +22,7 @@
 
   .active-link {
     font-weight: bold;
-    border-bottom: 2px solid #ffeb3b; /* Yellow underline for active link */
+    border: 2px solid #ffeb3b;
   }
 }
 
@@ -56,8 +56,6 @@ table {
 
 th.mat-column-actions,
 td.mat-column-actions {
-  //   min-width: 150px;
-  //   max-width: 200px;
   width: 150px;
 }
 
@@ -79,4 +77,13 @@ td.mat-column-actions {
 .login-spinner {
   text-align: center;
   margin-top: 25px;
+}
+
+.inputField {
+  margin-top: 10px;
+  text-align: center;
+
+  mat-form-field {
+    width: 300px;
+  }
 }

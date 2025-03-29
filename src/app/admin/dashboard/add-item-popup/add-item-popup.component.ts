@@ -30,7 +30,7 @@ import { CATEGORYTYPES } from '../../../shared/constants';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import { AddItemToppingsPopupComponent } from './add-item-toppings-popup/add-item-toppings-popup.component';
-import { OmfoItem, Topping } from '../../../shared/modals';
+import { OmfoItem, RestaurantEnum, Topping } from '../../../shared/modals';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { DataStorageService } from '../../services/data-storage.service';
 
@@ -76,11 +76,17 @@ export class AddItemPopupComponent implements OnInit {
     }
   }
 
+  public getRestaurantIdByName(name: string): number {
+    return RestaurantEnum[name.toUpperCase() as keyof typeof RestaurantEnum];
+  }
+
   fillForm(data: OmfoItem) {
     this.sizeForm.patchValue({
       name: data.name,
       description: data.description,
-      restaurantId: data.restaurantId,
+      restaurantId: this.getRestaurantIdByName(
+        data.restaurantId?.toString() ?? 'SHAHABAD',
+      ),
       imageURL: data.imageURL,
       category: data.category,
       isAvailable: data.isAvailable,

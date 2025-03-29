@@ -1,5 +1,10 @@
 export type DeliveryType = 'PICKUP' | 'DELIVERY' | 'DINE_IN';
 
+export enum RestaurantEnum {
+  LUCKNOW = 226021,
+  SHAHABAD = 241124,
+}
+
 export interface OrderType {
   deliveryType: DeliveryType;
   name: string;

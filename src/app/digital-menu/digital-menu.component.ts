@@ -8,14 +8,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FoodService } from '../services/food.service';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatDialog } from '@angular/material/dialog';
-import { StoreItems } from '../shared/modals';
+import { RestaurantEnum, StoreItems } from '../shared/modals';
 import { CategoryTabComponent } from './category-tab/category-tab.component';
 import { OutletSelectionPopupComponent } from './outlet-selection-popup/outlet-selection-popup.component';
-
-export enum RestaurantEnum {
-  LUCKNOW = 226021,
-  SHAHABAD = 241124,
-}
 
 @Component({
   selector: 'app-digital-menu',
@@ -88,7 +83,7 @@ export class DigitalMenuComponent implements OnInit {
     });
   }
 
-  getRestaurantIdByName(name: string): number {
+  public getRestaurantIdByName(name: string): number {
     return RestaurantEnum[name.toUpperCase() as keyof typeof RestaurantEnum];
   }
 
@@ -111,6 +106,7 @@ export class DigitalMenuComponent implements OnInit {
         const dialogRef = this.dialog.open(OutletSelectionPopupComponent);
 
         dialogRef.afterClosed().subscribe((RESTAURANT_NAME: string) => {
+          RESTAURANT_NAME ??= 'SHAHABAD';
           if (RESTAURANT_NAME) {
             this.restaurantId =
               this.getRestaurantIdByName(RESTAURANT_NAME) || 0;

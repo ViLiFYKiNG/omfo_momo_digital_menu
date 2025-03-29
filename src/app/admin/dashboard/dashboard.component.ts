@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-enum-comparison */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
@@ -10,7 +12,7 @@ import { AddItemPopupComponent } from './add-item-popup/add-item-popup.component
 import { MatDialog } from '@angular/material/dialog';
 import { DataStorageService } from '../services/data-storage.service';
 import { map } from 'rxjs';
-import { OmfoItem } from '../../shared/modals';
+import { OmfoItem, RestaurantEnum } from '../../shared/modals';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
@@ -20,12 +22,16 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTableModule } from '@angular/material/table';
 import { CommonModule } from '@angular/common';
 import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner/loading-spinner.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
   imports: [
     CommonModule,
+    MatFormFieldModule,
+    MatInputModule,
     MatToolbarModule,
     MatButtonModule,
     RouterModule,
@@ -38,9 +44,19 @@ import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner
   styleUrl: './dashboard.component.scss',
 })
 export class DashboardComponent implements OnInit {
-  displayedColumns = ['position', 'name', 'category', 'isAvailable', 'actions'];
+  displayedColumns = [
+    'position',
+    'name',
+    'restaurant',
+    'category',
+    'isAvailable',
+    'actions',
+  ];
 
   public items = signal<OmfoItem[] | []>([]);
+
+  public filteredItems = signal<OmfoItem[] | []>([]);
+
   public isFetching = signal<boolean>(false);
 
   public error = signal<string | null>(null);
@@ -50,6 +66,14 @@ export class DashboardComponent implements OnInit {
   constructor(private authService: AuthService) {}
   ngOnInit(): void {
     this.fetchItems();
+  }
+
+  public getRestaurantNameById(id: number): string {
+    return (
+      Object.entries(RestaurantEnum).find(([_key, value]) => {
+        return value === id;
+      })?.[0] || 'SHAHABAD'
+    );
   }
 
   public fetchItems(): void {
@@ -63,14 +87,22 @@ export class DashboardComponent implements OnInit {
             Object.keys(response).map((itemId) => ({
               itemId,
               ...response[itemId],
+              restaurantId: this.getRestaurantNameById(
+                Number(
+                  ((response[itemId] as OmfoItem).restaurantId ??= '241124'),
+                ),
+              ),
             }))
           );
         }),
       )
       .subscribe({
         next: (response: OmfoItem[] | null) => {
-          if (response) this.items.set(response);
-          else this.items.set([]);
+          if (response) {
+            this.items.set(response);
+            this.filteredItems.set(response);
+            console.log(response);
+          } else this.items.set([]);
         },
         complete: () => {
           this.isFetching.set(false);
@@ -80,6 +112,24 @@ export class DashboardComponent implements OnInit {
           this.isFetching.set(false);
         },
       });
+  }
+
+  public applyFilter(filterValue: string): void {
+    const filtered = this.items().filter(
+      (item) =>
+        item.restaurantId
+          ?.toString()
+          .toLowerCase()
+          .includes(filterValue.toLowerCase()) ||
+        item.name.toLowerCase().includes(filterValue.toLowerCase()) ||
+        item.category.toLowerCase().includes(filterValue.toLowerCase()),
+    );
+    this.filteredItems.set(filtered);
+  }
+
+  public onFilterInput(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    this.applyFilter(input.value);
   }
 
   readonly dialog = inject(MatDialog);
