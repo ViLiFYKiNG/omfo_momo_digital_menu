@@ -79,7 +79,7 @@ export class CartComponent {
   phoneNumber: string = '9517242377';
 
   shouldTakeDeliveryCharge(orderType: OrderType) {
-    return orderType.deliveryType === 'DELIVERY' && this.getTotalAmount() < 150;
+    return orderType.deliveryType === 'DELIVERY' && this.getTotalAmount() < 200;
   }
 
   formatOrderDetails(orderType: OrderType) {
